@@ -1,0 +1,14 @@
+site_name: Try X in Y minutes
+site_url: https://codapi.org/try
+repo_url: https://github.com/nalgeon/tryxinyminutes/
+edit_uri: blob/main/try/
+docs_dir: try
+nav:
+    - Home: index.md
+    - Contributing: https://github.com/nalgeon/tryxinyminutes/blob/main/CONTRIBUTING.md
+    - Live version: https://codapi.org/try/
+extra_css:
+    - https://unpkg.com/@antonz/codapi@0.14.0/dist/snippet.css
+extra_javascript:
+    - https://unpkg.com/@antonz/codapi@0.14.0/dist/snippet.js
+dev_addr: "127.0.0.1:3000"

@@ -1,0 +1,11 @@
+emp_id,first_name,last_name,birth_dt,hire_dt,dep_id,city,salary
+11,Diane,Wood,1973-07-21,2018-03-15,hr,London,70
+12,Bob,Yakamoto,1985-11-09,2019-07-22,hr,London,78
+21,Emma,Verde,1978-03-05,2020-11-08,it,London,84
+22,Grace,Tanner,1994-10-17,2021-02-27,it,Berlin,90
+23,Henry,Sivers,1982-01-29,2022-06-13,it,London,104
+24,Irene,Romen,1971-05-14,2018-09-04,it,Berlin,104
+25,Frank,Utrecht,1989-08-23,2019-12-19,it,Berlin,120
+31,Cindy,Xerst,1976-12-06,2020-05-26,sales,Berlin,96
+32,Dave,Walsh,1999-04-08,2021-08-03,sales,London,96
+33,Alice,Zakas,1987-02-19,2023-01-29,sales,Berlin,100
