@@ -3,6 +3,7 @@ x: SQLGlot
 title: Try SQLGlot in Y minutes
 image: /try/cover.png
 lastmod: 2024-01-07
+original: https://sqlglot.com/sqlglot.html#examples
 license: MIT
 contributors:
     - ["Toby Mao", "https://tobymao.com"]

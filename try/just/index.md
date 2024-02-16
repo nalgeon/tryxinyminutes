@@ -3,6 +3,7 @@ x: Just
 title: Try Just in Y minutes
 image: /try/cover.png
 lastmod: 2024-02-10
+original: https://just.systems/man/en/chapter_20.html
 license: CC0-1.0
 contributors:
     - ["Casey Rodarmor", "https://rodarmor.com"]

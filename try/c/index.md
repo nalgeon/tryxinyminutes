@@ -3,7 +3,8 @@ x: C
 title: Try C in Y minutes
 image: /try/cover.png
 lastmod: 2024-02-12
-license: CC BY-SA 3.0
+original: https://learnxinyminutes.com/docs/c/
+license: CC-BY-SA-3.0
 contributors:
     - ["Adam Bard", "http://adambard.com/"]
     - ["Árpád Goretity", "http://twitter.com/H2CO3_iOS"]

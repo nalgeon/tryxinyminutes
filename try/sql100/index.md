@@ -2,6 +2,7 @@
 title: SQL in 100 Queries
 image: /try/cover.png
 lastmod: 2024-02-15
+original: https://gvwilson.github.io/sql-tutorial/
 license: CC-BY-NC-4.0
 contributors:
     - ["Greg Wilson", "https://github.com/gvwilson"]

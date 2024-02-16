@@ -3,7 +3,8 @@ x: Bash
 title: Try Bash in Y minutes
 image: /try/cover.png
 lastmod: 2024-02-12
-license: CC BY-SA 3.0
+original: https://learnxinyminutes.com/docs/bash/
+license: CC-BY-SA-4.0
 contributors:
     - ["Max Yankov", "https://github.com/golergka"]
     - ["Darren Lin", "https://github.com/CogBear"]

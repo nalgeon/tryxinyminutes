@@ -2,9 +2,10 @@
 x: Odin
 title: Try Odin in Y minutes
 image: /try/cover.png
-canonical: https://antonz.org/trying-odin/
 lastmod: 2023-07-31
-license: CC BY-SA 4.0
+canonical: https://antonz.org/trying-odin/
+original: https://antonz.org/trying-odin/
+license: CC-BY-SA-4.0
 contributors:
     - ["Anton Zhiyanov", "https://antonz.org"]
 ---

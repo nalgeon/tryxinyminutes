@@ -3,13 +3,14 @@ x: PostgreSQL
 title: Try PostgreSQL in Y minutes
 image: /try/cover.png
 lastmod: 2024-02-15
-license: PostgreSQL License
+original: https://www.postgresql.org/docs/current/tutorial-sql.html
+license: PostgreSQL
 contributors:
     - ["PostgreSQL Team", "https://www.postgresql.org/"]
     - ["Anton Zhiyanov", "https://antonz.org/"]
 ---
 
-This is an overview of SQL as implemented in PostgreSQL, adapted from the [PostgreSQL](https://www.postgresql.org/docs/current/tutorial-sql.html) tutorial.
+This is an overview of SQL as implemented in PostgreSQL.
 
 <div class="tryx__panel">
 <p>✨ <strong>This guide needs some love</strong></p>

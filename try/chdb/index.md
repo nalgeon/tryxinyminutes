@@ -2,9 +2,10 @@
 x: chDB
 title: Try chDB in Y minutes
 image: /try/cover.png
-canonical: https://antonz.org/trying-chdb/
 lastmod: 2023-12-11
-license: CC BY-SA 4.0
+canonical: https://antonz.org/trying-chdb/
+original: https://antonz.org/trying-chdb/
+license: CC-BY-SA-4.0
 contributors:
     - ["Anton Zhiyanov", "https://antonz.org"]
 ---
