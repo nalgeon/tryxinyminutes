@@ -13,7 +13,7 @@ This is an overview of SQL as implemented in PostgreSQL, adapted from the [Postg
 
 <div class="tryx__panel">
 <p>✨ <strong>This guide needs some love</strong></p>
-<p>The guide now only covers the basics of SQL. It would be great to add some PostgreSQL specifics. If you'd like to help — please <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/postgres/index.md">contribute</a>!</p>
+<p>The guide now only covers the basics of SQL. It would be great to add some PostgreSQL specifics. If you'd like to help — please <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/CONTRIBUTING.md">contribute</a>!</p>
 </div>
 
 Make sure that you have created a database, and can connect to it using the shell (`psql`) or other tools. If you haven't, see the [Getting Started](https://www.postgresql.org/docs/current/tutorial-start.html) guide first.
