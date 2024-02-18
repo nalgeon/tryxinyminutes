@@ -12,13 +12,13 @@ contributors:
 
 [chDB](https://github.com/chdb-io/chdb) is an embeddable, in-process SQL OLAP engine powered by ClickHouse. It's as if SQLite and ClickHouse had an offspring (no offence to either party). chDB takes up ≈100mb of disk space, runs on smaller machines (even on a 64mb RAM container), and provides language bindings for Python, Node.js, Go, Rust and C/C++.
 
-[Using chDB](#using-chdb) •
-[SQL dialect](#sql-dialect) •
-[Reading data](#reading-data) •
-[Writing data](#writing-data) •
-[User-defined functions](#user-defined-functions) •
-[Python DB API](#python-database-api) •
-[Current status](#current-status)
+[Using chDB](#using-chdb) ·
+[SQL dialect](#sql-dialect) ·
+[Reading data](#reading-data) ·
+[Writing data](#writing-data) ·
+[User-defined functions](#user-defined-functions) ·
+[Python DB API](#python-database-api) ·
+[Further reading](#further-reading)
 
 ## Using chDB
 
@@ -286,6 +286,6 @@ with closing(dbapi.connect()) as conn:
 <codapi-snippet sandbox="chdb-python" editor="basic">
 </codapi-snippet>
 
-## Current status
+## Further reading
 
-chDB reached 1.0 in December 2023. It has the full power of ClickHouse under the hood, a team of passionate maintainers and a growing user base.
+See the chDB [documentation](https://doc.chdb.io/) for details on using chDB with other programming languages, sample Jupyter notebooks, and SQL reference.
