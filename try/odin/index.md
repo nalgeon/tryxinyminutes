@@ -192,6 +192,6 @@ Odin supports a native `matrix` type and matrix operations, and has various SIMD
 
 As far as I can tell, a significant number of programmers using Odin are game developers.
 
-## Current status
+## Further reading
 
-Odin is pre-1.0 and it does not have a 1.0 roadmap. However, Odin is actively used in production by the company it's creator works for.
+See the Odin [documentation](https://odin-lang.org/docs/) for a detailed overview, frequently asked questions, and language specification.
