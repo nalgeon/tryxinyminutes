@@ -56,6 +56,7 @@ Get a quick taste of your next language (database, package, tool, etc.) by study
 <a class="lang disabled" href="">MySQL</a>
 <a class="lang" href="/try/postgres/">PostgreSQL</a>
 <a class="lang disabled" href="">Redis</a>
+<a class="lang" href="/try/sql/">SQL</a>
 <a class="lang disabled" href="">SQL Server</a>
 <a class="lang disabled" href="">SQLite</a>
 
