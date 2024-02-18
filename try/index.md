@@ -50,7 +50,7 @@ Get a quick taste of your next language (database, package, tool, etc.) by study
 <a class="lang" href="/try/chdb/">chDB</a>
 <a class="lang disabled" href="">ClickHouse</a>
 <a class="lang disabled" href="">DuckDB</a>
-<a class="lang disabled" href="">FerretDB</a>
+<a class="lang" href="/try/ferretdb/">FerretDB</a>
 <a class="lang disabled" href="">MariaDB</a>
 <a class="lang disabled" href="">MongoDB</a>
 <a class="lang disabled" href="">MySQL</a>
