@@ -30,6 +30,13 @@ for the GNU operating system and as the default shell on most Linux distros.
 Nearly all examples below can be a part of a shell script
 or executed directly in the shell.
 
+[Introduction](#introduction) ·
+[Variables](#variables) ·
+[Control flow](#control-flow) ·
+[Files and directories](#files-and-directories) ·
+[Running processes](#running-processes) ·
+[Useful commands](#useful-commands)
+
 ## Introduction
 
 First line of the script is the [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) which tells the system how to execute the script:
