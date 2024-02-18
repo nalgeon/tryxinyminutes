@@ -24,6 +24,20 @@ C is the lowest-level language most programmers will ever use, but
 it more than makes up for it with raw speed. Just be aware of its manual
 memory management and C will take you as far as you need to go.
 
+[Introduction](#introduction) ·
+[Types](#types) ·
+[Operators](#operators) ·
+[Control Structures](#control-structures) ·
+[Typecasting](#typecasting) ·
+[Pointers](#pointers) ·
+[Functions](#functions) ·
+[User-defined types and structs](#user-defined-types-and-structs) ·
+[Function pointers](#function-pointers) ·
+[Printing characters with printf()](#printing-characters-with-printf) ·
+[Order of Evaluation](#order-of-evaluation) ·
+[Header files](#header-files) ·
+[Further Reading](#further-reading)
+
 > **About compiler flags**
 >
 > By default, `gcc` and `clang` are pretty quiet about compilation warnings and
