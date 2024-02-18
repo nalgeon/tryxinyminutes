@@ -15,15 +15,16 @@ It aims to read a wide variety of SQL inputs and output syntactically and semant
 
 See the examples below to get started with SQLGlot:
 
-[Formatting and Transpiling](#formatting-and-transpiling) •
-[Metadata](#metadata) •
-[Parser Errors](#parser-errors) •
-[Unsupported Errors](#unsupported-errors) •
-[Build and Modify SQL](#build-and-modify-sql) •
-[SQL Optimizer](#sql-optimizer) •
-[AST Introspection and Diff](#ast-introspection-and-diff) •
-[Custom Dialects](#custom-dialects) •
-[SQL Execution](#sql-execution) •
+[Formatting and Transpiling](#formatting-and-transpiling) ·
+[Metadata](#metadata) ·
+[Parser Errors](#parser-errors) ·
+[Unsupported Errors](#unsupported-errors) ·
+[Build and Modify SQL](#build-and-modify-sql) ·
+[SQL Optimizer](#sql-optimizer) ·
+[AST Introspection and Diff](#ast-introspection-and-diff) ·
+[Custom Dialects](#custom-dialects) ·
+[SQL Execution](#sql-execution) ·
+[Further reading](#further-reading)
 
 ## Formatting and Transpiling
 
@@ -516,3 +517,7 @@ user_id price
       1   4.0
       2   3.0
 ```
+
+## Further reading
+
+See SQLGlot [documentation](https://sqlglot.com/sqlglot.html) for details.
