@@ -19,6 +19,11 @@ Odin has a unique set of characteristics:
 -   Well-thought standard library.
 -   Concise and calm syntax.
 
+<div class="tryx__panel">
+<p>✨ <strong>This guide needs some love</strong></p>
+<p>The guide is too brief. It would be great to take the official Odin <a href="https://odin-lang.org/docs/overview/">overview</a> and make it interactive. If you'd like to help — please <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/CONTRIBUTING.md">contribute</a>!</p>
+</div>
+
 ## Some examples
 
 A classic "hello world":
