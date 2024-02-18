@@ -19,15 +19,15 @@ This is an overview of SQL as implemented in PostgreSQL.
 
 Make sure that you have created a database, and can connect to it using the shell (`psql`) or other tools. If you haven't, see the [Getting Started](https://www.postgresql.org/docs/current/tutorial-start.html) guide first.
 
-[Concepts](#concepts) •
-[Creating tables](#creating-a-new-table) •
-[Populating with data](#populating-a-table-with-rows) •
-[Querying](#querying-a-table) •
-[Joins](#joins-between-tables) •
-[Aggregates](#aggregate-functions) •
-[Updates](#updates) •
-[Deletions](#deletions) •
-[Summary](#summary)
+[Concepts](#concepts) ·
+[Creating tables](#creating-a-new-table) ·
+[Populating with data](#populating-a-table-with-rows) ·
+[Querying](#querying-a-table) ·
+[Joins](#joins-between-tables) ·
+[Aggregates](#aggregate-functions) ·
+[Updates](#updates) ·
+[Deletions](#deletions) ·
+[Further reading](#further-reading)
 
 ## Concepts
 
