@@ -61,7 +61,7 @@ Get a quick taste of your next language (database, package, tool, etc.) by study
 
 ## Network
 
-<a class="lang disabled" href="">curl</a>
+<a class="lang" href="/try/curl/">curl</a>
 <a class="lang disabled" href="">HTTP</a>
 
 ## Other
