@@ -5,7 +5,7 @@ image: /try/cover.png
 lastmod: 2023-09-04
 canonical: https://antonz.org/mastering-curl/
 original: https://antonz.org/mastering-curl/
-license: Apache-2.0
+license: CC-BY-SA-4.0
 contributors:
     - ["Daniel Stenberg", "https://daniel.haxx.se/"]
     - ["Anton Zhiyanov", "https://antonz.org"]
