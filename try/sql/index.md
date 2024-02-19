@@ -10,7 +10,7 @@ contributors:
     - ["Anton Zhiyanov", "https://antonz.org"]
 ---
 
-This is an introduction to SQL from basic to fairly advanced queries. It uses the SQLite dialect, but most queries should work for PostgreSQL as well.
+This is an introduction to SQL from basic to fairly advanced queries. All queries have been tested on SQLite and PostgreSQL.
 
 ## Concepts: Database
 
@@ -665,7 +665,7 @@ select
   avg(body_mass_g) as average_mass_g
 from penguins
 group by sex
-having average_mass_g > 4000.0;
+having avg(body_mass_g) > 4000.0;
 ```
 
 <codapi-snippet sandbox="sqlite" command="penguins" editor="basic" output>
@@ -690,7 +690,7 @@ select
   round(avg(body_mass_g), 1) as average_mass_g
 from penguins
 group by sex
-having average_mass_g > 4000.0;
+having round(avg(body_mass_g), 1) > 4000.0;
 ```
 
 <codapi-snippet sandbox="sqlite" command="penguins" editor="basic" output>
@@ -706,6 +706,17 @@ having average_mass_g > 4000.0;
 ```
 
 Use `round(value, decimals)` to round off a number.
+
+Note that PostgreSQL requires a type conversion:
+
+```sql
+select
+  sex,
+  round(avg(body_mass_g)::numeric, 1) as average_mass_g
+from penguins
+group by sex
+having round(avg(body_mass_g)::numeric, 1) > 4000.0;
+```
 
 ## 25: Filtering aggregate inputs
 
@@ -732,6 +743,8 @@ group by sex;
 │ MALE   │ 3729.6         │
 └────────┴────────────────┘
 ```
+
+Note: use `avg(body_mass_g) filter (where body_mass_g < 4000.0)::numeric` for PostgreSQL.
 
 `filter (where <condition>)` filters the results after aggregation, just like `having`. But unlike `having`, it applies to each expression in the `select` list individually.
 
@@ -1266,10 +1279,8 @@ create table person (
   name text not null
 );
 
-insert into person values
-(null, 'mik'),
-(null, 'po'),
-(null, 'tay');
+insert into person(name) values
+('mik'), ('po'), ('tay');
 
 select * from person;
 
@@ -1294,6 +1305,15 @@ Runtime error near line 37: UNIQUE constraint failed: person.ident (19)
 The database _autoincrements_ `ident` each time a new record is added. Auto-incremented fields are unique for each record, so they are often used as primary keys.
 
 Such _surrogate_ identifiers are also useful because if the "business" attribute of a record changes (say, Mik changes their name), the identifier remains the same, and we don't need to change the data in other tables that reference said record.
+
+Note that PostgreSQL requires a different autoincrement syntax:
+
+```sql
+create table person (
+  ident serial primary key,
+  name text not null
+);
+```
 
 ## 43: Altering tables
 
@@ -1365,6 +1385,8 @@ from work;
 <codapi-snippet id="s-people" sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output-mode="hidden">
 </codapi-snippet>
 
+Note: use `ident serial primary key` for PostgreSQL.
+
 ```sql
 -- extract jobs
 create table jobs (
@@ -1379,6 +1401,8 @@ select name, billable from job;
 
 <codapi-snippet id="s-jobs" sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output-mode="hidden">
 </codapi-snippet>
+
+Note: use `ident serial primary key` for PostgreSQL.
 
 ```sql
 -- create a join table
@@ -1519,6 +1543,8 @@ limit 5;
 
 Here, the subquery runs first to create a temporary table `averaged` with the average mass per species. Then the database engine joins it with the `penguins` table, and finally filters to find penguins that are heavier than average within their species.
 
+Note: use `round(averaged.avg_mass_g::numeric, 1)` for PostgreSQL.
+
 ## 48: Common table expressions
 
 ```sql
@@ -1556,6 +1582,8 @@ limit 5;
 We've extracted the `averaged` subquery into a _common table expression_ (CTE) to make the query clearer. CTE is basically a named subquery that is defined before the main query and can be referenced by name like a regular table.
 
 Nested subqueries quickly become hard to understand, so it's better to use CTEs. Do not worry about subqueries being more performant than CTEs — the database engine is (usually) smart enough to take care of that.
+
+Note: use `round(averaged.avg_mass_g::numeric, 1)` for PostgreSQL.
 
 ## 49: Conditionals
 
