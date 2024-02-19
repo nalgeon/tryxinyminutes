@@ -1,5 +1,5 @@
 create table job (
-  name text not null,
+  name varchar(10) not null,
   billable real not null
 );
 
@@ -8,8 +8,8 @@ insert into job values
 ('clean', 0.5);
 
 create table work (
-  person text not null,
-  job text not null
+  person varchar(5) not null,
+  job varchar(10) not null
 );
 
 insert into work values

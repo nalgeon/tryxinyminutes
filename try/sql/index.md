@@ -776,13 +776,13 @@ group by sex;
 
 ```sql
 create table job (
-  name text not null,
-  billable real not null
+  name     varchar(10) not null,
+  billable real        not null
 );
 
 create table work (
-  person text not null,
-  job text not null
+  person varchar(5)  not null,
+  job    varchar(10) not null
 );
 ```
 
@@ -840,14 +840,14 @@ set person = 'tae'
 where person = 'tay';
 ```
 
-<codapi-snippet id="s-update" sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output-mode="hidden">
+<codapi-snippet id="s-update" sandbox="sqlite" command="run" editor="basic" template="workers.sql" output-mode="hidden">
 </codapi-snippet>
 
 ```sql
 select * from work;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" depends-on="s-update" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" depends-on="s-update" output>
 </codapi-snippet>
 
 ```
@@ -874,7 +874,7 @@ where person = 'tae';
 select * from work;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" depends-on="s-update" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" depends-on="s-update" output>
 </codapi-snippet>
 
 ```
@@ -895,8 +895,8 @@ As with `update`, you use `where` to specify which rows to delete.
 
 ```sql
 create table work_bak (
-  person text not null,
-  job text not null
+  person varchar(5) not null,
+  job varchar(10) not null
 );
 
 insert into work_bak
@@ -906,7 +906,7 @@ from work;
 select count(*) from work_bak;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
 </codapi-snippet>
 
 ```
@@ -929,7 +929,7 @@ from work;
 select count(*) from work_bak;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
 </codapi-snippet>
 
 ```
@@ -949,7 +949,7 @@ select *
 from work cross join job;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
 </codapi-snippet>
 
 ```
@@ -984,7 +984,7 @@ from work
   inner join job on work.job = job.name;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
 </codapi-snippet>
 
 ```
@@ -1012,7 +1012,7 @@ from work
 group by work.person;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
 </codapi-snippet>
 
 ```
@@ -1036,7 +1036,7 @@ from work
   left join job on work.job = job.name;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
 </codapi-snippet>
 
 ```
@@ -1067,7 +1067,7 @@ from work
 group by work.person;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
 </codapi-snippet>
 
 ```
@@ -1093,7 +1093,7 @@ from work
 group by work.person;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
 </codapi-snippet>
 
 ```
@@ -1117,7 +1117,7 @@ insert into job values
 ('manage', 1);
 ```
 
-<codapi-snippet id="s-job-manage" sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output-mode="hidden">
+<codapi-snippet id="s-job-manage" sandbox="sqlite" command="run" editor="basic" template="workers.sql" output-mode="hidden">
 </codapi-snippet>
 
 Now let's select people with their corresponding job, but using the `full join` instead of `left join`:
@@ -1128,7 +1128,7 @@ from work
   full join job on work.job = job.name;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" depends-on="s-job-manage" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" depends-on="s-job-manage" output>
 </codapi-snippet>
 
 ```
@@ -1163,7 +1163,7 @@ from work
 where job <> 'calibrate';
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
 </codapi-snippet>
 
 ```
@@ -1189,7 +1189,7 @@ where person not in ('mik', 'tay');
 -- select all people except Mik and Tay
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
 </codapi-snippet>
 
 ```
@@ -1217,7 +1217,7 @@ where person not in (
 );
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
 </codapi-snippet>
 
 ```
@@ -1231,26 +1231,136 @@ where person not in (
 
 Here we use a _subquery_ to select the people who _do_ calibrate. Then we select all the people who are _not_ in that set (so essentially those who _do not_ calibrate).
 
-## 41: Defining a primary key
+## 41: Union
+
+Who clean _or_ calibrate?
+
+```sql
+select person from work
+where job = 'clean'
+
+union
+
+select person from work
+where job = 'calibrate';
+```
+
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
+</codapi-snippet>
+
+```
+┌────────┐
+│ person │
+├────────┤
+│ mik    │
+│ po     │
+└────────┘
+```
+
+`union` returns the records found in the first or second datasets. The records must have exactly the same structure (same set and order of fields).
+
+`union` also removes the duplicate records from the result (otherwise we'd see `mik` twice). You can use `union all` if you don't mind the duplicates — this can be much faster on large datasets.
+
+Union does not guarantee any particular order, so we can add an `order by` to the last `select` to sort the result:
+
+```sql
+select person from work
+where job = 'clean'
+
+union
+
+select person from work
+where job = 'calibrate'
+order by person desc;
+```
+
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
+</codapi-snippet>
+
+```
+┌────────┐
+│ person │
+├────────┤
+│ po     │
+│ mik    │
+└────────┘
+```
+
+## 42: Intersection
+
+Who clean _and_ calibrate?
+
+```sql
+select person from work
+where job = 'clean'
+
+intersect
+
+select person from work
+where job = 'calibrate';
+```
+
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
+</codapi-snippet>
+
+```
+┌────────┐
+│ person │
+├────────┤
+│ mik    │
+└────────┘
+```
+
+`intersect` returns the records found in both the first and second datasets. As with union, all records must have the same structure.
+
+## 43: Exclusion
+
+Who just complains and does no useful work?
+
+```sql
+select person from work
+where job = 'complain'
+
+except
+
+select person from work
+where job <> 'complain';
+```
+
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
+</codapi-snippet>
+
+```
+┌────────┐
+│ person │
+├────────┤
+│ tay    │
+└────────┘
+```
+
+`except` returns the records found in the first dataset but not in the second. As with union and intersect, all records must have the same structure.
+
+## 44: Defining a primary key
 
 A _primary key_ uniquely identifies each record in a table. A table can use any field (or combination of fields) as a primary key, as long as the value(s) are unique for each record.
 
 ```sql
-create table lab_equipment (
-  size real not null,
-  color text not null,
-  num integer not null,
+create table equipment (
+  size  real        not null,
+  color varchar(10) not null,
+  num   integer     not null,
+
   primary key (size, color)
 );
 
-insert into lab_equipment values
+insert into equipment values
 (1.5, 'blue', 2),
 (1.5, 'green', 1),
 (2.5, 'blue', 1);
 
-select * from lab_equipment;
+select * from equipment;
 
-insert into lab_equipment values
+insert into equipment values
 (1.5, 'green', 2);
 ```
 
@@ -1265,18 +1375,18 @@ insert into lab_equipment values
 │ 1.5  │ green │ 1   │
 │ 2.5  │ blue  │ 1   │
 └──────┴───────┴─────┘
-Runtime error near line 17: UNIQUE constraint failed: lab_equipment.size, lab_equipment.color (19)
+Runtime error near line 17: UNIQUE constraint failed: equipment.size, equipment.color (19)
  (exit status 1)
 ```
 
 Since the table already contains the `size=1.5, color='green'` record, we can't add another one with the same values.
 
-## 42: Autoincrementing and primary keys
+## 45: Autoincrementing and primary keys
 
 ```sql
 create table person (
   ident integer primary key autoincrement,
-  name text not null
+  name  varchar(5) not null
 );
 
 insert into person(name) values
@@ -1311,11 +1421,11 @@ Note that PostgreSQL requires a different autoincrement syntax:
 ```sql
 create table person (
   ident serial primary key,
-  name text not null
+  name  varchar(5) not null
 );
 ```
 
-## 43: Altering tables
+## 46: Altering tables
 
 Let's add a unique identifier to the `job` table:
 
@@ -1334,7 +1444,7 @@ where name = 'clean';
 select * from job;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" output>
 </codapi-snippet>
 
 ```
@@ -1360,7 +1470,7 @@ Relationships between entities are typically characterized as:
 
 **Many-to-many**. Each record in table A can have multiple matching records in table B, and vice versa (a person can have multiple jobs, and each job can be performed by multiple people).
 
-## 44: Creating a join table
+## 47: Creating a join table
 
 Our `work` and `job` tables have a many-to-many relationship. Typically, such relationships are implemented using a separate _join table_:
 
@@ -1374,7 +1484,7 @@ Let's do this.
 -- extract people
 create table people (
   ident integer primary key autoincrement,
-  name text not null
+  name  varchar(5) not null
 );
 
 insert into people (name)
@@ -1382,7 +1492,7 @@ select distinct person
 from work;
 ```
 
-<codapi-snippet id="s-people" sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output-mode="hidden">
+<codapi-snippet id="s-people" sandbox="sqlite" command="run" editor="basic" template="workers.sql" output-mode="hidden">
 </codapi-snippet>
 
 Note: use `ident serial primary key` for PostgreSQL.
@@ -1390,16 +1500,16 @@ Note: use `ident serial primary key` for PostgreSQL.
 ```sql
 -- extract jobs
 create table jobs (
-  ident integer primary key autoincrement,
-  name text not null,
-  billable real not null
+  ident    integer primary key autoincrement,
+  name     varchar(10) not null,
+  billable real        not null
 );
 
 insert into jobs (name, billable)
 select name, billable from job;
 ```
 
-<codapi-snippet id="s-jobs" sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output-mode="hidden">
+<codapi-snippet id="s-jobs" sandbox="sqlite" command="run" editor="basic" template="workers.sql" output-mode="hidden">
 </codapi-snippet>
 
 Note: use `ident serial primary key` for PostgreSQL.
@@ -1408,13 +1518,14 @@ Note: use `ident serial primary key` for PostgreSQL.
 -- create a join table
 create table people_jobs (
   person_id integer not null,
-  job_id integer not null,
+  job_id    integer not null,
+
   foreign key (person_id) references people (ident),
   foreign key (job_id) references jobs (ident)
 );
 ```
 
-<codapi-snippet id="s-people-jobs" sandbox="sqlite" command="run" editor="basic" template="work_job.sql" depends-on="s-people s-jobs" output-mode="hidden">
+<codapi-snippet id="s-people-jobs" sandbox="sqlite" command="run" editor="basic" template="workers.sql" depends-on="s-people s-jobs" output-mode="hidden">
 </codapi-snippet>
 
 The `foreign key` constraint defines references from `people_jobs` to `people` and `jobs`:
@@ -1435,7 +1546,7 @@ from people
 select * from people_jobs;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" depends-on="s-people-jobs" output>
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" depends-on="s-people-jobs" output>
 </codapi-snippet>
 
 ```
@@ -1448,7 +1559,7 @@ select * from people_jobs;
 └───────────┴────────┘
 ```
 
-## 45: Removing Tables
+## 48: Removing Tables
 
 Delete old tables:
 
@@ -1457,7 +1568,7 @@ drop table work;
 drop table job;
 ```
 
-<codapi-snippet id="s-drop-table" sandbox="sqlite" command="run" editor="basic" template="work_job.sql" output-mode="hidden">
+<codapi-snippet id="s-drop-table" sandbox="sqlite" command="run" editor="basic" template="workers.sql" output-mode="hidden">
 </codapi-snippet>
 
 Running `drop table` twice on the same table will result in error. So it's safer to delete a table only if it really exists and do nothing otherwise:
@@ -1467,10 +1578,10 @@ drop table if exists work;
 drop table if exists job;
 ```
 
-<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="work_job.sql" depends-on="s-drop-table" output-mode="hidden">
+<codapi-snippet sandbox="sqlite" command="run" editor="basic" template="workers.sql" depends-on="s-drop-table" output-mode="hidden">
 </codapi-snippet>
 
-## 46: Comparing individual values to aggregates
+## 49: Comparing individual values to aggregates
 
 Going back to the [penguins.sql](https://gist.github.com/nalgeon/c2c7919909e7f38d245ff3fbd5c1b152) database, let's select penguins who weight more than the average:
 
@@ -1506,7 +1617,7 @@ Running the query requires two scans of the data. There's no way to avoid this, 
 
 `null` values aren't included in the average or in the final results.
 
-## 47: Comparing individual values to aggregates within groups
+## 50: Comparing individual values to aggregates within groups
 
 Find penguins that are heavier than average within their species:
 
@@ -1545,7 +1656,7 @@ Here, the subquery runs first to create a temporary table `averaged` with the av
 
 Note: use `round(averaged.avg_mass_g::numeric, 1)` for PostgreSQL.
 
-## 48: Common table expressions
+## 51: Common table expressions
 
 ```sql
 with averaged as (
@@ -1585,7 +1696,7 @@ Nested subqueries quickly become hard to understand, so it's better to use CTEs.
 
 Note: use `round(averaged.avg_mass_g::numeric, 1)` for PostgreSQL.
 
-## 49: Conditionals
+## 52: Conditionals
 
 Assign a `size` to each penguin according to its weight, then calculate the number of penguins of each size within each species:
 
@@ -1628,7 +1739,7 @@ The following expression returns a single result according to the condition:
 case when <condition> then <true_result> else <false_result> end
 ```
 
-## 50: Selecting a case
+## 53: Selecting a case
 
 Use three possible `size`s instead of two:
 
@@ -1679,7 +1790,7 @@ case
 end
 ```
 
-## 51: Checking a range
+## 54: Checking a range
 
 Consider the weight 3500 ≤ x ≤ 5000 as "normal", otherwise as "abnormal":
 
@@ -1719,65 +1830,26 @@ order by species, num;
 
 `X between L and H` is equivalent to `X >= L and X <= H`.
 
-## Assays database
+## 55: Pattern matching
 
-Let's switch to the [`assays`](https://gist.github.com/nalgeon/87473cbad6918c579d00dc4561083d58) database:
-
-```text
-┌─────────────┐                   ┌─────────────┐
-│ invalidated │──────────────────>│ plate       │──┐
-└─────────────┘   ┌───────────┐   └─────────────┘  │
-        └────────>│ staff     │   ┌─────────────┐  │
-        ┌────────>│           │──>│ department  │  │
-        │         └───────────┘   └─────────────┘  │
-┌─────────────┐                   ┌─────────────┐  │
-│ performed   │──────────────────>│ experiment  │<─┘
-└─────────────┘                   └─────────────┘
-```
-
-Try selecting from different tables to understand the table structure and relationships:
+Islands with names containing _o_:
 
 ```sql
-select * from staff;
+select distinct island
+from penguins
+where island like '%o%';
 ```
 
-<codapi-snippet sandbox="sqlite" command="assays" editor="basic" output>
+<codapi-snippet sandbox="sqlite" command="penguins" editor="basic" output>
 </codapi-snippet>
 
 ```
-┌───────┬──────────┬───────────┬──────┬─────┐
-│ ident │ personal │  family   │ dept │ age │
-├───────┼──────────┼───────────┼──────┼─────┤
-│ 1     │ Kartik   │ Gupta     │      │ 46  │
-│ 2     │ Divit    │ Dhaliwal  │ hist │ 34  │
-│ 3     │ Indrans  │ Sridhar   │ mb   │ 47  │
-│ 4     │ Pranay   │ Khanna    │ mb   │ 51  │
-│ 5     │ Riaan    │ Dua       │      │ 23  │
-│ 6     │ Vedika   │ Rout      │ hist │ 45  │
-│ 7     │ Abram    │ Chokshi   │ gen  │ 23  │
-│ 8     │ Romil    │ Kapoor    │ hist │ 38  │
-│ 9     │ Ishaan   │ Ramaswamy │ mb   │ 35  │
-│ 10    │ Nitya    │ Lal       │ gen  │ 52  │
-└───────┴──────────┴───────────┴──────┴─────┘
-```
-
-## 52: Pattern matching
-
-```sql
-select personal, family
-from staff
-where personal like '%ya%';
-```
-
-<codapi-snippet sandbox="sqlite" command="assays" editor="basic" output>
-</codapi-snippet>
-
-```
-┌──────────┬────────┐
-│ personal │ family │
-├──────────┼────────┤
-│ Nitya    │ Lal    │
-└──────────┴────────┘
+┌───────────┐
+│  island   │
+├───────────┤
+│ Torgersen │
+│ Biscoe    │
+└───────────┘
 ```
 
 `like` matches the value against the pattern:
@@ -1787,4 +1859,14 @@ where personal like '%ya%';
 
 `like` is case-sensitive in some DBMS (such as PostgreSQL) and case-insensitive in others (SQLite).
 
-To be continued...
+## Further reading
+
+SQL is huge. The SQL standard was of ≈4000 pages in 2011, and there have been two more editions since then, so it hasn't gotten any smaller. It's also incredibly hard to read and understand.
+
+What's worse, each DBMS implements only parts of the standard, and each has its own quirks. So your best bet is to read the documentation for the specific DBMS you are working with:
+
+-   [PostgreSQL](https://www.postgresql.org/docs/current/index.html)
+-   [MySQL](https://dev.mysql.com/doc/refman/8.3/en/)
+-   [SQLite](https://sqlite.org/docs.html)
+-   [SQL Server](https://learn.microsoft.com/en-us/sql/sql-server/)
+-   [Oracle Database](https://docs.oracle.com/en/database/oracle/oracle-database/index.html)
