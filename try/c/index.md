@@ -1923,11 +1923,17 @@ Books:
     considered good anymore) or now-changed practices.
 -   [Beej's Guide to C Programming](https://beej.us/guide/bgc/)
     is probably the best introduction to _modern_ C.
--   [Learn C The Hard Way](http://learncodethehardway.org/c/) (not free) is another good resource.
+-   [Learn C The Hard Way](https://learncodethehardway.org/c/) (not free) is another good resource.
 
-If you have a question, read the [compl.lang.c FAQ](http://c-faq.com).
+If you have a question, read the [compl.lang.c FAQ](https://c-faq.com).
 
 It's very important to use proper spacing, indentation and to be consistent with
 your coding style in general. Readable code is better than clever code and fast code.
-For a good, sane coding style to adopt, see the
-[Linux kernel coding style](https://www.kernel.org/doc/Documentation/process/coding-style.rst).
+There are a few good coding styles available on the Internet to follow, these are:
+
+-   [Linux kernel coding style](https://www.kernel.org/doc/Documentation/process/coding-style.rst)
+	is mainly used in the Linux kernel.
+-   [Kernel Normal Form](https://man.openbsd.org/style.9) is used in the BSD systems. Based on the
+	original KNF concept from CSRG.
+-   [Coding Standards for SunOS](https://www.cis.upenn.edu/~lee/06cse480/data/cstyle.ms.pdf)
+	is used in the SunOS and OpenZFS.
