@@ -7,4 +7,4 @@ function init(id) {
 
 ##CODE##
 
-rc.canvas.style.display = "unset";
+rc.canvas.parentElement.style.display = "block";
