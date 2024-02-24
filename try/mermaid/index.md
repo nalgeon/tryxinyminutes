@@ -16,6 +16,17 @@ It is a JavaScript based diagramming and charting tool that renders Markdown-ins
 
 Let's see some of Mermaid's features in action! You can edit a diagram definition at any time and click the Run button to see the updated diagram.
 
+[Flowchart](#flowchart) ·
+[Sequence diagram](#sequence-diagram) ·
+[Gantt chart](#gantt-chart) ·
+[Class diagram](#class-diagram) ·
+[Git graph](#git-graph) ·
+[Entity relationship diagram](#entity-relationship-diagram) ·
+[User journey diagram](#user-journey-diagram) ·
+[Quadrant chart](#quadrant-chart) ·
+[XY chart](#xy-chart) ·
+[Further reading](#further-reading)
+
 ## Flowchart
 
 A flowchart consists of nodes (geometric shapes) and edges (arrows or lines). It supports different arrow types, multidirectional arrows, and subgraphs.
