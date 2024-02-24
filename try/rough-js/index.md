@@ -14,6 +14,12 @@ contributors:
 
 Let's see Rough.js in action! You can edit the code at any time and click the Run button to see the updated drawing.
 
+[Basic usage](#basic-usage) ·
+[Shapes](#shapes) ·
+[Filling](#filling) ·
+[Sketching style](#sketching-style) ·
+[Further reading](#further-reading)
+
 ## Basic usage
 
 You can draw on a `canvas`:
