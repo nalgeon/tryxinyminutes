@@ -37,6 +37,10 @@ or executed directly in the shell.
 [Running processes](#running-processes) ·
 [Useful commands](#useful-commands)
 
+<div class="tryx__panel">
+<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/bash/index.md">improve it</a>!</p>
+</div>
+
 ## Introduction
 
 First line of the script is the [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) which tells the system how to execute the script:

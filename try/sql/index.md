@@ -12,6 +12,10 @@ contributors:
 
 This is an introduction to SQL from basic to fairly advanced queries. All queries have been tested on SQLite and PostgreSQL.
 
+<div class="tryx__panel">
+<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/sql/index.md">improve it</a>!</p>
+</div>
+
 ## Concepts: Database
 
 A _database_ is a collection of data that can be searched and retrieved. A _database management system_ (DBMS) is a program that manages a particular kind of database.

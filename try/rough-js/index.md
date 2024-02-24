@@ -20,6 +20,10 @@ Let's see Rough.js in action! You can edit the code at any time and click the Ru
 [Sketching style](#sketching-style) ·
 [Further reading](#further-reading)
 
+<div class="tryx__panel">
+<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/rough-js/index.md">improve it</a>!</p>
+</div>
+
 ## Basic usage
 
 You can draw on a `canvas`:

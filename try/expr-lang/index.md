@@ -18,6 +18,10 @@ deeper into its core features:
 -   **Terminating** - Ensures every expression evaluation cannot loop indefinitely.
 -   **Side effects free** - Evaluations won't modify global states or variables.
 
+<div class="tryx__panel">
+<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/expr-lang/index.md">improve it</a>!</p>
+</div>
+
 Let's start with a simple example:
 
 <script id="main.tpl" type="text/plain">

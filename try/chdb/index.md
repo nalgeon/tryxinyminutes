@@ -20,6 +20,10 @@ contributors:
 [Python DB API](#python-database-api) ·
 [Further reading](#further-reading)
 
+<div class="tryx__panel">
+<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/chdb/index.md">improve it</a>!</p>
+</div>
+
 ## Using chDB
 
 It's as simple as `pip install chdb` and then:

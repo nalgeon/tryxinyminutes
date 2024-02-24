@@ -21,6 +21,10 @@ Curl supports a crazy number of protocols, from HTTP, FTP and TELNET to IMAP, LD
 [HTTP](#http) ·
 [Further reading](#further-reading)
 
+<div class="tryx__panel">
+<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/curl/index.md">improve it</a>!</p>
+</div>
+
 Curl has an extensive [reference documentation](https://curl.se/docs/manpage.html). To see the short version, try this:
 
 ```sh

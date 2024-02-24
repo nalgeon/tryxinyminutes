@@ -38,6 +38,10 @@ memory management and C will take you as far as you need to go.
 [Header files](#header-files) ·
 [Further Reading](#further-reading)
 
+<div class="tryx__panel">
+<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/c/index.md">improve it</a>!</p>
+</div>
+
 > **About compiler flags**
 >
 > By default, `gcc` and `clang` are pretty quiet about compilation warnings and
@@ -1932,8 +1936,8 @@ your coding style in general. Readable code is better than clever code and fast 
 There are a few good coding styles available on the Internet to follow, these are:
 
 -   [Linux kernel coding style](https://www.kernel.org/doc/Documentation/process/coding-style.rst)
-	is mainly used in the Linux kernel.
+    is mainly used in the Linux kernel.
 -   [Kernel Normal Form](https://man.openbsd.org/style.9) is used in the BSD systems. Based on the
-	original KNF concept from CSRG.
+    original KNF concept from CSRG.
 -   [Coding Standards for SunOS](https://www.cis.upenn.edu/~lee/06cse480/data/cstyle.ms.pdf)
-	is used in the SunOS and OpenZFS.
+    is used in the SunOS and OpenZFS.

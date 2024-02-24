@@ -13,11 +13,6 @@ contributors:
 
 [FerretDB](https://www.ferretdb.io/) is an open-source drop-in replacement for MongoDB that uses PostgreSQL or SQLite as a backend. With FerretDB, there's no need to learn new syntax or query methods. You can use the familiar MongoDB query language or driver API.
 
-<div class="tryx__panel">
-<p>✨ <strong>This guide needs some love</strong></p>
-<p>The guide now only covers the basic FerretDB operations. It would be great to add more features. If you'd like to help — please <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/CONTRIBUTING.md">contribute</a>!</p>
-</div>
-
 This guide will show you how to perform basic MongoDB CRUD operations using FerretDB.
 
 [CRUD operations](#crud-operations) ·
@@ -27,6 +22,11 @@ This guide will show you how to perform basic MongoDB CRUD operations using Ferr
 [Update](#update-operation) ·
 [Delete](#delete-operation) ·
 [Further reading](#further-reading)
+
+<div class="tryx__panel">
+<p>✨ <strong>This guide needs some love</strong></p>
+<p>The guide only covers the basic FerretDB operations. It would be great to add more features. If you'd like to help — please <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/ferretdb/index.md">contribute</a>!</p>
+</div>
 
 ## CRUD operations
 

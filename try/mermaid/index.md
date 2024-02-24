@@ -27,6 +27,10 @@ Let's see some of Mermaid's features in action! You can edit a diagram definitio
 [XY chart](#xy-chart) ·
 [Further reading](#further-reading)
 
+<div class="tryx__panel">
+<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/mermaid/index.md">improve it</a>!</p>
+</div>
+
 ## Flowchart
 
 A flowchart consists of nodes (geometric shapes) and edges (arrows or lines). It supports different arrow types, multidirectional arrows, and subgraphs.

@@ -26,6 +26,10 @@ See the examples below to get started with SQLGlot:
 [SQL Execution](#sql-execution) ·
 [Further reading](#further-reading)
 
+<div class="tryx__panel">
+<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/sqlglot/index.md">improve it</a>!</p>
+</div>
+
 ## Formatting and Transpiling
 
 Easily translate from one dialect to another. For example, date/time functions vary between dialects and can be hard to deal with:
