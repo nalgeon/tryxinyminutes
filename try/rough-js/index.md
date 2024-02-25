@@ -86,7 +86,7 @@ Draw a **line** from `(x1, y1)` to `(x2, y2)`:
 // `init` is a helper function I'm using in the examples.
 // It initializes a RoughCanvas on the element with the given ID
 // just like we did above.
-rc = init("c01");
+const rc = init("c01");
 
 rc.line(20, 20, 160, 60);
 rc.line(20, 40, 160, 80, { strokeWidth: 5 });
@@ -100,7 +100,7 @@ rc.line(20, 40, 160, 80, { strokeWidth: 5 });
 Draw a **rectangle** with the top-left corner at `(x, y)` and the specified `width` and `height`:
 
 ```js
-rc = init("c02");
+const rc = init("c02");
 
 rc.rectangle(20, 20, 100, 50);
 rc.rectangle(140, 20, 100, 50, { fill: "red" });
@@ -114,7 +114,7 @@ rc.rectangle(140, 20, 100, 50, { fill: "red" });
 Draw a **circle** with the center at `(x, y)` and the specified `diameter`:
 
 ```js
-rc = init("c03");
+const rc = init("c03");
 
 rc.circle(60, 60, 80);
 ```
@@ -127,7 +127,7 @@ rc.circle(60, 60, 80);
 Draw an **ellipse** with the center at `(x, y)` and the specified `width` and `height`:
 
 ```js
-rc = init("c04");
+const rc = init("c04");
 
 rc.ellipse(70, 50, 100, 60);
 rc.ellipse(190, 50, 100, 60, { fill: "blue", stroke: "red" });
@@ -141,7 +141,7 @@ rc.ellipse(190, 50, 100, 60, { fill: "blue", stroke: "red" });
 Draw a **set of lines** connecting the specified `points`:
 
 ```js
-rc = init("c05");
+const rc = init("c05");
 
 // linearPath accepts an array of points.
 // Each point is an array with values [x, y].
@@ -162,7 +162,7 @@ rc.linearPath([
 Draw a **polygon** with the specified `vertices`:
 
 ```js
-rc = init("c06");
+const rc = init("c06");
 
 // polygon accepts an array of points.
 // Each point is an array with values [x, y].
@@ -195,7 +195,7 @@ arc(x, y, width, height, start, stop, closed [, options]) {}
 ```
 
 ```js
-rc = init("c07");
+const rc = init("c07");
 
 // upper left segment
 rc.arc(70, 60, 100, 80, Math.PI, Math.PI * 1.6, true);
@@ -224,7 +224,7 @@ rc.arc(70, 60, 100, 80, Math.PI / 2, Math.PI, true, {
 Draw a **curve** passing through the points:
 
 ```js
-rc = init("c08");
+const rc = init("c08");
 
 // curve accepts an array of points.
 // Each point is an array with values [x, y].
@@ -245,7 +245,7 @@ rc.curve([
 Draw a **path** described by an [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths) data string:
 
 ```js
-rc = init("c09");
+const rc = init("c09");
 
 rc.path("M 20 70 C 50 0, 75 0, 105 70 S 160 140, 190 70", {
     stroke: "blue",
@@ -258,12 +258,38 @@ rc.path("M 20 70 C 50 0, 75 0, 105 70 S 160 140, 190 70", {
 
 <pre style="display: none"><canvas id="c09" width="250" height="140"></canvas></pre>
 
+Write some **text** using the Canvas API:
+
+```js
+const rc = init("c10");
+
+// draw two rectangles and an arrow
+rc.rectangle(20, 20, 100, 50);
+rc.rectangle(220, 20, 100, 50);
+rc.line(120, 45, 220, 45);
+rc.line(220, 45, 200, 40);
+rc.line(220, 45, 200, 50);
+
+// write some text
+const ctx = rc.canvas.getContext("2d");
+ctx.font = "16px sans-serif";
+ctx.fillStyle = "blue";
+ctx.fillText("Rough.js", 40, 50);
+ctx.fillText("is", 160, 40);
+ctx.fillText("awesome", 240, 50);
+```
+
+<codapi-snippet engine="browser" sandbox="javascript" editor="basic" template="render.js" output-mode="hidden">
+</codapi-snippet>
+
+<pre style="display: none"><canvas id="c10" width="350" height="90"></canvas></pre>
+
 ## Filling
 
 The `fill` property specifies the color used to fill a shape. Uses hachure by default:
 
 ```js
-rc = init("c11");
+const rc = init("c11");
 
 rc.circle(60, 60, 80, { fill: "red" });
 rc.rectangle(120, 20, 80, 80, { fill: "red" });
@@ -277,7 +303,7 @@ rc.rectangle(120, 20, 80, 80, { fill: "red" });
 You can change the hatch angle and line thickness, or choose a different fill style altogether:
 
 ```js
-rc = init("c12");
+const rc = init("c12");
 
 // hatch angle
 rc.rectangle(20, 20, 80, 80, {
@@ -307,7 +333,7 @@ rc.rectangle(220, 20, 80, 80, {
 You can use the following fill styles:
 
 ```js
-rc = init("c13");
+const rc = init("c13");
 
 // hachure (default) draws sketchy parallel lines.
 rc.rectangle(20, 20, 80, 80, {
@@ -341,7 +367,7 @@ rc.rectangle(320, 20, 80, 80, {
 And even more:
 
 ```js
-rc = init("c14");
+const rc = init("c14");
 
 // dots fills the shape with sketchy dots.
 rc.rectangle(20, 20, 80, 80, {
@@ -376,7 +402,7 @@ rc.rectangle(220, 20, 80, 80, {
 You can control the _roughness_ of the drawing:
 
 ```js
-rc = init("c21");
+const rc = init("c21");
 
 // A rectangle with the roughness of 0 would be a perfect rectangle.
 rc.rectangle(20, 20, 80, 80, {
@@ -411,7 +437,7 @@ rc.rectangle(320, 20, 80, 80, {
 You can also control _bowing_:
 
 ```js
-rc = init("c22");
+const rc = init("c22");
 
 // Bowing indicates how curvy the lines are.
 // A value of 0 will cause straight lines.
