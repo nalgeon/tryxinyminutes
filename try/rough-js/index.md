@@ -1,7 +1,7 @@
 ---
 x: Rough.js
 title: Try Rough.js in Y minutes
-image: /try/rough-js/cover.png
+image: /try/rough-js/cover.jpg
 lastmod: 2024-02-24
 original: https://roughjs.com/
 license: MIT
@@ -276,7 +276,7 @@ ctx.font = "16px sans-serif";
 ctx.fillStyle = "blue";
 ctx.fillText("Rough.js", 40, 50);
 ctx.fillText("is", 160, 40);
-ctx.fillText("awesome", 240, 50);
+ctx.fillText("awesome", 235, 50);
 ```
 
 <codapi-snippet engine="browser" sandbox="javascript" editor="basic" template="render.js" output-mode="hidden">
