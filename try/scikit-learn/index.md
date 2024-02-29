@@ -20,6 +20,10 @@ This guide introduces the machine learning vocabulary that is used throughout sc
 [Evaluating results](#evaluating-results) ·
 [Further reading](#further-reading)
 
+<div class="tryx__panel">
+<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/scikit-learn/index.md">improve it</a>!</p>
+</div>
+
 ## About machine learning
 
 In general, a learning problem considers a set of n _samples_ of data and then tries to predict properties of the unknown data. If each sample is more than a single number (e.g., an array), it is said to have multiple attributes or _features_.
