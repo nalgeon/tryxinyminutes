@@ -58,7 +58,7 @@ Simple hello world example:
 echo "Hello world!"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -72,7 +72,7 @@ Each command starts on a new line, or after a semicolon:
 echo "This is the first command"; echo "This is the second command"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -88,7 +88,7 @@ Declaring a variable looks like this (I'll skip the shebang from now on):
 variable="Some string"
 ```
 
-<codapi-snippet id="s-variable" sandbox="bash" editor="basic" output-mode="hidden">
+<codapi-snippet id="s-variable" sandbox="shell" editor="basic" output-mode="hidden">
 </codapi-snippet>
 
 But not like this:
@@ -97,7 +97,7 @@ But not like this:
 variable = "Some string"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -113,7 +113,7 @@ Nor like this:
 variable= "Some string"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -132,7 +132,7 @@ echo "$variable"
 echo '$variable'
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" depends-on="s-variable" output>
+<codapi-snippet sandbox="shell" editor="basic" depends-on="s-variable" output>
 </codapi-snippet>
 
 ```
@@ -151,7 +151,7 @@ Parameter expansion `${...}`:
 echo "${variable}"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" depends-on="s-variable" output>
+<codapi-snippet sandbox="shell" editor="basic" depends-on="s-variable" output>
 </codapi-snippet>
 
 ```
@@ -170,7 +170,7 @@ String substitution in variables:
 echo "${variable/Some/A}"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" depends-on="s-variable" output>
+<codapi-snippet sandbox="shell" editor="basic" depends-on="s-variable" output>
 </codapi-snippet>
 
 ```
@@ -192,7 +192,7 @@ echo "${variable:0:length}"
 echo "${variable: -5}"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" depends-on="s-variable" output>
+<codapi-snippet sandbox="shell" editor="basic" depends-on="s-variable" output>
 </codapi-snippet>
 
 ```
@@ -206,7 +206,7 @@ String length:
 echo "${#variable}"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" depends-on="s-variable" output>
+<codapi-snippet sandbox="shell" editor="basic" depends-on="s-variable" output>
 </codapi-snippet>
 
 ```
@@ -220,7 +220,7 @@ other_variable="variable"
 echo ${!other_variable}
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" depends-on="s-variable" output>
+<codapi-snippet sandbox="shell" editor="basic" depends-on="s-variable" output>
 </codapi-snippet>
 
 ```
@@ -235,7 +235,7 @@ The default value for variable:
 echo "${foo:-"DefaultValueIfFooIsMissingOrEmpty"}"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -267,7 +267,7 @@ echo "Two elements starting from 4th:"
 echo "${array[@]:3:2}"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -296,7 +296,7 @@ for item in "${array[@]}"; do
 done
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -318,7 +318,7 @@ echo "All arguments passed to script: $@"
 echo "Script's arguments separated into different variables: $1 $2..."
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -336,7 +336,7 @@ echo {1..10}
 echo {a..z}
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -354,7 +354,7 @@ to=10
 echo {$from..$to}
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -367,7 +367,7 @@ Expressions are denoted with the following format:
 echo $(( 10 + 5 ))
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -388,7 +388,7 @@ else
 fi
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -410,7 +410,7 @@ if [[ "$name" == "Daniya" ]] || [[ "$name" == "Zach" ]]; then
 fi
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -435,7 +435,7 @@ then
 fi
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -448,7 +448,7 @@ There is also conditional execution:
 echo "Always executed" || echo "Only executed if first command fails"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -459,7 +459,7 @@ Always executed
 echo "Always executed" && echo "Only executed if first command does NOT fail"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -480,7 +480,7 @@ case "$variable" in
 esac
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -497,7 +497,7 @@ do
 done
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -515,7 +515,7 @@ do
 done
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -534,7 +534,7 @@ do
 done
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="file1.txt file2.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="file1.txt file2.txt" output>
 </codapi-snippet>
 
 ```
@@ -552,7 +552,7 @@ do
 done
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="file1.txt file2.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="file1.txt file2.txt" output>
 </codapi-snippet>
 
 ```
@@ -570,7 +570,7 @@ do
 done
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="file1.txt file2.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="file1.txt file2.txt" output>
 </codapi-snippet>
 
 ```
@@ -588,7 +588,7 @@ do
 done
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -608,7 +608,7 @@ function foo ()
 }
 ```
 
-<codapi-snippet id="s-function" sandbox="bash" editor="basic" output-mode="hidden">
+<codapi-snippet id="s-function" sandbox="shell" editor="basic" output-mode="hidden">
 </codapi-snippet>
 
 Call the function `foo` with two arguments, `arg1` and `arg2`:
@@ -617,7 +617,7 @@ Call the function `foo` with two arguments, `arg1` and `arg2`:
 foo arg1 arg2
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" depends-on="s-function" output>
+<codapi-snippet sandbox="shell" editor="basic" depends-on="s-function" output>
 </codapi-snippet>
 
 ```
@@ -635,7 +635,7 @@ resultValue=$?
 echo "result = $resultValue"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" depends-on="s-function" output>
+<codapi-snippet sandbox="shell" editor="basic" depends-on="s-function" output>
 </codapi-snippet>
 
 ```
@@ -657,7 +657,7 @@ bar ()
 bar
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -679,7 +679,7 @@ echo "I'm in $(pwd)"
 echo "I'm in $PWD"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -713,7 +713,7 @@ directory with the `ls` command:
 ls
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -735,7 +735,7 @@ echo ""
 ls -R
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="file.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="file.txt" output>
 </codapi-snippet>
 
 ```
@@ -760,7 +760,7 @@ That's how we can list `.txt` files in the current directory:
 ls -l | grep "\.txt"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="file.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="file.txt" output>
 </codapi-snippet>
 
 ```
@@ -773,7 +773,7 @@ Use `cat` to print files to stdout:
 cat file.txt
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="file.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="file.txt" output>
 </codapi-snippet>
 
 ```
@@ -791,7 +791,7 @@ Contents=$(cat file.txt)
 echo -e "START OF FILE\n$Contents\nEND OF FILE"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="file.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="file.txt" output>
 </codapi-snippet>
 
 ```
@@ -812,7 +812,7 @@ cp -r /sandbox/ /tmp # recursively copy
 ls -lR /tmp
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="file.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="file.txt" output>
 </codapi-snippet>
 
 ```
@@ -841,7 +841,7 @@ mv /tmp/src.txt /tmp/dst.txt
 ls /tmp
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -869,7 +869,7 @@ cd /var/log/..
 cd -
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -883,7 +883,7 @@ Use subshells to work across directories:
 pwd # still in first directory
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -904,7 +904,7 @@ mkdir -p /tmp/two/three/four
 tree /tmp
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -941,7 +941,7 @@ fi
 EOF
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output-mode="hidden">
+<codapi-snippet sandbox="shell" editor="basic" output-mode="hidden">
 </codapi-snippet>
 
 Variables will be expanded if the first "EOF" is not quoted.
@@ -960,7 +960,7 @@ bash hello.sh > "/tmp/output.out"
 bash hello.sh 2> "/tmp/error.err"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="hello.sh input.in" output>
+<codapi-snippet sandbox="shell" editor="basic" files="hello.sh input.in" output>
 </codapi-snippet>
 
 ```
@@ -977,7 +977,7 @@ bash hello.sh > "/tmp/output-and-error.log" 2>&1
 cat /tmp/output-and-error.log
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="hello.sh" output>
+<codapi-snippet sandbox="shell" editor="basic" files="hello.sh" output>
 </codapi-snippet>
 
 ```
@@ -990,7 +990,7 @@ Redirect all output and errors to the black hole, `/dev/null`, i.e., no output:
 bash hello.sh > /dev/null 2>&1
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="hello.sh" output>
+<codapi-snippet sandbox="shell" editor="basic" files="hello.sh" output>
 </codapi-snippet>
 
 ```
@@ -1010,7 +1010,7 @@ echo "error.err:"
 cat /tmp/error.err
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="hello.sh" output>
+<codapi-snippet sandbox="shell" editor="basic" files="hello.sh" output>
 </codapi-snippet>
 
 ```
@@ -1027,7 +1027,7 @@ help for > /tmp/output.out 2>> /tmp/error.err
 wc -l /tmp/output.out /tmp/error.err
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -1043,7 +1043,7 @@ see: `man fd`
 echo <(echo "#helloworld")
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -1060,7 +1060,7 @@ echo "#helloworld" | tee /tmp/output.out >/dev/null
 cat /tmp/output.out
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -1079,7 +1079,7 @@ rm -v /tmp/one.txt /tmp/two.txt
 rm -r /tmp/subdir/ # recursively delete
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -1098,7 +1098,7 @@ current directory:
 echo "There are $(ls | wc -l) items here."
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -1112,7 +1112,7 @@ the preferred way is to use`$( )`.
 echo "There are `ls | wc -l` items here."
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -1148,7 +1148,7 @@ Redefine command `ping` as alias to send only 5 packets:
 alias ping='ping -c 5'
 ```
 
-<codapi-snippet id="s-alias" sandbox="bash" editor="basic" output-mode="hidden">
+<codapi-snippet id="s-alias" sandbox="shell" editor="basic" output-mode="hidden">
 </codapi-snippet>
 
 Escape the alias and use command with this name instead:
@@ -1157,7 +1157,7 @@ Escape the alias and use command with this name instead:
 \ping -c 1 127.0.0.1
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -1175,7 +1175,7 @@ Print all aliases:
 alias -p
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" depends-on="s-alias" output>
+<codapi-snippet sandbox="shell" editor="basic" depends-on="s-alias" output>
 </codapi-snippet>
 
 ```
@@ -1192,7 +1192,7 @@ Prints last 5 lines of `data.txt`:
 tail -n 5 data.txt
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="data.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="data.txt" output>
 </codapi-snippet>
 
 ```
@@ -1209,7 +1209,7 @@ Prints first 5 lines of `data.txt`:
 head -n 5 data.txt
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="data.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="data.txt" output>
 </codapi-snippet>
 
 ```
@@ -1226,7 +1226,7 @@ Print `data.txt`'s lines in sorted order:
 sort data.txt
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="data.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="data.txt" output>
 </codapi-snippet>
 
 ```
@@ -1248,7 +1248,7 @@ Report or omit repeated lines, with `-d` it reports them:
 uniq -d data.txt
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="data.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="data.txt" output>
 </codapi-snippet>
 
 ```
@@ -1262,7 +1262,7 @@ Prints only the first column before the `,` character:
 cut -d ',' -f 1 data.txt | grep four
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="data.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="data.txt" output>
 </codapi-snippet>
 
 ```
@@ -1278,7 +1278,7 @@ grep "three" /tmp/data.txt | wc -l
 grep "ten" /tmp/data.txt | wc -l
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="data.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="data.txt" output>
 </codapi-snippet>
 
 ```
@@ -1296,7 +1296,7 @@ The example prints lines which begin with `foo` and end in `bar`:
 grep "^foo.*bar$" data.txt
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="data.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="data.txt" output>
 </codapi-snippet>
 
 ```
@@ -1310,7 +1310,7 @@ Pass the option `-c` to instead print the number of lines matching the regex:
 grep -c "^foo.*bar$" data.txt
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="data.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="data.txt" output>
 </codapi-snippet>
 
 ```
@@ -1336,7 +1336,7 @@ Perform the same initial search, but filter out the lines containing "baz"
 grep "^foo.*bar$" data.txt | grep -v "baz"
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="data.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="data.txt" output>
 </codapi-snippet>
 
 ```
@@ -1350,7 +1350,7 @@ and not the regex, use `fgrep` (or `grep -F`):
 fgrep "baz" data.txt
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" files="data.txt" output>
+<codapi-snippet sandbox="shell" editor="basic" files="data.txt" output>
 </codapi-snippet>
 
 ```
@@ -1387,7 +1387,7 @@ Help for the `return` command:
 help return
 ```
 
-<codapi-snippet sandbox="bash" editor="basic" output>
+<codapi-snippet sandbox="shell" editor="basic" output>
 </codapi-snippet>
 
 ```

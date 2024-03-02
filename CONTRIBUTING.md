@@ -101,7 +101,7 @@ Display the current local date in the default format:
 date
 ```
 
-<codapi-snippet sandbox="bash" editor="basic">
+<codapi-snippet sandbox="shell" editor="basic">
 </codapi-snippet>
 
 Display the date in a custom format:
@@ -110,7 +110,7 @@ Display the date in a custom format:
 date +%Y-%m-%d
 ```
 
-<codapi-snippet sandbox="bash" editor="basic">
+<codapi-snippet sandbox="shell" editor="basic">
 </codapi-snippet>
 
 ...
