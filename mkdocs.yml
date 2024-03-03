@@ -8,8 +8,8 @@ nav:
     - Contributing: https://github.com/nalgeon/tryxinyminutes/blob/main/CONTRIBUTING.md
     - Live version: https://codapi.org/try/
 extra_css:
-    - https://unpkg.com/@antonz/codapi@0.15.0/dist/snippet.css
+    - https://unpkg.com/@antonz/codapi@0.17.0/dist/snippet.css
 extra_javascript:
-    - https://unpkg.com/@antonz/codapi@0.15.0/dist/snippet.js
+    - https://unpkg.com/@antonz/codapi@0.17.0/dist/snippet.js
 plugins: []
 dev_addr: "127.0.0.1:3000"
