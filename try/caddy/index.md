@@ -141,9 +141,9 @@ Then upload it:
 
 ```sh
 curl localhost:2019/load \
-	-H "Content-Type: application/json" \
+    -H "Content-Type: application/json" \
     -w "status: %{response_code}" \
-	-d @caddy.json
+    -d @caddy.json
 ```
 
 <codapi-snippet sandbox="caddy" command="exec" editor="basic" files="#caddy.json" output>
@@ -378,8 +378,8 @@ As you probably remember, we used the `/load` API method to apply it:
 
 ```sh
 curl localhost:2019/load \
-	-H "Content-Type: application/json" \
-	-d @caddy.json
+    -H "Content-Type: application/json" \
+    -d @caddy.json
 ```
 
 <codapi-snippet sandbox="caddy" command="exec" editor="basic" files="caddy.json" output-mode="hidden">
@@ -395,9 +395,9 @@ Using the request URI's path, we can traverse into the config structure and upda
 
 ```sh
 curl \
-	localhost:2019/config/apps/http/servers/example/routes/0/handle/0/body \
-	-H "Content-Type: application/json" \
-	-d '"Work smarter, not harder."'
+    localhost:2019/config/apps/http/servers/example/routes/0/handle/0/body \
+    -H "Content-Type: application/json" \
+    -d '"Work smarter, not harder."'
 ```
 
 <codapi-snippet id="update-body-1" sandbox="caddy" command="exec" editor="basic" template="load.sh" files="caddy.json" output-mode="hidden">
@@ -454,9 +454,9 @@ We can give our handler object an [`@id` tag](https://caddyserver.com/docs/api#u
 
 ```sh
 curl \
-	localhost:2019/config/apps/http/servers/example/routes/0/handle/0/@id \
-	-H "Content-Type: application/json" \
-	-d '"msg"'
+    localhost:2019/config/apps/http/servers/example/routes/0/handle/0/@id \
+    -H "Content-Type: application/json" \
+    -d '"msg"'
 ```
 
 <codapi-snippet id="set-id" sandbox="caddy" command="exec" editor="basic" template="load.sh" files="caddy.json" depends-on="update-body-1" output-mode="hidden">
@@ -491,9 +491,9 @@ And now we can change the message with a shorter path:
 
 ```sh
 curl \
-	localhost:2019/id/msg/body \
-	-H "Content-Type: application/json" \
-	-d '"Some shortcuts are good."'
+    localhost:2019/id/msg/body \
+    -H "Content-Type: application/json" \
+    -d '"Some shortcuts are good."'
 ```
 
 <codapi-snippet id="update-body-2" sandbox="caddy" command="exec" editor="basic" template="load.sh" files="caddy.json" depends-on="set-id" output-mode="hidden">
@@ -610,7 +610,7 @@ Save this as `caddy.html` in the current directory and load it in your browser:
 curl localhost/caddy.html
 ```
 
-<codapi-snippet sandbox="caddy" command="exec" editor="basic" files="#caddyfile-2:Caddyfile #caddy.html" output-mode="iframe">
+<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="sleep.sh" files="#caddyfile-2:Caddyfile #caddy.html" output-mode="iframe">
 </codapi-snippet>
 
 Wait a minute. We should see today's date. Why didn't it work? It's because the server hasn't yet been configured to evaluate templates! Easy to fix, just add a line to the Caddyfile so it looks like this:
@@ -631,7 +631,7 @@ Save that, then reload the browser tab:
 curl localhost/caddy.html
 ```
 
-<codapi-snippet sandbox="caddy" command="exec" editor="basic" files="#caddyfile-3:Caddyfile #caddy.html" output-mode="iframe">
+<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="sleep.sh" files="#caddyfile-3:Caddyfile #caddy.html" output-mode="iframe">
 </codapi-snippet>
 
 With Caddy's [templates module](https://caddyserver.com/docs/modules/http.handlers.templates), you can do a lot of useful things with static files, such as including other HTML files, making sub-requests, setting response headers, working with data structures, and more!
