@@ -146,7 +146,7 @@ curl localhost:2019/load \
     -d @caddy.json
 ```
 
-<codapi-snippet sandbox="caddy" command="exec" editor="basic" files="#caddy.json" output>
+<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="exec.sh" files="#caddy.json" output>
 </codapi-snippet>
 
 ```
@@ -248,7 +248,7 @@ You can now try loading your site again and you will see that it is working:
 curl localhost:2015
 ```
 
-<codapi-snippet sandbox="caddy" command="exec" editor="basic" files="#Caddyfile" output>
+<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="exec.sh" files="#Caddyfile" output>
 </codapi-snippet>
 
 ```
@@ -558,7 +558,7 @@ Open `http://localhost` in your browser and see your web server working, complet
 curl localhost
 ```
 
-<codapi-snippet sandbox="caddy" command="exec" editor="basic" files="#caddyfile-1:Caddyfile" output>
+<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="exec.sh" files="#caddyfile-1:Caddyfile" output>
 </codapi-snippet>
 
 ```
@@ -582,7 +582,7 @@ Save your Caddyfile, then refresh your browser tab. You should either see a list
 curl localhost
 ```
 
-<codapi-snippet sandbox="caddy" command="exec" editor="basic" files="#caddyfile-2:Caddyfile" output-mode="iframe">
+<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="exec.sh" files="#caddyfile-2:Caddyfile" output-mode="iframe">
 </codapi-snippet>
 
 ### Adding functionality
@@ -705,7 +705,7 @@ Let's try the port 8080:
 curl localhost:8080
 ```
 
-<codapi-snippet sandbox="caddy" command="exec" editor="basic" files="#caddyfile-4:Caddyfile" output>
+<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="exec.sh" files="#caddyfile-4:Caddyfile" output>
 </codapi-snippet>
 
 ```
@@ -757,7 +757,7 @@ There; now the reverse proxy will be prioritized for all requests starting with 
 curl -v localhost/api/status
 ```
 
-<codapi-snippet sandbox="caddy" command="exec" editor="basic" files="#caddyfile-5:Caddyfile" output>
+<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="exec.sh" files="#caddyfile-5:Caddyfile" output>
 </codapi-snippet>
 
 ```
@@ -815,7 +815,7 @@ caddy start
 curl localhost:2019/config/ | jq '.. | .body? // empty'
 ```
 
-<codapi-snippet sandbox="caddy" command="run" editor="basic" files="#caddyfile-6:Caddyfile" output>
+<codapi-snippet sandbox="caddy" command="run" editor="basic" template="exec.sh" files="#caddyfile-6:Caddyfile" output>
 </codapi-snippet>
 
 ```
