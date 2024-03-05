@@ -85,7 +85,7 @@ This blocks forever, but what is it doing? At the moment... nothing. By default,
 curl localhost:2019/config/
 ```
 
-<codapi-snippet sandbox="caddy" command="exec" editor="basic" output>
+<codapi-snippet sandbox="caddy" command="exec" template="exec.sh" editor="basic" output>
 </codapi-snippet>
 
 ```
@@ -382,7 +382,7 @@ curl localhost:2019/load \
     -d @caddy.json
 ```
 
-<codapi-snippet sandbox="caddy" command="exec" editor="basic" files="caddy.json" output-mode="hidden">
+<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="exec.sh" files="caddy.json" output-mode="hidden">
 </codapi-snippet>
 
 ### Config traversal
