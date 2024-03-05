@@ -610,7 +610,7 @@ Save this as `caddy.html` in the current directory and load it in your browser:
 curl localhost/caddy.html
 ```
 
-<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="sleep.sh" files="#caddyfile-2:Caddyfile #caddy.html" output-mode="iframe">
+<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="exec.sh" files="#caddyfile-2:Caddyfile #caddy.html" output-mode="iframe">
 </codapi-snippet>
 
 Wait a minute. We should see today's date. Why didn't it work? It's because the server hasn't yet been configured to evaluate templates! Easy to fix, just add a line to the Caddyfile so it looks like this:
@@ -631,7 +631,7 @@ Save that, then reload the browser tab:
 curl localhost/caddy.html
 ```
 
-<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="sleep.sh" files="#caddyfile-3:Caddyfile #caddy.html" output-mode="iframe">
+<codapi-snippet sandbox="caddy" command="exec" editor="basic" template="exec.sh" files="#caddyfile-3:Caddyfile #caddy.html" output-mode="iframe">
 </codapi-snippet>
 
 With Caddy's [templates module](https://caddyserver.com/docs/modules/http.handlers.templates), you can do a lot of useful things with static files, such as including other HTML files, making sub-requests, setting response headers, working with data structures, and more!
