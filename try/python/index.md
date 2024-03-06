@@ -10,6 +10,10 @@ contributors:
 
 ## Introduction
 
+Python was created in the late 1980s by Guido van Rossum. It emphasizes code readability by using significant whitespace. 
+It uses dynamic typing, dynamic name resolution, garbage collection, and a "batteries included" standard library.
+This guide is for Python 3, which diverges significantly from Python 2. For a guide on Python 2, see [Learn Python 2 in Y minutes](https://learnxinyminutes.com/docs/pythonlegacy/).
+
 ```
 
 # Single line comments start with a number symbol.

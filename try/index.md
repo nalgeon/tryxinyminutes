@@ -38,7 +38,7 @@ Get a quick taste of your next language (database, package, tool, etc.) by study
 <a class="lang disabled" href="">OCaml</a>
 <a class="lang" href="/try/odin/">Odin</a>
 <a class="lang disabled" href="">PHP</a>
-<a class="lang disabled" href="">Python</a>
+<a class="lang" href="/try/python/">Python</a>
 <a class="lang disabled" href="">Ruby</a>
 <a class="lang disabled" href="">Rust</a>
 <a class="lang" href="/try/sql/">SQL</a>
