@@ -9,8 +9,8 @@ contributors:
     -  ["Christoph Berger", "https://github.com/christophberger"]
 license: CC-BY-SA 3.0
 ---
-<codapi-settings url="http://localhost:1313/v1">
-</codapi-settings>
+<!-- codapi-settings url="http://localhost:1313/v1">
+</codapi-settings -->
 
 Go was created out of the need to get work done. It's not the latest trend
 in programming language theory, but it is a way to solve real-world
@@ -31,7 +31,7 @@ Go comes with a good standard library and a sizeable community.
  line comment */
 ```
 
-<codapi-snippet sandbox="go" editor="basic" template="tpl-plain.go" output-mode="hidden"></codapi-snippet>
+<codapi-snippet sandbox="go" editor="basic" template="tpl_plain_main.go" output-mode="hidden"></codapi-snippet>
 
 
 ## Build tags
@@ -44,15 +44,21 @@ Go comes with a good standard library and a sizeable community.
 // +build prod, dev, test
 ```
 
-<codapi-snippet sandbox="go" editor="basic" template="tpl-plain.go" output-mode="hidden"></codapi-snippet>
+<codapi-snippet sandbox="go" editor="basic" template="tpl_plain_main.go" output-mode="hidden"></codapi-snippet>
 
+
+## Packages and imports
+
+A package clause starts every source file.
+`main` is a special name declaring an executable rather than a library.
+
+Import declaration declares library packages referenced in this file.
+
+Imported packages must be used. (The Go Language Server `gopls` can take care of removing unused imports automatically.)
 
 ```go
-// A package clause starts every source file.
-// main is a special name declaring an executable rather than a library.
 package main
 
-// Import declaration declares library packages referenced in this file.
 import (
 	"fmt"       // A package in the Go standard library.
 	"io/ioutil" // Implements some I/O utility functions.
@@ -62,41 +68,88 @@ import (
 	"strconv"   // String conversions.
 )
 
-// A function definition. Main is special. It is the entry point for the
-// executable program. Love it or hate it, Go uses brace brackets.
+// Running this code snippet is expected to fail.
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_noop_main_for_package_decl.go"></codapi-snippet>
+
+## Functions
+
+A function definition. 
+
+The name `main` is special. It is the entry point for the
+executable program. 
+
+Go uses curly braces for defining scopes like a function body.
+
+Go does **not** require semicolons to end a statement.
+
+```go
 func main() {
 	// Println outputs a line to stdout.
 	// It comes from the package fmt.
 	fmt.Println("Hello world!")
 
-	// Call another function within this package.
+	// Call another function within package main.
 	beyondHello()
 }
 
-// Functions have parameters in parentheses.
-// If there are no parameters, empty parentheses are still required.
 func beyondHello() {
-	var x int // Variable declaration. Variables must be declared before use.
-	x = 3     // Variable assignment.
-	// "Short" declarations use := to infer the type, declare, and assign.
-	y := 4
-	sum, prod := learnMultiple(x, y)        // Function returns two values.
-	fmt.Println("sum:", sum, "prod:", prod) // Simple output.
-	learnTypes()                            // < y minutes, learn more!
+	fmt.Println("Hello main!")
 }
+```
 
-/* <- multiline comment
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+
+Functions have parameters in parentheses.
+If there are no parameters, empty parentheses are still required.
+
+```go
+func noparams() {
+	fmt.Println("Look ma! No parameters!")
+}
+```
+<codapi-snippet sandbox="go" editor="basic" template="tpl_func_noparams.go"></codapi-snippet>
+
+## Variables
+
+Variables must be declared before use. The type name *precedes* the variable name; this is quite the opposite of what C does. See [here](https://appliedgo.com/blog/go-declaration-syntax) for an explanation.
+
+A variable assignment uses a single equal sign (`=`). 
+
+Use a "short declaration" to declare and assign in one statement. Go infers the type from the value assigned.
+
+```go
+var x int // Variable declaration. 
+x = 3     // Variable assignment.
+y := 4    // "Short" declaration
+fmt.Println("x:", x, ", y:", y) 
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
 Functions can have parameters and (multiple!) return values.
-Here `x`, `y` are the arguments and `sum`, `prod` is the signature (what's returned).
+
+Here `x`, `y` are the arguments and `sum`, `prod` is the signature (what's returned). You could write `func learnMultiple(x, y int) (int, int)` as well, but named return parameters make the function signature clearer.
+
 Note that `x` and `sum` receive the type `int`.
-*/
+
+```go
 func learnMultiple(x, y int) (sum, prod int) {
 	return x + y, x * y // Return two values.
 }
 
-// Some built-in types and literals.
-func learnTypes() {
-	// Short declaration usually gives you what you want.
+func main() {
+	a, b := learnMultiple(3,4)
+	fmt.Println(a, b)
+}
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+
+## Built-in types and literals
+
+```go
 	str := "Learn Go!" // string type.
 
 	s2 := `A "raw" string literal
