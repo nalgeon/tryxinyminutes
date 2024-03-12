@@ -95,7 +95,7 @@ To view the guide in a browser, visit http://localhost:3000/try/date
 
 ## Make the guide interactive
 
-To make examples interactive, use the [codapi-js](https://github.com/nalgeon/codapi-js) widget. It's already enabled in your local environment, so all you need to do is use it in the guide.
+To make examples interactive, use the [codapi-js](https://github.com/nalgeon/codapi-js) widget. It's already enabled in your local environment, so all you need to do is use it in the guide. There is no need to install the Codapi server — your local environment uses the cloud instance.
 
 Add a `codapi-snippet` for each static code example:
 
