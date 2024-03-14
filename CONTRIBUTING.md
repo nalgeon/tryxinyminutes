@@ -2,6 +2,13 @@
 
 Feel free to add your own interactive guides or improve existing ones. Here is how to do it.
 
+[Setup local environment](#setup-local-environment) •
+[Add a new guide](#add-a-new-guide) •
+[Make the guide interactive](#make-the-guide-interactive) •
+[Improve an existing guide](#improve-an-existing-guide) •
+[Explain by example](#explain-by-example) •
+[Make a pull request](#make-a-pull-request)
+
 ## Setup local environment
 
 Fork the [repo](https://github.com/nalgeon/tryxinyminutes) on GitHub and clone the fork locally:
@@ -88,7 +95,7 @@ To view the guide in a browser, visit http://localhost:3000/try/date
 
 ## Make the guide interactive
 
-To make examples interactive, use the [codapi-js](https://github.com/nalgeon/codapi-js) widget. It's already enabled in your local environment, so all you need to do is use it in the guide.
+To make examples interactive, use the [codapi-js](https://github.com/nalgeon/codapi-js) widget. It's already enabled in your local environment, so all you need to do is use it in the guide. There is no need to install the Codapi server — your local environment uses the cloud instance.
 
 Add a `codapi-snippet` for each static code example:
 
@@ -128,9 +135,13 @@ See the list of available sandboxes on the [Codapi website](https://codapi.org/#
 
 Some guides need improvement (they usually say so), so feel free to contribute to them. The process is the same as creating a new guide, but you work with an existing `try/someguide/index.md` file instead of creating a new one.
 
-Use clear, simple language that's approachable for a wide range of technical readers. Use the active voice whenever possible.
+## Explain by example
 
-Try to follow the original style and tone of the guide so that it looks and reads consistent.
+Use clear, simple language that's approachable for a wide range of technical readers. Use the active voice whenever possible. When contributing to existing guides, follow the original style and tone of the guide so that it looks and reads consistent.
+
+Do not write long, theory-heavy passages. Always explain by example. If you can't explain something with an example, it's probably best not to mention it at all.
+
+Make sure all examples work. There should be no errors when the reader clicks _Run_ (unless the error is expected according to the example).
 
 ## Make a pull request
 
