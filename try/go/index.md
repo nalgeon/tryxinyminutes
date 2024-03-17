@@ -12,6 +12,8 @@ license: CC-BY-SA 3.0
 <!-- codapi-settings url="http://localhost:1313/v1">
 </codapi-settings -->
 
+> This text and code is based on [Learn X in Y Minutes Where X = Go](https://learnxinyminutes.com/docs/go/), with only a few changes required by the separation of the code into snippets that can execute independently. Big shoutout to the authors!
+
 Go was created out of the need to get work done. It's not the latest trend
 in programming language theory, but it is a way to solve real-world
 problems.
@@ -25,6 +27,7 @@ Go comes with a rich standard library and a large, thriving community.
 
 ## Comments
 
+Go has single- and multiline comments. Multiline comments cannot be nested.
 ```go
 // Single line comment
 /* Multi-
@@ -73,6 +76,7 @@ import (
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_noop_main_for_package_decl.go"></codapi-snippet>
 
+ 
 ## Functions
 
 A function definition. 
@@ -100,6 +104,20 @@ func beyondHello() {
 ```
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+
+> **NOTE:** For brevity, most of the following code snippets hide the package declaration, imports, and the `main()` function.
+>
+> If a code snippet contains only statements, assume they exist in a `main()` function:
+> 
+>     package main
+> 
+>     import (
+>         // used packages imported here
+>     )
+>    
+>     func main() {
+>	     // statements visible in a code snippet live here
+>     }
 
 Functions have parameters in parentheses.
 If there are no parameters, empty parentheses are still required.
@@ -149,101 +167,231 @@ func main() {
 
 ## Built-in types and literals
 
-```go
-	str := "Learn Go!" // string type.
+### Simple types
 
-	s2 := `A "raw" string literal
+```go
+str := "Learn Go!" // string type.
+
+s2 := `A "raw" string literal
 can include line breaks.` // Same string type.
 
-	// Non-ASCII literal. Go source is UTF-8.
-	g := 'Σ' // rune type, an alias for int32, holds a unicode code point.
+// Non-ASCII literal. Go source is UTF-8.
+g := 'Σ' // rune type, an alias for int32, holds a unicode code point.
 
-	f := 3.14159 // float64, an IEEE-754 64-bit floating point number.
-	c := 3 + 4i  // complex128, represented internally with two float64's.
+f := 3.14159 // float64, an IEEE-754 64-bit floating point number.
+c := 3 + 4i  // complex128, represented internally with two float64's.
 
-	// var syntax with initializers.
-	var u uint = 7 // Unsigned, but implementation dependent size as with int.
-	var pi float32 = 22. / 7
+// var syntax with initializers.
+var u uint = 7 // Unsigned, but implementation dependent size as with int.
+var pi float32 = 22. / 7
 
-	// Conversion syntax with a short declaration.
-	n := byte('\n') // byte is an alias for uint8.
+// Conversion syntax with a short declaration.
+n := byte('\n') // byte is an alias for uint8.
 
-	// Arrays have size fixed at compile time.
-	var a4 [4]int           // An array of 4 ints, initialized to all 0.
-	a5 := [...]int{3, 1, 5, 10, 100} // An array initialized with a fixed size of five
-	// elements, with values 3, 1, 5, 10, and 100.
+fmt.Printf("str: %s\ns2: %s\ng: %s\nf: %f\nc: %f\nu: %d\npi: %f\nn: %v\n",
+	str, s2, g, f, c, u, pi, n)
+```
 
-	// Arrays have value semantics.
-	a4_cpy := a4            // a4_cpy is a copy of a4, two separate instances.
-	a4_cpy[0] = 25          // Only a4_cpy is changed, a4 stays the same.
-	fmt.Println(a4_cpy[0] == a4[0]) // false
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
 
-	// Slices have dynamic size. Arrays and slices each have advantages
-	// but use cases for slices are much more common.
-	s3 := []int{4, 5, 9}    // Compare to a5. No ellipsis here.
-	s4 := make([]int, 4)    // Allocates slice of 4 ints, initialized to all 0.
-	var d2 [][]float64      // Declaration only, nothing allocated here.
-	bs := []byte("a slice") // Type conversion syntax.
+### Pointers
 
-	// Slices (as well as maps and channels) have reference semantics.
-	s3_cpy := s3            // Both variables point to the same instance.
-	s3_cpy[0] = 0           // Which means both are updated.
-	fmt.Println(s3_cpy[0] == s3[0]) // true	
+A pointer represents the address of a variable in memory.
 
-	// Because they are dynamic, slices can be appended to on-demand.
-	// To append elements to a slice, the built-in append() function is used.
-	// First argument is a slice to which we are appending. Commonly,
-	// the slice variable is updated in place, as in example below.
-	s := []int{1, 2, 3}		// Result is a slice of length 3.
-	s = append(s, 4, 5, 6)	// Added 3 elements. Slice now has length of 6.
-	fmt.Println(s) // Updated slice is now [1 2 3 4 5 6]
+Pointers are bound to their base type. For example, a pointer to an integer variable cannot be changed to point to a boolean variable.
 
-	// To append another slice, instead of list of atomic elements we can
-	// pass a reference to a slice or a slice literal like this, with a
-	// trailing ellipsis, meaning take a slice and unpack its elements,
-	// appending them to slice s.
-	s = append(s, []int{7, 8, 9}...) // Second argument is a slice literal.
-	fmt.Println(s)	// Updated slice is now [1 2 3 4 5 6 7 8 9]
+Pointers are created by taking the address of a variable (`&a`) or by the `new()` function (discussed later).
 
-	p, q := learnMemory() // Declares p, q to be type pointer to int.
-	fmt.Println(*p, *q)   // * follows a pointer. This prints two ints.
+```go
+a, b := 1024, 2048
+p, q := &a, &b // Declares p, q to be type pointer to int.
+fmt.Println(p, q)   // This prints the addresses of p and q.
+fmt.Println(*p, *q)   // * follows a pointer. This prints two ints.
+```
 
-	// Maps are a dynamically growable associative array type, like the
-	// hash or dictionary types of some other languages.
-	m := map[string]int{"three": 3, "four": 4}
-	m["one"] = 1
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
 
-	// Unused variables are an error in Go.
-	// The underscore lets you "use" a variable but discard its value.
-	_, _, _, _, _, _, _, _, _, _ = str, s2, g, f, u, pi, n, a5, s4, bs
-	// Usually you use it to ignore one of the return values of a function
-	// For example, in a quick and dirty script you might ignore the
-	// error value returned from os.Create, and expect that the file
-	// will always be created.
+### Arrays
+
+Arrays are static; that is, they have a fixed size at compile time. 
+
+```go
+var a4 [4]int           // An array of 4 ints, initialized to all 0.
+a5 := [...]int{3, 1, 5, 10, 100} // An array initialized with a fixed size of five
+fmt.Printf("a4: %v\na5: %v\n", a4, a5)
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+Arrays have value semantics.
+
+```go
+var a4 [4]int           // An array of 4 ints, initialized to all 0.
+a4_cpy := a4            // a4_cpy is a copy of a4, two separate instances.
+a4_cpy[0] = 25          // Only a4_cpy is changed, a4 stays the same.
+fmt.Println(a4_cpy[0] == a4[0]) // false
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+
+### Slices
+
+Slices have dynamic size. Arrays and slices each have advantages, 
+but use cases for slices are much more common.
+
+```go
+s3 := []int{4, 5, 9}    // Compare to a5. No ellipsis used here.
+s4 := make([]int, 4)    // Allocates slice of 4 ints, initialized to all 0.
+var d2 [][]float64      // Declaration only, nothing allocated here.
+bs := []byte("a slice") // Type conversion syntax.
+fmt.Printf("s3: %v\ns4: %v\nd2: %v\nbs: %v\n", s3, s4, d2, bs)
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+Slices (as well as maps and channels) have reference semantics.
+
+```go
+s3 := []int{4, 5, 9}
+s3_cpy := s3            // Both variables point to the same instance.
+s3_cpy[0] = 0           // Which means both are updated.
+fmt.Println(s3_cpy[0] == s3[0]) // true	
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+Because they are dynamic, slices can be appended to on-demand.
+
+To append elements to a slice, the built-in append() function is used.
+
+First argument is a slice to which we are appending. Commonly, 
+the slice variable is updated in place, as in the example below.
+
+```go
+s := []int{1, 2, 3}		// Result is a slice of length 3.
+fmt.Println(s)
+s = append(s, 4, 5, 6)	// Added 3 elements. Slice now has length of 6.
+fmt.Println(s) // Updated slice is now [1 2 3 4 5 6]
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+To append another slice, instead of list of atomic elements we can
+pass a reference to a slice or a slice literal like this, with a
+trailing ellipsis, meaning take a slice and unpack its elements,
+appending them to slice s.
+
+
+```go
+s := []int{1, 2, 3, 4, 5, 6}
+s = append(s, []int{7, 8, 9}...) // Second argument is a slice literal.
+fmt.Println(s)	// Updated slice is now [1 2 3 4 5 6 7 8 9]
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+## Maps
+
+Maps are a dynamically growable associative array type, like the
+hash or dictionary types of some other languages.
+
+```go
+m := map[string]int{"three": 3, "four": 4}
+m["one"] = 1
+fmt.Printf("m: %v\nm[\"one\"]: %d", m, m["one"])
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+## Unused variables
+
+Unused variables are an error in Go.
+
+The blank identifier lets you "use" a variable but discard its value. 
+Technically, the blank identifier is an underscore. 
+
+(Try replacing the blank identifier "_" with a variable name.)
+
+```go
+var _ = "This variable is not used"
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_plain_main.go"></codapi-snippet>
+
+Usually you use it to ignore one of the return values of a function.
+For example, in a **quick and dirty** (!) script you might ignore the
+error value returned from `os.Create` and expect that the file
+will always be created.
+
+
+```go
+package main
+
+import (
+	"os"
+	"fmt"
+)
+
+func main() {
 	file, _ := os.Create("output.txt")
 	fmt.Fprint(file, "This is how you write to a file, by the way")
 	file.Close()
-	
-	// Output of course counts as using a variable.
-	fmt.Println(s, c, a4, s3, d2, m)
+}
+```
 
-	learnFlowControl() // Back in the flow.
+<codapi-snippet sandbox="go" editor="basic"></codapi-snippet>
+
+## Named return values
+
+Functions in Go can have named return values. The main benefit is better self-documentation. 
+
+Compare 
+
+```go
+func query(filter string) (string, string, string) { ... } 
+```
+
+with 
+
+```go
+func query(filter string) (first, last, email string) { ... } 
+```
+
+The latter variant leaves no question about what each returned string represents.
+
+Named return values are automatically declared in the function body.
+
+You do not need to list named return values in the return statement. 
+However, be aware that "naked" return statements are bad practice. They make the code
+less readable and prone to errors. 
+
+```go
+func namedReturn() (a, b int) {
+	a = 1 // note the simple assignment; no short declaration := required
+	// b is initialized with the zero value, 0 in this case.
+	return      // bad practice; don't do this.
 }
 
-// It is possible, unlike in many other languages for functions in go
-// to have named return values.
-// Assigning a name to the type being returned in the function declaration line
-// allows us to easily return from multiple points in a function as well as to
-// only use the return keyword, without anything further.
-func learnNamedReturns(x, y int) (z int) {
-	z = x * y
-	return // z is implicit here, because we named it earlier.
+func main() {
+	fmt.Println(namedReturn())
 }
+```
 
-// Go is fully garbage collected. It has pointers but no pointer arithmetic.
-// You can make a mistake with a nil pointer, but not by incrementing a pointer.
-// Unlike in C/Cpp taking and returning an address of a local variable is also safe. 
-func learnMemory() (p, q *int) {
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+
+
+## Memory management
+
+Go is fully garbage collected. Variables do not need to be manually allocated, and allocated memory does not need to be manually freed. Automatic memory management is one of the biggest factors in accelerating code creation.
+
+Go has pointers but no pointer arithmetic.
+You can make a mistake with a `nil` pointer, but not by incrementing a pointer.
+
+Unlike in C or C++, taking and returning an address of a local variable is also safe.
+
+```go
+func memoryAllocations() (p, q *int) {
 	// Named return values p and q have type pointer to int.
 	p = new(int) // Built-in function new allocates memory.
 	// The allocated int slice is initialized to 0, p is no longer nil.
@@ -253,6 +401,15 @@ func learnMemory() (p, q *int) {
 	return &s[3], &r     // & takes the address of an object.
 }
 
+func main() {
+	a, b := memoryAllocations()
+	fmt.Printf("*a: %d, *b: %d\n", *a, *b)
+}
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+
+```go
 // Use the aliased math library (see imports, above) 
 func expensiveComputation() float64 {
 	return m.Exp(10)
