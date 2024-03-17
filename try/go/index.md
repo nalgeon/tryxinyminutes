@@ -340,7 +340,7 @@ func main() {
 }
 ```
 
-<codapi-snippet sandbox="go" editor="basic"></codapi-snippet>
+<codapi-snippet sandbox="go" editor="basic" output-mode="hidden"></codapi-snippet>
 
 ## Named return values
 
