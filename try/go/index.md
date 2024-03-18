@@ -34,7 +34,7 @@ Go has single- and multiline comments. Multiline comments cannot be nested.
  line comment */
 ```
 
-<codapi-snippet sandbox="go" editor="basic" template="tpl_plain_main.go" output-mode="hidden"></codapi-snippet>
+<codapi-snippet sandbox="go" editor="basic" template="tpl_plain_main.go"></codapi-snippet>
 
 
 ## Build tags
@@ -47,7 +47,7 @@ Go has single- and multiline comments. Multiline comments cannot be nested.
 // +build prod, dev, test
 ```
 
-<codapi-snippet sandbox="go" editor="basic" template="tpl_plain_main.go" output-mode="hidden"></codapi-snippet>
+<codapi-snippet sandbox="go" editor="basic" template="tpl_plain_main.go"></codapi-snippet>
 
 
 ## Packages and imports
@@ -265,10 +265,11 @@ fmt.Println(s3_cpy[0] == s3[0]) // true
 
 Because they are dynamic, slices can be appended to on-demand.
 
-To append elements to a slice, the built-in append() function is used.
+To append elements to a slice, the built-in `append()` function is used.
 
-First argument is a slice to which we are appending. Commonly, 
-the slice variable is updated in place, as in the example below.
+`append()` takes a variable number of arguments.
+
+The first argument is a slice, to which `append()` adds the subsequent arguments and returns the updated slice.
 
 ```go
 s := []int{1, 2, 3}		// Result is a slice of length 3.
@@ -279,15 +280,14 @@ fmt.Println(s) // Updated slice is now [1 2 3 4 5 6]
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
 
-To append another slice, instead of list of atomic elements we can
-pass a reference to a slice or a slice literal like this, with a
-trailing ellipsis, meaning take a slice and unpack its elements,
-appending them to slice s.
+`append` only adds atomic elements to a slice. To append another slice, 
+pass a slice and add a trailing ellipsis. The ellipsis tells the compiler 
+to unpack the slice into individual elements, making them consumable for `append`. (This is called "paremeter expansion".)
 
 
 ```go
 s := []int{1, 2, 3, 4, 5, 6}
-s = append(s, []int{7, 8, 9}...) // Second argument is a slice literal.
+s = append(s, []int{7, 8, 9}...) // The ellipsis unpacks the slice 
 fmt.Println(s)	// Updated slice is now [1 2 3 4 5 6 7 8 9]
 ```
 
@@ -342,7 +342,7 @@ func main() {
 }
 ```
 
-<codapi-snippet sandbox="go" editor="basic" output-mode="hidden"></codapi-snippet>
+<codapi-snippet sandbox="go" editor="basic"></codapi-snippet>
 
 ## Named return values
 
@@ -415,13 +415,17 @@ func main() {
 
 ### if 
 
-If statements require brace brackets, and do not require parentheses.
-Formatting is standardized by the command line command "go fmt".
+The condition of an `if` statement does not require parentheses.
+
+The body of an `if` statement *does* require curly braces, even for "one-line" `if` bodies. 
+
+The `else` statement must follow on the same line as the closing curly brace of the `then` block. 
 
 ```go
 if true {
 	fmt.Println("told ya")
 }
+
 if false {
 	// Pout.
 } else {
