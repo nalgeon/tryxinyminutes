@@ -86,6 +86,8 @@ executable program.
 
 Go uses curly braces for defining scopes like a function body.
 
+The opening brace of a function **must** appear on the same line as the function signature.
+
 Go does **not** require semicolons to end a statement.
 
 ```go
@@ -107,7 +109,7 @@ func beyondHello() {
 
 > **NOTE:** For brevity, most of the following code snippets hide the package declaration, imports, and the `main()` function.
 >
-> If a code snippet contains only statements, assume they exist in a `main()` function:
+> If a code snippet contains only statements, assume they exist in a context similar to this:
 > 
 >     package main
 > 
@@ -116,7 +118,7 @@ func beyondHello() {
 >     )
 >    
 >     func main() {
->	     // statements visible in a code snippet live here
+>	     // statements visible in a code snippet typically live here
 >     }
 
 Functions have parameters in parentheses.
@@ -409,23 +411,28 @@ func main() {
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
 
-```go
-// Use the aliased math library (see imports, above) 
-func expensiveComputation() float64 {
-	return m.Exp(10)
-}
+## Flow control
 
-func learnFlowControl() {
-	// If statements require brace brackets, and do not require parentheses.
-	if true {
-		fmt.Println("told ya")
-	}
-	// Formatting is standardized by the command line command "go fmt".
-	if false {
-		// Pout.
-	} else {
-		// Gloat.
-	}
+### if 
+
+If statements require brace brackets, and do not require parentheses.
+Formatting is standardized by the command line command "go fmt".
+
+```go
+if true {
+	fmt.Println("told ya")
+}
+if false {
+	// Pout.
+} else {
+	// Gloat.
+}
+```
+
+
+### switch
+
+```go
 	// Use switch in preference to chained if statements.
 	x := 42.0
 	switch x {
