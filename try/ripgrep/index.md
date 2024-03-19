@@ -316,7 +316,7 @@ Similarly, there are options to enable other paths:
 -   `-a` (`--text`) to search binary files;
 -   `-L` (`--follow`) to follow symlinks.
 
-ripgrep also allows you to override the ignored paths from `.gitignore` with `.ignore` files. See the [official guide](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#automatic-filtering) for details.
+ripgrep allows you to override the ignored paths from `.gitignore` with `.ignore` files. See the [official guide](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#automatic-filtering) for details.
 
 ### File globs
 
@@ -522,7 +522,7 @@ rg -n --smart-case HTTP README.md
 131:		  Print HTTP status codes
 ```
 
-Searching for `HTTP` returns `HTTP` matches, but not `https` or `httpurr`.
+Searching for `HTTP` matches `HTTP`, but not `https` or `httpurr`.
 
 ### Inverse matching
 
@@ -729,7 +729,7 @@ Now we can see the job names even without using `--context`.
 
 ## Replacements
 
-ripgrep provides a limited ability replace matched text with some other text.
+ripgrep provides a limited ability to replace matched text with some other text.
 
 [Replace matches](#replace-matches) ·
 [Replace entire line](#replace-entire-line) ·
@@ -813,7 +813,7 @@ Replacements can include capturing groups. Let's say we want to find all occurre
 
 -   literal string `status`,
 -   followed by any number of whitespace characters,
--   followed by any number of "word" characters (e.g., letters).
+-   followed by any number of "word" characters (e.g. letters).
 
 We put the `\w+` in a "capturing group" (indicated by parentheses) so that we can reference it later in our replacement string. For example:
 
@@ -857,7 +857,7 @@ cat /tmp/.ripgreprc
 </codapi-snippet>
 
 ```
-# Trim really long lines and show a preview.
+# Trim really long lines and show a preview
 --max-columns=40
 --max-columns-preview
 
@@ -872,7 +872,7 @@ cat /tmp/.ripgreprc
 --smart-case
 ```
 
-When specifying a flag that has a value, either put the flag and the value on the same line with a `=` sign (e.g., `--max-columns=40`), or put the flag and the value on two different lines (e.g., `--glob`). Do not put them on the same line without an equal sign (e.g., not `--max-columns 40`).
+When specifying a flag that has a value, either put the flag and the value on the same line with a `=` sign (e.g. `--max-columns=40`), or put the flag and the value on two different lines (e.g., `--glob`). Do not put them on the same line without an equal sign (e.g. not `--max-columns 40`).
 
 Let's search using this config:
 

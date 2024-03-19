@@ -1,15 +1,16 @@
 cat > /tmp/.ripgreprc << EOF
-# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+# Trim really long lines and show a preview
 --max-columns=40
 --max-columns-preview
 
-# Search hidden files / directories (e.g. dotfiles) by default
+# Search hidden files / directories (e.g. dotfiles)
 --hidden
 
-# Using glob patterns to include/exclude files or folders
---glob=!.git/*
+# Do not search git files
+--glob
+!.git/*
 
-# Because who cares about case!?
+# Ignore case unless all caps
 --smart-case
 EOF
 
