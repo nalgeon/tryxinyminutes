@@ -4,7 +4,7 @@ title: Try scikit-learn in Y minutes
 image: /try/scikit-learn/cover.png
 lastmod: 2024-02-29
 original: https://scikit-learn.org/stable/auto_examples/classification/plot_digits_classification.html
-license: BSD-3-Clause
+license: CC-BY-SA-4.0
 contributors:
     - ["Scikit-learn developers", "https://scikit-learn.org/"]
     - ["Anton Zhiyanov", "https://antonz.org/"]

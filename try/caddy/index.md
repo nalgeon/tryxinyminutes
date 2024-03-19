@@ -4,7 +4,7 @@ title: Try Caddy in Y minutes
 image: /try/caddy/cover.png
 lastmod: 2024-03-03
 original: https://caddyserver.com/docs/getting-started
-license: Apache-2.0
+license: CC-BY-SA-4.0
 contributors:
     - ["Caddy contributors", "https://caddyserver.com/"]
     - ["Anton Zhiyanov", "https://antonz.org/"]

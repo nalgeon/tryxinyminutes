@@ -5,7 +5,7 @@ image: /try/cover.png
 lastmod: 2023-10-23
 canonical: https://blog.ferretdb.io/mongodb-crud-operations-with-ferretdb/
 original: https://blog.ferretdb.io/mongodb-crud-operations-with-ferretdb/
-license: Apache-2.0
+license: CC-BY-SA-4.0
 contributors:
     - ["Alexander Fashakin", "https://github.com/fashander"]
     - ["Anton Zhiyanov", "https://antonz.org"]
