@@ -426,34 +426,50 @@ if true {
 	fmt.Println("told ya")
 }
 
-if false {
-	// Pout.
+a := 1 
+if a > 0 {
+	fmt.Println("yep")
 } else {
-	// Gloat.
+	fmt.Println("nope")
 }
 ```
 
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
 
 ### switch
 
+If you find yourself writing changed `if` statements, switch to `switch` (pun intended). 
+
+A switch statement consists of an expression and a block with `case`s. A `case` block is executed if the `case` expression matches the result of the `switch` expression.
+
+Unlike in other languages, you do not need to call `break` at the end of a case. Cases don't "fall through".
+
+If you intentionally want to "fall through" subsequent cases, add the keyword `fallthrough` to the end of a `case` block.
+
+A `default` block can be added at the end. It is invoked if, and only if, none of the `case`s match. 
+
 ```go
-	// Use switch in preference to chained if statements.
 	x := 42.0
 	switch x {
 	case 0:
+		fmt.Println("not 42")
 	case 1, 2: // Can have multiple matches on one case
+		fmt.Println("still not 42")
 	case 42:
-		// Cases don't "fall through".
-		/*
-		There is a `fallthrough` keyword however, see:
-		  https://github.com/golang/go/wiki/Switch#fall-through
-		*/
+		fmt.Println("Yay! 42!")
+		// no fallthrough to subsequent case blocks.	
 	case 43:
-		// Unreached.
+		fmt.Println("This case is never reached.")
 	default:
-		// Default case is optional.
+		fmt.Println("The default case is optional.")
 	}
+```
 
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+<div id="high-water mark" style="text-align:center; font-size:4em">🌊🌊🌊</div>
+
+```go
 	// Type switch allows switching on the type of something instead of value
 	var data interface{}
 	data = ""
