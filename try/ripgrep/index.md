@@ -53,10 +53,10 @@ cd httpurr
 Let's find all occurrences of the word `codes` in `README.md`:
 
 ```shell
-rg -n codes README.md
+rg codes README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -67,17 +67,19 @@ rg -n codes README.md
 131:		  Print HTTP status codes
 ```
 
-So what happened here? ripgrep read the contents of `README.md`, and for each line that contained `codes`, ripgrep printed it to the terminal. ripgrep also included the line number for each line thanks to the `-n` (`--line-number`) option.
+So what happened here? ripgrep read the contents of `README.md`, and for each line that contained `codes`, ripgrep printed it to the terminal.
+
+ripgrep includes the line number for each line by default (use `-n`/`--line-number` to force this) and highlights the matches (use `--color=always` to force this).
 
 ### Partial matches
 
 ripgrep supports partial matches by default:
 
 ```shell
-rg -n descr README.md
+rg descr README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -90,10 +92,10 @@ The word `description` matches the `descr` search pattern.
 To search for whole words instead, use the `-w` (`--word-regexp`) option:
 
 ```shell
-rg -n --word-regexp code README.md
+rg --word-regexp code README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -112,10 +114,10 @@ ripgrep found strings containing the word `code`, but not `codes`. Try removing 
 By default, ripgrep treats the search pattern as a _regular expression_. Let's find all lines with a word that contains `res` followed by other letters:
 
 ```shell
-rg -n 'res\w' README.md
+rg 'res\w+' README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -129,10 +131,10 @@ rg -n 'res\w' README.md
 Suppose we are only interested in 4 letter words starting with `res`:
 
 ```shell
-rg -n 'res\w\b' README.md
+rg 'res\w\b' README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -141,13 +143,13 @@ rg -n 'res\w\b' README.md
 
 `\b` means "word boundary" (e.g. a space, a punctuation character, or the end of a line), so `rest` matches, but `response` and `resource` don't.
 
-Finally, let's search for 3-digit numbers (showing first 10 matches with `--max-count`):
+Finally, let's search for 3-digit numbers (showing first 10 matches with `head`):
 
 ```shell
-rg -n --max-count 10 '\d\d\d' README.md
+rg '\d\d\d' README.md | head
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -170,10 +172,10 @@ A full tutorial on regular expressions is beyond the scope of this guide, but ri
 What if we want to search for a _literal_ string instead of a regular expression? Suppose we are interested in a word `code` followed by a dot:
 
 ```shell
-rg -n 'code.' src/data.go | head
+rg 'code.' src/data.go | head
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -194,10 +196,10 @@ Since `.` means "any character" in regular expressions, our pattern also matches
 To treat the pattern as a literal string, use the `-F` (`--fixed-strings`) option:
 
 ```shell
-rg -n --fixed-strings 'code.' src/data.go
+rg --fixed-strings 'code.' src/data.go
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -213,15 +215,15 @@ Much better!
 
 ### Multiple patterns
 
-To search for multiple patterns, list them with the `-e` (`--regexp`) option. ripgrep will output lines matching at least one of the specified patterns.
+To search for multiple patterns, list them with the `-e` (`--regexp`) option. ripgrep will output-mode="html" output lines matching at least one of the specified patterns.
 
 For example, search for `make` or `run`:
 
 ```shell
-rg -n -e 'make' -e 'run' README.md
+rg -e 'make' -e 'run' README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -245,10 +247,10 @@ Previously, we used ripgrep to search a single file, but ripgrep is perfectly ca
 Let's find all unexported functions (they start with a lowercase letter):
 
 ```shell
-rg -n 'func [a-z]\w+' .
+rg 'func [a-z]\w+' .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -262,10 +264,10 @@ rg -n 'func [a-z]\w+' .
 This search returned matches from both the `cmd` and `src` directories. If you are only interested in `cmd`, specify it instead of `.`:
 
 ```shell
-rg -n 'func [a-z]\w+' cmd
+rg 'func [a-z]\w+' cmd
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -284,23 +286,23 @@ ripgrep is smart enough to ignore some paths when searching:
 For example, let's search for GitHub action jobs:
 
 ```shell
-rg -n 'jobs:' .
+rg 'jobs:' .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
 exit status 1
 ```
 
-Since the GitHub stuff is in a hidden `.github` directory, ripgrep won't find it (hence exit status 1). But it will with the `-.` (`--hidden`) option:
+Since the GitHub stuff is in a hidden `.github` directory, ripgrep won't find it. But it will with the `-.` (`--hidden`) option:
 
 ```shell
-rg -n --hidden 'jobs:' .
+rg --hidden 'jobs:' .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -323,10 +325,10 @@ ripgrep allows you to override the ignored paths from `.gitignore` with `.ignore
 Let's search for `httpurr`:
 
 ```shell
-rg -n --max-count=5 httpurr .
+rg --max-count=5 httpurr .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -351,10 +353,10 @@ Note that I have limited the number of results per file to 5 with the `-m` (`--m
 Quite a lot of results. Let's narrow it down by searching only in `.go` files:
 
 ```shell
-rg -n -g '*.go' httpurr .
+rg -g '*.go' httpurr .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -368,10 +370,10 @@ The `-g` (`--glob`) option takes a _glob_ (filename pattern), typically containi
 Another example — search in files named `http`-something:
 
 ```shell
-rg -n -g 'http*' httpurr .
+rg -g 'http*' httpurr .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -389,10 +391,10 @@ rg -n -g 'http*' httpurr .
 To _negate_ the glob, prefix it with `!`. For example, search everywhere except the `.go`, `.md`, and `.rb` files:
 
 ```shell
-rg -n -g '!*.{go,md,rb}' httpurr .
+rg -g '!*.{go,md,rb}' httpurr .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -404,10 +406,10 @@ All that is left is `go.mod`.
 To apply multiple filters, specify multiple glob options. For example, find all functions except those in test files:
 
 ```shell
-rg -n -g '*.go' -g '!*_test.go' 'func ' .
+rg -g '*.go' -g '!*_test.go' 'func ' .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -424,10 +426,10 @@ rg -n -g '*.go' -g '!*_test.go' 'func ' .
 Instead of using a glob to filter by extension, you can use ripgrep's support for file types. Let's search for `httpurr` in `.go` files:
 
 ```shell
-rg -n -t go httpurr .
+rg -t go httpurr .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -441,10 +443,10 @@ The `-t` (`--type`) option restricts the search results to files of a certain ty
 To exclude files of a certain type, use `-T` (`--not-type`):
 
 ```shell
-rg -n -T go -T md -T ruby httpurr .
+rg -T go -T md -T ruby httpurr .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -455,7 +457,7 @@ We've excluded Go, Markdown and Ruby files, so all that's left is `go.mod` (pers
 
 ## Useful options
 
-ripgrep supports a number of additional search and output options you may find handy.
+ripgrep supports a number of additional search and output-mode="html" output options you may find handy.
 
 [Ignore case](#ignore-case) ·
 [Inverse matching](#inverse-matching) ·
@@ -470,10 +472,10 @@ ripgrep supports a number of additional search and output options you may find h
 Remember our search for `codes` in the README?
 
 ```shell
-rg -n codes README.md
+rg codes README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -487,10 +489,10 @@ rg -n codes README.md
 It returns `codes` matches, but not `Codes` because ripgrep is case-sensitive by default. To change this, use `-i` (`--ignore-case`):
 
 ```shell
-rg -n --ignore-case codes README.md
+rg --ignore-case codes README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -506,10 +508,10 @@ rg -n --ignore-case codes README.md
 There is also `-S` (`--smart-case`), which behaves like `--ignore-case` unless the search pattern is all caps:
 
 ```shell
-rg -n --smart-case HTTP README.md
+rg --smart-case HTTP README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -529,10 +531,10 @@ Searching for `HTTP` matches `HTTP`, but not `https` or `httpurr`.
 To find lines that _do not_ contain the pattern, use `-v` (`--invert-match`). For example, find the non-empty lines without the `@` symbol:
 
 ```shell
-rg -n --invert-match -e '@' -e '^$' Makefile
+rg --invert-match -e '@' -e '^$' Makefile
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -553,10 +555,10 @@ rg -n --invert-match -e '@' -e '^$' Makefile
 To count the number of matched lines (per file), use `-c` (`--count`). For example, count the number of functions in each `.go` file:
 
 ```shell
-rg -n --count -t go 'func ' .
+rg --count -t go 'func ' .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -569,10 +571,10 @@ rg -n --count -t go 'func ' .
 Note that `--count` counts the number of _lines_, not the number of matches. For example, there are 6 words `string` in `src/cli.go`, but two of them are on the same line, so `--count` reports 5:
 
 ```shell
-rg -nw --count -t go 'string' src/cli.go
+rg -w --count -t go 'string' src/cli.go
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -582,10 +584,10 @@ rg -nw --count -t go 'string' src/cli.go
 To count the number of _matches_ instead, use `--count-matches`:
 
 ```shell
-rg -nw --count-matches -t go 'string' src/cli.go
+rg -w --count-matches -t go 'string' src/cli.go
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -599,10 +601,10 @@ By default, ripgrep prints the entire line containing the match. To show only th
 Suppose we want to find functions named `print`-something:
 
 ```shell
-rg -n --only-matching -t go 'func print\w+' .
+rg --only-matching -t go 'func print\w+' .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -618,10 +620,10 @@ The results are much cleaner than without `--only-matching` (try removing the op
 If there are too many matches, you may prefer to show only the files where the matches occurred. Use `-l` (`--files-with-matches`) to do this:
 
 ```shell
-rg -n --files-with-matches 'httpurr' .
+rg --files-with-matches 'httpurr' .
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -638,10 +640,10 @@ rg -n --files-with-matches 'httpurr' .
 Remember when we searched for GitHub jobs?
 
 ```shell
-rg -n 'jobs:' .github/workflows
+rg 'jobs:' .github/workflows
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -654,10 +656,10 @@ rg -n 'jobs:' .github/workflows
 These results are kind of useless, because they don't return the actual job name (which is on the next line after `jobs`). To fix this, let's use `-C` (`--context`), which shows `N` lines around each match:
 
 ```shell
-rg -n --context=1 'jobs:' .github/workflows
+rg --context=1 'jobs:' .github/workflows
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -681,10 +683,10 @@ rg -n --context=1 'jobs:' .github/workflows
 It might be even better to show only the _next_ line after the match, since we are not interested in the previous one. Use `-A` (`--after-context`) for this:
 
 ```shell
-rg -n --after-context=1 'jobs:' .github/workflows
+rg --after-context=1 'jobs:' .github/workflows
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -708,10 +710,10 @@ Nice!
 I have another idea for searching GitHub jobs. Since the job name is always on the next line after the literal `jobs:`, let's enable multiline searching with `-U` (`--multiline`):
 
 ```shell
-rg -n --multiline 'jobs:\n\s+\w+' .github/workflows
+rg --multiline 'jobs:\n\s+\w+' .github/workflows
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -740,10 +742,10 @@ ripgrep provides a limited ability to replace matched text with some other text.
 Remember our search for `codes` in the README?
 
 ```shell
-rg -n codes README.md
+rg codes README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -757,10 +759,10 @@ rg -n codes README.md
 Now let's replace all `codes` with `ids` using the `-r` (`--replace`) option:
 
 ```shell
-rg -n codes -r ids README.md
+rg codes -r ids README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -776,10 +778,10 @@ rg -n codes -r ids README.md
 Replace applies only to the matching portion of text. To replace an entire line of text, include the entire line in the match like this:
 
 ```shell
-rg -n '^.*codes.*$' -r 'REDACTED' README.md
+rg '^.*codes.*$' -r 'REDACTED' README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -793,10 +795,10 @@ rg -n '^.*codes.*$' -r 'REDACTED' README.md
 Alternatively, you can combine the `-o` (`--only-matching`) option with `--replace` to achieve the same result:
 
 ```shell
-rg -n codes -or 'REDACTED' README.md
+rg codes -or 'REDACTED' README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -818,10 +820,10 @@ Replacements can include capturing groups. Let's say we want to find all occurre
 We put the `\w+` in a "capturing group" (indicated by parentheses) so that we can reference it later in our replacement string. For example:
 
 ```shell
-rg -n 'status\s+(\w+)' -r 'status-$1' README.md
+rg 'status\s+(\w+)' -r 'status-$1' README.md
 ```
 
-<codapi-snippet sandbox="shell" editor="basic" template="httpurr.sh" output>
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
 </codapi-snippet>
 
 ```
@@ -839,7 +841,7 @@ Our replacement string (`status-$1`) consists of the literal `status-` followed 
 
 > Capturing groups actually start at index `0`, but the 0th capturing group always corresponds to the entire match. The capturing group at index `1` always corresponds to the first explicit capturing group found in the regex pattern.
 
-ripgrep **will never modify your files**. The `--replace` flag only controls ripgrep's output. (And there is no flag to let you do a replacement in a file.)
+ripgrep **will never modify your files**. The `--replace` flag only controls ripgrep's output-mode="html" output. (And there is no flag to let you do a replacement in a file.)
 
 ## Configuration
 
@@ -878,7 +880,7 @@ Let's search using this config:
 
 ```shell
 export RIPGREP_CONFIG_PATH=/tmp/.ripgreprc
-rg -n httpurr . | head
+rg httpurr . | head
 ```
 
 <codapi-snippet sandbox="shell" editor="basic" template="config.sh" output>
