@@ -421,6 +421,14 @@ The body of an `if` statement *does* require curly braces, even for "one-line" `
 
 The `else` statement must follow on the same line as the closing curly brace of the `then` block. 
 
+<script id="expensive.go" type="text/plain">
+package main
+
+func expensiveComputation() int {
+	return 1
+}
+</script>
+
 ```go
 if true {
 	fmt.Println("told ya")
@@ -432,9 +440,20 @@ if a > 0 {
 } else {
 	fmt.Println("nope")
 }
+
+// You can put an assignment statement before the condition. 
+// In this case, the variable lives ONLY within the scope of the `if``
+// statement.
+
+if y := expensiveComputation(); y > 0 {
+	fmt.Println("positive!")
+}
+// y is not defined outside the if block.
+// fmt.Println(y) // Uncomment this line to see the error
 ```
 
-<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go" files="#expensive.go"></codapi-snippet>
+
 
 ### switch
 
@@ -449,20 +468,200 @@ If you intentionally want to "fall through" subsequent cases, add the keyword `f
 A `default` block can be added at the end. It is invoked if, and only if, none of the `case`s match. 
 
 ```go
-	x := 42.0
-	switch x {
-	case 0:
-		fmt.Println("not 42")
-	case 1, 2: // Can have multiple matches on one case
-		fmt.Println("still not 42")
-	case 42:
-		fmt.Println("Yay! 42!")
-		// no fallthrough to subsequent case blocks.	
-	case 43:
-		fmt.Println("This case is never reached.")
-	default:
-		fmt.Println("The default case is optional.")
+x := 42.0
+switch x {
+case 0:
+	fmt.Println("not 42")
+case 1, 2: // Can have multiple matches on one case
+	fmt.Println("still not 42")
+case 42:
+	fmt.Println("Yay! 42!")
+	// no fallthrough to subsequent case blocks.	
+case 43:
+	fmt.Println("This case is never reached.")
+default:
+	fmt.Println("The default case is optional.")
+}
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+#### Type switch
+
+A type switch allows switching on the type of a variable instead of its value. 
+
+`any` is the name of the empty interface. Interfaces are discussed later. For this example, you only need to know that a variable of type `any` can be instantiated with data of any type. 
+
+Assign different values to data, like `10`, `false`, or `int64(42)`.
+
+```go
+var data any // data is an empty interface
+data = "data"    // now data holds a string
+switch c := data.(type) { // c 
+case string:
+	fmt.Printf("%s is a string", c)
+case int64:
+	fmt.Printf("%d is an int64\n", c)
+default:
+	fmt.Printf("data's type is %T, its value is %v", c, c)
+}
+```
+
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+### Loops
+
+Go has one loop keyword, `for`, to create for, while, and until loops, as well as loops over data ranges.
+
+Like `if`, `for` conditions don't need parentheses.
+
+Variables declared in for and if are local to their scope.
+
+
+```go
+x := 42
+for x := 0; x < 3; x++ { // ++ is the increment operator
+	fmt.Println("iteration", x)
+}
+fmt.Println("Not the loop's x: ", x)
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+#### Loop options and variants
+
+```go
+// infinite loops and the break statement
+x := 0
+for { // an unrestricted loop
+	fmt.Print(x, ",")
+	if x >= 3 {
+		break  // exit the loop
 	}
+	x++
+}
+
+fmt.Println()
+
+x = 0
+for x <= 5 { // a while loop
+	x++
+	if x % 2 == 0 { // modulo operator
+		continue // skip the rest of this iteration
+	}
+	fmt.Print(x, ",")
+}
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+#### Range loops
+
+
+You can use `range` to iterate over an array, a slice, a string, a map, or a channel.
+
+`range` yields two values on every iteration: 
+
+- For strings, slices, and arrays, the index and the value of the current element. 
+- For maps, the key and the value of the current element.
+
+For channels, `range` returns only one value, the element read from the channel. 
+
+```go
+for index, value := range "Hello" {
+	fmt.Printf("index=%d, value=%c\n", index, value)
+}
+fmt.Println()
+
+for key, value := range map[string]int{"one": 1, "two": 2, "three": 3} {
+	// for each pair in the map, print key and value
+	fmt.Printf("key=%s, value=%d\n", key, value)
+}
+fmt.Println()
+
+// If you only need the value, assign the key to the blank identifier
+for _, name := range []string{"Bob", "Bill", "Joe"} {
+	fmt.Printf("Hello, %s\n", name)
+}
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+
+## Function literals
+
+Function literals are closures. A closure can see variables defined in the parent function's scope.
+
+```go
+	x := 99999
+	xBig := func() bool {  // xBig is a variable of type func() bool
+		return x > 10000   // References x declared outside the closure
+	}
+	fmt.Println("xBig:", xBig()) // true
+	x = 1.3e3                    // This makes x == 1300
+	fmt.Println("xBig:", xBig()) // false now.
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+Function literals may be used as an argument to a function, as long as:
+
+1. the function literal is called immediately `()`, and
+2. the result type matches the expected type of the argument.
+
+```go
+	fmt.Printf("Add and double two numbers: %d", // %d expects an integer
+		func(a, b int) int {
+			return (a + b) * 2
+		}(10, 2)) // Called with args 10 and 2
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+## Goto (OMG!)
+
+[Goto is considered harmless](https://ammar.io/blog/go-goto-retry). ([Archive](https://web.archive.org/web/20240320084058/https://ammar.io/blog/go-goto-retry))
+
+Use `goto` with great caution. But when you need it, you'll love it.
+
+Example: Cleanup without deferred functions, often used in low-level pacakges like `syscall` or `runtime` (courtesy of the aforementioned article).
+
+```go
+func cleanupWithoutDefer() (err error) { // err is declared here
+	var a, b string
+	_, err = fmt.Sscan("one", &a, &b) // too many arguments for the input
+    if err != nil {
+        goto fail
+    }
+    // more error-producing code
+    if err != nil {
+        goto fail
+    }
+    // ...
+    return nil
+
+    fail:
+        fmt.Printf("Got %s, cleaning up\n", err)
+		// clean up
+        return err
+}
+
+func main() {
+	fmt.Println(cleanupWithoutDefer())
+}
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+
+
+A `goto` directive cannot skip variable declarations.
+
+```go
+	goto printx // ERROR: goto jumps over declaration
+	x := "I am skipped"
+printx:
+	fmt.Println(x)
 ```
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
@@ -470,75 +669,6 @@ A `default` block can be added at the end. It is invoked if, and only if, none o
 <div id="high-water mark" style="text-align:center; font-size:4em">🌊🌊🌊</div>
 
 ```go
-	// Type switch allows switching on the type of something instead of value
-	var data interface{}
-	data = ""
-	switch c := data.(type) {
-	case string:
-		fmt.Println(c, "is a string")
-	case int64:
-		fmt.Printf("%d is an int64\n", c)
-	default:
-		// all other cases
-	}
-
-	// Like if, for doesn't use parens either.
-	// Variables declared in for and if are local to their scope.
-	for x := 0; x < 3; x++ { // ++ is a statement.
-		fmt.Println("iteration", x)
-	}
-	// x == 42 here.
-
-	// For is the only loop statement in Go, but it has alternate forms.
-	for { // Infinite loop.
-		break    // Just kidding.
-		continue // Unreached.
-	}
-
-	// You can use range to iterate over an array, a slice, a string, a map, or a channel.
-	// range returns one (channel) or two values (array, slice, string and map).
-	for key, value := range map[string]int{"one": 1, "two": 2, "three": 3} {
-		// for each pair in the map, print key and value
-		fmt.Printf("key=%s, value=%d\n", key, value)
-	}
-	// If you only need the value, use the underscore as the key
-	for _, name := range []string{"Bob", "Bill", "Joe"} {
-		fmt.Printf("Hello, %s\n", name)
-	}
-
-	// As with for, := in an if statement means to declare and assign
-	// y first, then test y > x.
-	if y := expensiveComputation(); y > x {
-		x = y
-	}
-	// Function literals are closures.
-	xBig := func() bool {
-		return x > 10000 // References x declared above switch statement.
-	}
-	x = 99999
-	fmt.Println("xBig:", xBig()) // true
-	x = 1.3e3                    // This makes x == 1300
-	fmt.Println("xBig:", xBig()) // false now.
-
-	// What's more is function literals may be defined and called inline,
-	// acting as an argument to function, as long as:
-	// a) function literal is called immediately (),
-	// b) result type matches expected type of argument.
-	fmt.Println("Add + double two numbers: ",
-		func(a, b int) int {
-			return (a + b) * 2
-		}(10, 2)) // Called with args 10 and 2
-	// => Add + double two numbers: 24
-
-	// When you need it, you'll love it.
-	goto love
-love:
-
-	learnFunctionFactory() // func returning func is fun(3)(3)
-	learnDefer()      // A quick detour to an important keyword.
-	learnInterfaces() // Good stuff coming up!
-}
-
 func learnFunctionFactory() {
 	// Next two are equivalent, with second being more practical
 	fmt.Println(sentenceFactory("summer")("A beautiful", "day!"))
