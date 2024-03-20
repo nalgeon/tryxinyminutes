@@ -621,7 +621,7 @@ Function literals may be used as an argument to a function, as long as:
 
 ## Goto (OMG!)
 
-[Goto is considered harmless](https://ammar.io/blog/go-goto-retry). ([Archive](https://web.archive.org/web/20240320084058/https://ammar.io/blog/go-goto-retry))
+[Goto is considered harmless](https://ammar.io/blog/go-goto-retry?utm_source=codapi). ([Archive](https://web.archive.org/web/20240320084058/https://ammar.io/blog/go-goto-retry))
 
 Use `goto` with great caution. But when you need it, you'll love it.
 
@@ -666,36 +666,65 @@ printx:
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
 
-<div id="high-water mark" style="text-align:center; font-size:4em">🌊🌊🌊</div>
+
+## Function literals as "decorators"
+
+Do you miss decorators? Try function literals.
 
 ```go
-func learnFunctionFactory() {
+func main() {
 	// Next two are equivalent, with second being more practical
-	fmt.Println(sentenceFactory("summer")("A beautiful", "day!"))
+	fmt.Println(sentenceFactory("summer")("It's", "time!"))
 
 	d := sentenceFactory("summer")
 	fmt.Println(d("A beautiful", "day!"))
 	fmt.Println(d("A lazy", "afternoon!"))
 }
 
-// Decorators are common in other languages. Same can be done in Go
-// with function literals that accept arguments.
 func sentenceFactory(mystring string) func(before, after string) string {
 	return func(before, after string) string {
 		return fmt.Sprintf("%s %s %s", before, mystring, after) // new string
 	}
 }
+```
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
 
-func learnDefer() (ok bool) {
-	// A defer statement pushes a function call onto a list. The list of saved
-	// calls is executed AFTER the surrounding function returns.
-	defer fmt.Println("deferred statements execute in reverse (LIFO) order.")
+## Defer
+
+A defer statement pushes a function call onto a list. The list of saved
+calls is executed when the surrounding function returns.
+
+Deferred functions are useful if a function has resources to clean up and if it has multiple exit points.
+
+A deferred function takes no arguments and returns nothing. It is a closure, hence it can access its parent func's variables.
+
+Note that the defer statement takes a function *call*, rather than a function *definition*. 
+
+```go
+func learnDefer() (err error) {
+	defer func() {
+		fmt.Println("deferred statements execute in reverse (LIFO) order.")
+	}()  // Note the parens! The deferred func must be called here.
 	defer fmt.Println("\nThis line is being printed first because")
-	// Defer is commonly used to close a file, so the function closing the
-	// file stays close to the function opening the file.
-	return true
-}
+	fmt.Println("This is normal code.")
+	return nil
+}	
 
+func main() {
+	_ = learnDefer()  // always make ignoring an error an explicit operation
+}
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+
+## Basic Interfaces
+
+A basic interface defines behavior by listing zero or more methods.
+
+A type *implements* an interface if it implements all methods that the interface declares.
+
+
+```go
 // Define Stringer as an interface type with one method, String.
 type Stringer interface {
 	String() string
@@ -706,6 +735,7 @@ type pair struct {
 	x, y int
 }
 
+
 // Define a method on type pair. Pair now implements Stringer because Pair has defined all the methods in the interface.
 func (p pair) String() string { // p is called the "receiver"
 	// Sprintf is another public function in package fmt.
@@ -713,7 +743,7 @@ func (p pair) String() string { // p is called the "receiver"
 	return fmt.Sprintf("(%d, %d)", p.x, p.y)
 }
 
-func learnInterfaces() {
+func main() {
 	// Brace syntax is a "struct literal". It evaluates to an initialized
 	// struct. The := syntax declares and initializes p to this struct.
 	p := pair{3, 4}
@@ -728,24 +758,84 @@ func learnInterfaces() {
 	fmt.Println(p) // Output same as above. Println calls String method.
 	fmt.Println(i) // Output same as above.
 
-	learnVariadicParams("great", "learning", "here!")
 }
+```
 
-// Functions can have variadic parameters.
-func learnVariadicParams(myStrings ...interface{}) {
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+
+
+## Variadic parameters
+
+Functions can have a dynamic number of parameters.
+
+Prepend an ellipsis to a parameter type to make it variadic. Only the last parameter in a parameter list can be variadic.
+
+Inside the function, the variadic parameter is an array of the given type.
+
+```go
+func learnVariadicParams(myStrings ...string) {
 	// Iterate each value of the variadic.
-	// The underscore here is ignoring the index argument of the array.
-	for _, param := range myStrings {
-		fmt.Println("param:", param)
+	for i, param := range myStrings {
+		fmt.Printf("(%d) %s ", i, param)
 	}
-
-	// Pass variadic value as a variadic parameter.
-	fmt.Println("params:", fmt.Sprintln(myStrings...))
-
-	learnErrorHandling()
+	fmt.Println()
 }
 
-func learnErrorHandling() {
+func main() {
+	learnVariadicParams("great", "learning", "here!")
+
+	// Expand a slice into a list of parameters by appending an ellipsis
+	s := []string{"codapi", "is", "awesome!"}
+	learnVariadicParams(s...)
+}
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+
+## Error handling
+
+Go handles errors explicitly. It has no exceptions. 
+
+Please do not try to emulate exceptions because you are used to them. In Go, errors are values, and handling errors when they occur is idiomatic Go.
+
+People often say that Go's explicit error handling only adds noise to the code, but consider this:
+
+> "If 80% of your Go code consists of error handling, it is because 80% of your code might fail at any time."
+
+*– [Preslav Rachev](https://preslav.me/2023/04/14/golang-error-handling-is-a-form-of-storytelling/?utm_source=codapi)*
+
+
+```go
+func divideBy(a, b int) (int, error) {  // put an error return value always last
+	// Create a new error
+	if b == 0 {
+		// errors is a package from the standard library
+		return 0, errors.New("divideBy: division by zero is undefined")
+	}
+	return a/b, nil // nil means no error
+}
+
+func calculate() (int, error) {
+	// If you cannot handle an error, pass it on with annotations
+	res, err := divideBy(10, 0)
+	if err != nil {
+		// The fmt package has an Errorf function for creating error messages
+		return 0, fmt.Errorf("calculate: %w", err) // %w is a special verb for wrapping errors 
+	}
+	return res, nil
+}
+
+func main() {
+	fmt.Println(calculate())
+}
+```
+	
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt_errors.go"></codapi-snippet>
+
+
+<div id="high-water mark" style="text-align:center; font-size:4em">🌊🌊🌊</div>
+
+```go
 	// ", ok" idiom used to tell if something worked or not.
 	m := map[int]string{3: "three", 4: "four"}
 	if x, ok := m[1]; !ok { // ok will be false because 1 is not in the map.
@@ -758,10 +848,13 @@ func learnErrorHandling() {
 		// prints 'strconv.ParseInt: parsing "non-int": invalid syntax'
 		fmt.Println(err)
 	}
-	// We'll revisit interfaces a little later. Meanwhile,
-	learnConcurrency()
+	return err
 }
+```
 
+## Concurrency
+
+```go
 // c is a channel, a concurrency-safe communication object.
 func inc(i int, c chan int) {
 	c <- i + 1 // <- is the "send" operator when a channel appears on the left.
@@ -771,6 +864,8 @@ func inc(i int, c chan int) {
 func learnConcurrency() {
 	// Same make function used earlier to make a slice. Make allocates and
 	// initializes slices, maps, and channels.
+	// This channel is unbuffered. That is, it can store no elements.
+	// The sender must wait until the receiver reads from that channel.
 	c := make(chan int)
 	// Start three concurrent goroutines. Numbers will be incremented
 	// concurrently, perhaps in parallel if the machine is capable and
@@ -799,10 +894,14 @@ func learnConcurrency() {
 	}
 	// At this point a value was taken from either c or cs. One of the two
 	// goroutines started above has completed, the other will remain blocked.
-
-	learnWebProgramming() // Go does it. You want to do it too.
 }
+```
 
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+
+## Web programming
+
+```go
 // A single function from package http starts a web server.
 func learnWebProgramming() {
 
@@ -831,6 +930,9 @@ func requestServer() {
 }
 ```
 
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+
+
 ## Further Reading
 
 The root of all things Go is the [official Go web site](http://golang.org/).
@@ -855,6 +957,8 @@ There are many excellent conference talks and video tutorials on Go available on
 
 - [Golang University 101](https://www.youtube.com/playlist?list=PLEcwzBXTPUE9V1o8mZdC9tNnRZaTgI-1P) introduces fundamental Go concepts and shows you how to use the Go tools to create and manage Go code
 - [Golang University 201](https://www.youtube.com/playlist?list=PLEcwzBXTPUE_5m_JaMXmGEFgduH8EsuTs) steps it up a notch, explaining important techniques like testing, web services, and APIs
-- [Golang University 301](https://www.youtube.com/playlist?list=PLEcwzBXTPUE8KvXRFmmfPEUmKoy9LfmAf) dives into more advanced topics like the Go scheduler, implementation of maps and channels, and optimisation techniques
+- [Golang University 301](https://www.youtube.com/playlist?list=PLEcwzBXTPUE8KvXRFmmfPEUmKoy9LfmAf) dives into more advanced topics like the Go scheduler, implementation of maps and channels, and optimization techniques
+
+Stay up to date on Go with the [Applied Go Weekly Newsletter](https://newsletter.appliedgo.net?utm_source=codapi). Articles, projects, tips, and more. 
 
 Go Mobile adds support for mobile platforms (Android and iOS). You can write all-Go native mobile apps or write a library that contains bindings from a Go package, which can be invoked via Java (Android) and Objective-C (iOS). Check out the [Go Mobile page](https://github.com/golang/go/wiki/Mobile) for more information.
