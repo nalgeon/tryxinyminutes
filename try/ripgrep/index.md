@@ -274,6 +274,23 @@ rg 'func [a-z]\w+' cmd
 cmd/httpurr/main.go:12:func main() {
 ```
 
+To search multiple directories, list them all like this:
+
+```shell
+rg 'func [a-z]\w+' cmd src
+```
+
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
+</codapi-snippet>
+
+```
+cmd/httpurr/main.go:12:func main() {
+src/cli.go:16:func formatStatusText(text string) string {
+src/cli.go:21:func printHeader(w *tabwriter.Writer) {
+src/cli.go:35:func printStatusCodes(w *tabwriter.Writer, category string) error {
+src/cli.go:105:func printStatusText(w *tabwriter.Writer, code string) error {
+```
+
 ### Automatic filtering
 
 ripgrep is smart enough to ignore some paths when searching:
