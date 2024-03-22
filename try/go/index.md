@@ -833,26 +833,88 @@ func main() {
 <codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt_errors.go"></codapi-snippet>
 
 
-<div id="high-water mark" style="text-align:center; font-size:4em">🌊🌊🌊</div>
+
+## The comma,ok idiom
+
+Trying to fetch a non-existing element from a map or read from a closed channel is not an error. Therfore, such an operation returns a boolean instead of an error. 
+
+The "comma,ok" idiom is used to examine the result of that operation.
+
 
 ```go
-	// ", ok" idiom used to tell if something worked or not.
-	m := map[int]string{3: "three", 4: "four"}
-	if x, ok := m[1]; !ok { // ok will be false because 1 is not in the map.
-		fmt.Println("no one there")
-	} else {
-		fmt.Print(x) // x would be the value, if it were in the map.
-	}
-	// An error value communicates not just "ok" but more about the problem.
-	if _, err := strconv.Atoi("non-int"); err != nil { // _ discards value
-		// prints 'strconv.ParseInt: parsing "non-int": invalid syntax'
-		fmt.Println(err)
-	}
-	return err
+m := map[int]string{3: "three", 4: "four"}
+
+if x, ok := m[1]; ok { // key 1 is not in the map.
+	fmt.Println("1:", x) 
+}
+
+if x, ok := m[3]; ok { // key 3 is in the map
+	fmt.Println("3:", x) 
 }
 ```
 
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+
 ## Concurrency
+
+Go has two concurrency primitives built into the language: goroutines and channels. 
+
+### Goroutines
+
+Goroutines are lightweight threads. They are supposed to be short-lived. Hence, they have no "control API". The runtime scheduler maps goroutines onto system threads as needed.  
+
+A goroutine cannot have a return value. The caller doesn't wait for the goroutine, so there is nothing to return a value to.
+
+```go
+// a function.
+func surfing() {
+	for {
+		fmt.Print(".")
+	}
+}
+
+// Start any function as a goroutine by prepending "go".
+func main() {
+	go surfing()
+	time.Sleep(time.Millisecond)
+}
+
+// A process does not wait for running goroutines
+// to finish. When main() exits, all goroutines are stopped
+// immediately.
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt_time.go"></codapi-snippet>
+
+### Channels
+
+Channels are used for sending data from one goroutine to another. 
+
+A channel can have a size of zero. In this case, the sender blocks until the receiver reads the sent value. This is effectively a synchronization mechanism.
+
+The `<-` operator reads from or writes to a channel.
+
+```go
+// Create a channel with string elements.
+ch := make(chan string) // this channel has zero size.
+
+go func(done chan string) {
+	for i := 0; i < 10; i++ {
+		fmt.Print(".")
+	}
+	done <- "finished!" // send a value to the channel
+}(ch) // don't forgt to call the goroutine
+
+// Wait for the gorotuine to send something to the channel.
+status := <-ch  // read from the channel into new variable status
+fmt.Println(status)
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+
+<div id="high-water mark" style="text-align:center; font-size:4em">🌊🌊🌊</div>
 
 ```go
 // c is a channel, a concurrency-safe communication object.
