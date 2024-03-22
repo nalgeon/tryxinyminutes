@@ -233,6 +233,30 @@ rg -e 'make' -e 'run' README.md
 149:	make test
 ```
 
+If you have many patterns, it may be easier to put them in a file and point ripgrep to it with `-f` (`--file`):
+
+```shell
+echo 'install' > /tmp/patterns.txt
+echo 'make' >> /tmp/patterns.txt
+echo 'run' >> /tmp/patterns.txt
+
+rg --file=/tmp/patterns.txt README.md
+```
+
+<codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
+</codapi-snippet>
+
+```
+* On MacOS, brew install:
+	    && brew install httpurr
+* Or elsewhere, go install:
+	go install github.com/rednafi/httpurr/cmd/httpurr
+* Go to the root directory and run:
+	make init
+	make lint
+	make test
+```
+
 ## Recursive search
 
 Previously, we used ripgrep to search a single file, but ripgrep is perfectly capable of recursively searching in directories.
