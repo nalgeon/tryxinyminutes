@@ -896,70 +896,109 @@ A channel can have a size of zero. In this case, the sender blocks until the rec
 The `<-` operator reads from or writes to a channel.
 
 ```go
-// Create a channel with string elements.
-ch := make(chan string) // this channel has zero size.
+// Create a channel with integer elements.
+ch := make(chan int) // this channel has zero size.
 
-go func(done chan string) {
+// The syntax "chan<-" tells the func that this channel 
+// is for sending only. 
+go func(send chan<- int) {
 	for i := 0; i < 10; i++ {
-		fmt.Print(".")
+		send <- i
+		fmt.Println("sent", i)
 	}
-	done <- "finished!" // send a value to the channel
-}(ch) // don't forgt to call the goroutine
+	// by closing the channel, we tell the receiver
+	// that there is nothing left to wait for
+	close(send)
+}(ch) // don't forget to call the goroutine here
 
-// Wait for the gorotuine to send something to the channel.
-status := <-ch  // read from the channel into new variable status
-fmt.Println(status)
+// Now that the sender runs concurrently, we can start
+// receiving values from the channel. 
+// The range loop exits when the channel is closed.
+for n := range ch {
+	fmt.Println("received", n)
+}
+
 ```
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
 
+You might have noticed that some "received" messages may appear before the corresponding "sent" message. This is because of the asynchronous nature of this code. The receiver may be faster to print out the result than the sender. 
 
-<div id="high-water mark" style="text-align:center; font-size:4em">🌊🌊🌊</div>
+You may also have noticed that the send and receive messages come in a quite ordered manner. That's because the sender has to wait for the receiver to read a value from the channel before it can send a new one. 
+
+Give the channel a non-zero size and see what happens. 
+Edit the above code and change the line
 
 ```go
-// c is a channel, a concurrency-safe communication object.
-func inc(i int, c chan int) {
-	c <- i + 1 // <- is the "send" operator when a channel appears on the left.
-}
+ch := make(chan int) 
+```
 
-// We'll use inc to increment some numbers concurrently.
-func learnConcurrency() {
-	// Same make function used earlier to make a slice. Make allocates and
-	// initializes slices, maps, and channels.
-	// This channel is unbuffered. That is, it can store no elements.
-	// The sender must wait until the receiver reads from that channel.
-	c := make(chan int)
-	// Start three concurrent goroutines. Numbers will be incremented
-	// concurrently, perhaps in parallel if the machine is capable and
-	// properly configured. All three send to the same channel.
-	go inc(0, c) // go is a statement that starts a new goroutine.
-	go inc(10, c)
-	go inc(-805, c)
-	// Read three results from the channel and print them out.
-	// There is no telling in what order the results will arrive!
-	fmt.Println(<-c, <-c, <-c) // channel on right, <- is "receive" operator.
+to
 
-	cs := make(chan string)       // Another channel, this one handles strings.
-	ccs := make(chan chan string) // A channel of string channels.
-	go func() { c <- 84 }()       // Start a new goroutine just to send a value.
-	go func() { cs <- "wordy" }() // Again, for cs this time.
-	// Select has syntax like a switch statement but each case involves
-	// a channel operation. It selects a case at random out of the cases
-	// that are ready to communicate.
-	select {
-	case i := <-c: // The value received can be assigned to a variable,
-		fmt.Printf("it's a %T", i)
-	case <-cs: // or the value received can be discarded.
-		fmt.Println("it's a string")
-	case <-ccs: // Empty channel, not ready for communication.
-		fmt.Println("didn't happen.")
+```
+ch := make(chan int, 7) 
+```
+
+Now, the sender can write 7 elements to the channel before it is blocked. After the receiver reads some values, the sender is able to continue sending.
+
+
+### The select statement
+
+A `select` statement is similar to a `switch` statement. But instead of matching a condition, the `case` blocks listen on channels to read from or wait for channels to become available for sending. 
+
+
+
+```go
+c1 := make(chan string)
+c2 := make(chan string)
+
+// send some values to c1 with a delay
+go func() {
+	for i := 0; i < 3; i++ {
+		c1 <- fmt.Sprintf("one %d", i)
+		time.Sleep(10 * time.Millisecond)
 	}
-	// At this point a value was taken from either c or cs. One of the two
-	// goroutines started above has completed, the other will remain blocked.
+	close(c1)
+}()
+
+// send some values to c2 with a delay
+go func() {
+	for i := 0; i < 2; i++ {
+		c2 <- fmt.Sprintf("two %d", i)
+		time.Sleep(15 * time.Millisecond)
+	}
+	close(c2)
+}()
+
+for {
+	// select takes no expressions. The cases block until one of the channels becomes available. 
+	select {
+	// The comma,ok idiom allows checking if a channel
+	// is open or closed.
+	case msg1, ok := <-c1:
+		if !ok {
+			c1 = nil
+		} else {
+			fmt.Println("Received from c1:", msg1)
+		}
+	case msg2, ok := <-c2:
+		if !ok {
+			c2 = nil
+		} else {
+			fmt.Println("Received from c2:", msg2)
+		}
+	default:
+		if c1 == nil && c2 == nil {
+			return
+		}
+	}
 }
 ```
 
-<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt_time.go"></codapi-snippet>
+
+<div id="high-water mark" style="text-align:center; font-size:4em">🌊🌊🌊</div>
+
 
 ## Web programming
 
