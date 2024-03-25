@@ -1002,36 +1002,57 @@ for {
 
 ## Web programming
 
-```go
-// A single function from package http starts a web server.
-func learnWebProgramming() {
 
-	// First parameter of ListenAndServe is TCP address to listen to.
-	// Second parameter is an interface, specifically http.Handler.
+A single function from package `net/http` is sufficient to run a web server.
+
+The following code starts a web server in an extra goroutine. The server
+
+```go
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+// A handler function responds to an HTTP request.
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "You tried Go in Y minutes!")
+}
+
+func main() {
+	// Wire the base path to the handler func
+	http.HandleFunc("/", handler)
+
+	// Start a web server 
 	go func() {
-		err := http.ListenAndServe(":8080", pair{})
-		fmt.Println(err) // don't ignore errors
+		err := http.ListenAndServe(":8181", nil)
+		if err != nil {
+			fmt.Println("ListenAndServe: ", err)
+		}
 	}()
 
-	requestServer()
-}
-
-// Make pair an http.Handler by implementing its only method, ServeHTTP.
-func (p pair) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	// Serve data with a method of http.ResponseWriter.
-	w.Write([]byte("You learned Go in Y minutes!"))
-}
-
-func requestServer() {
-	resp, err := http.Get("http://localhost:8080")
-	fmt.Println(err)
+	// send a request
+	resp, err := http.Get("http://localhost:8181/")
+	if err != nil {
+		log.Fatal("Error sending request: ", err)
+	}
+	// The response body is an `io.Reader` stream that must be
+	// closed after reading.
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	fmt.Printf("\nWebserver said: `%s`", string(body))
+
+	// Read and print the response.
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal("Error reading response body: ", err)
+	}
+
+	// `body` is a byte slice. string() turns it into a string.
+	fmt.Println("The web server says:", string(body))
 }
 ```
 
-<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt_http.go"></codapi-snippet>
 
 
 ## Further Reading
