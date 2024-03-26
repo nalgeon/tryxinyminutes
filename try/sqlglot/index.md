@@ -4,7 +4,7 @@ title: Try SQLGlot in Y minutes
 image: /try/cover.png
 lastmod: 2024-01-07
 original: https://sqlglot.com/sqlglot.html#examples
-license: MIT
+license: CC-BY-SA-4.0
 contributors:
     - ["Toby Mao", "https://tobymao.com"]
 ---

@@ -4,7 +4,7 @@ title: Try Rough.js in Y minutes
 image: /try/rough-js/cover.jpg
 lastmod: 2024-02-24
 original: https://roughjs.com/
-license: MIT
+license: CC-BY-SA-4.0
 contributors:
     - ["Preet Shihn", "https://github.com/pshihn"]
     - ["Anton Zhiyanov", "https://antonz.org"]

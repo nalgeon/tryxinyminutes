@@ -4,7 +4,7 @@ title: Try Mermaid in Y minutes
 image: /try/cover.png
 lastmod: 2024-02-23
 original: https://mermaid.js.org/intro/
-license: MIT
+license: CC-BY-SA-4.0
 contributors:
     - ["Mermaid team", "https://mermaid.js.org/"]
     - ["Anton Zhiyanov", "https://antonz.org"]

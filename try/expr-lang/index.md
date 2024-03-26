@@ -4,9 +4,10 @@ title: Try Expr in Y minutes
 image: /try/cover.png
 lastmod: 2023-12-27
 original: https://expr-lang.org/docs/getting-started
-license: MIT
+license: CC-BY-SA-4.0
 contributors:
     - ["Anton Medvedev", "https://medv.io"]
+    - ["Anton Zhiyanov", "https://antonz.org"]
 ---
 
 [Expr](https://expr-lang.org/) is a simple, fast and extensible expression language for Go. It is
