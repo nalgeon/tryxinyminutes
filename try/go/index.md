@@ -588,38 +588,7 @@ for _, name := range []string{"Bob", "Bill", "Joe"} {
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
 
-
-## Function literals
-
-Function literals are closures. A closure can see variables defined in the parent function's scope.
-
-```go
-	x := 99999
-	xBig := func() bool {  // xBig is a variable of type func() bool
-		return x > 10000   // References x declared outside the closure
-	}
-	fmt.Println("xBig:", xBig()) // true
-	x = 1.3e3                    // This makes x == 1300
-	fmt.Println("xBig:", xBig()) // false now.
-```
-
-<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
-
-Function literals may be used as an argument to a function, as long as:
-
-1. the function literal is called immediately `()`, and
-2. the result type matches the expected type of the argument.
-
-```go
-	fmt.Printf("Add and double two numbers: %d", // %d expects an integer
-		func(a, b int) int {
-			return (a + b) * 2
-		}(10, 2)) // Called with args 10 and 2
-```
-
-<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
-
-## Goto (OMG!)
+### Goto (OMG!)
 
 [Goto is considered harmless](https://ammar.io/blog/go-goto-retry?utm_source=codapi). ([Archive](https://web.archive.org/web/20240320084058/https://ammar.io/blog/go-goto-retry))
 
@@ -662,6 +631,37 @@ A `goto` directive cannot skip variable declarations.
 	x := "I am skipped"
 printx:
 	fmt.Println(x)
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+
+## Function literals
+
+Function literals are closures. A closure can see variables defined in the parent function's scope.
+
+```go
+	x := 99999
+	xBig := func() bool {  // xBig is a variable of type func() bool
+		return x > 10000   // References x declared outside the closure
+	}
+	fmt.Println("xBig:", xBig()) // true
+	x = 1.3e3                    // This makes x == 1300
+	fmt.Println("xBig:", xBig()) // false now.
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
+
+Function literals may be used as an argument to a function, as long as:
+
+1. the function literal is called immediately `()`, and
+2. the result type matches the expected type of the argument.
+
+```go
+	fmt.Printf("Add and double two numbers: %d", // %d expects an integer
+		func(a, b int) int {
+			return (a + b) * 2
+		}(10, 2)) // Called with args 10 and 2
 ```
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
