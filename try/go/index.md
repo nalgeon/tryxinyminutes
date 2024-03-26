@@ -1008,13 +1008,6 @@ A single function from package `net/http` is sufficient to run a web server.
 The following code starts a web server in an extra goroutine. The server
 
 ```go
-package main
-
-import (
-	"fmt"
-	"net/http"
-)
-
 // A handler function responds to an HTTP request.
 func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "You tried Go in Y minutes!")
