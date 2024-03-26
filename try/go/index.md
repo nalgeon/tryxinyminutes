@@ -763,6 +763,54 @@ func main() {
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
 
+## Type parameters
+
+Type parameters, a.k.a. generics, can be used to define generic functions that work with a range of parameter types, rather than just one specific. They are also useful for creating generic containers that can hold elements of different types (think "tree of ints" or "tree of strings"). 
+
+A type parameter for a function is specified within brackets, between the function name and the parameter list. `T` is the name of the parameter, and `comparable` is a type constraint. 
+
+In this example, T can only be instantiated by a type that is comparable (through the `==` and `!=` operators). 
+
+```go
+func CountOccurrences[T comparable](slice []T, element T) int {
+    count := 0
+    for _, value := range slice {
+        if value == element {
+            count++
+        }
+    }
+    return count
+}
+
+func main() {
+	numbers := []int{1, 2, 3, 2, 4, 2, 5}
+	count := CountOccurrences(numbers, 2)  // 
+	fmt.Printf("Found %d occurrences of 2 in %v\n", count, numbers)
+
+	words := []string{"go", "is", "awesome!", "go", "go!"}
+	count = CountOccurrences(words, "go") 
+	fmt.Printf("Found %d occurrences of 'go' in %v\n", count, words)
+}
+```
+
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
+
+`comparable` is a pre-declared constraint. You can use a list of allowed types as well.
+
+Edit the code and change 
+
+```go
+[T comparable]
+```
+
+to
+
+```go
+[T int|string]
+```
+
+Now only `int`s or `string`s can be used for `T`. The code still works because `int` and `string` are both comparable types.
+
 
 ## Variadic parameters
 
