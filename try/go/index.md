@@ -1045,7 +1045,7 @@ func main() {
 }
 ```
 
-<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt_http.go"></codapi-snippet>
+<codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt_http_log_io.go"></codapi-snippet>
 
 
 ## Further Reading
