@@ -12,7 +12,7 @@ license: CC-BY-SA 3.0
 <!-- codapi-settings url="http://localhost:1313/v1">
 </codapi-settings -->
 
-> This text and code is based on [Learn X in Y Minutes Where X = Go](https://learnxinyminutes.com/docs/go/), with only a few changes required by the separation of the code into snippets that can execute independently. Big shoutout to the authors!
+> *This text and code is based on [Learn X in Y Minutes Where X = Go](https://learnxinyminutes.com/docs/go/), with only a few changes required by the separation of the code into snippets that can execute independently. Big shoutout to the authors!*
 
 Go was created out of the need to get work done. It's not the latest trend
 in programming language theory, but it is a way to solve real-world
@@ -57,7 +57,7 @@ A package clause starts every source file.
 
 Import declaration declares library packages referenced in this file.
 
-Imported packages must be used. (The Go Language Server `gopls` can take care of removing unused imports automatically.)
+Imported packages **must** be used. (The Go Language Server `gopls` can take care of removing unused imports automatically.)
 
 ```go
 package main
@@ -107,9 +107,9 @@ func beyondHello() {
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_pkg_main_with_fmt.go"></codapi-snippet>
 
-> **NOTE:** For brevity, most of the following code snippets hide the package declaration, imports, and the `main()` function.
+> **NOTE:** For brevity, many of the following code snippets hide the package declaration, imports, and the `main()` function.
 >
-> If a code snippet contains only statements, assume they exist in a context similar to this:
+> If a code snippet contains only statements and no function definitions, assume these statements exist in a context similar to this:
 > 
 >     package main
 > 
@@ -142,17 +142,18 @@ Use a "short declaration" to declare and assign in one statement. Go infers the 
 ```go
 var x int // Variable declaration. 
 x = 3     // Variable assignment.
-y := 4    // "Short" declaration
+y := 4+3i    // "Short" declaration
 fmt.Println("x:", x, ", y:", y) 
+fmt.Printf("Type of y: %T\n", y)
 ```
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
 
 Functions can have parameters and (multiple!) return values.
 
-Here `x`, `y` are the arguments and `sum`, `prod` is the signature (what's returned). You could write `func learnMultiple(x, y int) (int, int)` as well, but named return parameters make the function signature clearer.
+Here `x`, `y` are the arguments and `sum`, `prod` are the return values. You could write `func learnMultiple(x, y int) (int, int)` as well, but named return parameters make the function signature clearer.
 
-Note that `x` and `sum` receive the type `int`.
+Variables `a` and `b` receive the type `int` through type inference.
 
 ```go
 func learnMultiple(x, y int) (sum, prod int) {
@@ -170,6 +171,8 @@ func main() {
 ## Built-in types and literals
 
 ### Simple types
+
+Go supports strings, signed and unsigned integers of various sizes, floating point numbers, bytes, booleans, and more.
 
 ```go
 str := "Learn Go!" // string type.
@@ -208,7 +211,7 @@ Pointers are created by taking the address of a variable (`&a`) or by the `new()
 a, b := 1024, 2048
 p, q := &a, &b // Declares p, q to be type pointer to int.
 fmt.Println(p, q)   // This prints the addresses of p and q.
-fmt.Println(*p, *q)   // * follows a pointer. This prints two ints.
+fmt.Println(*p, *q)   // * follows (or dereferences) a pointer. This prints two ints.
 ```
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
@@ -219,7 +222,8 @@ Arrays are static; that is, they have a fixed size at compile time.
 
 ```go
 var a4 [4]int           // An array of 4 ints, initialized to all 0.
-a5 := [...]int{3, 1, 5, 10, 100} // An array initialized with a fixed size of five
+a5 := [...]int{3, 1, 5, 10, 100} // An array initialized from an array literal. 
+// The ellipsis says that the size is determined from the literal.
 fmt.Printf("a4: %v\na5: %v\n", a4, a5)
 ```
 
@@ -263,7 +267,7 @@ fmt.Println(s3_cpy[0] == s3[0]) // true
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt.go"></codapi-snippet>
 
-Because they are dynamic, slices can be appended to on-demand.
+Because slices are dynamic, you can append more elements to them.
 
 To append elements to a slice, the built-in `append()` function is used.
 
@@ -282,7 +286,7 @@ fmt.Println(s) // Updated slice is now [1 2 3 4 5 6]
 
 `append` only adds atomic elements to a slice. To append another slice, 
 pass a slice and add a trailing ellipsis. The ellipsis tells the compiler 
-to unpack the slice into individual elements, making them consumable for `append`. (This is called "paremeter expansion".)
+to unpack the slice into individual elements, making them consumable for `append`. (This is called "parameter expansion".)
 
 
 ```go
@@ -297,6 +301,8 @@ fmt.Println(s)	// Updated slice is now [1 2 3 4 5 6 7 8 9]
 
 Maps are a dynamically growable associative array type, like the
 hash or dictionary types of some other languages.
+
+Keys in a map have no particular order. The key type does not even have to be orderable, it only must be comparable.
 
 ```go
 m := map[string]int{"three": 3, "four": 4}
@@ -846,7 +852,7 @@ Go handles errors explicitly. It has no exceptions.
 
 Please do not try to emulate exceptions because you are used to them. In Go, errors are values, and handling errors when they occur is idiomatic Go.
 
-People often say that Go's explicit error handling only adds noise to the code, but consider this:
+Also, don't ignore errors returned by a function. Handling errors is part of your program's logic. People often say that Go's explicit error handling only adds noise to the code, but consider this:
 
 > "If 80% of your Go code consists of error handling, it is because 80% of your code might fail at any time."
 
@@ -974,8 +980,7 @@ You might have noticed that some "received" messages may appear before the corre
 
 You may also have noticed that the send and receive messages come in a quite ordered manner. That's because the sender has to wait for the receiver to read a value from the channel before it can send a new one. 
 
-Give the channel a non-zero size and see what happens. 
-Edit the above code and change the line
+Give the channel a non-zero size and see what happens. Edit the above code and change the line
 
 ```go
 ch := make(chan int) 
@@ -1045,8 +1050,6 @@ for {
 
 <codapi-snippet sandbox="go" editor="basic" template="tpl_main_with_fmt_time.go"></codapi-snippet>
 
-<div id="high-water mark" style="text-align:center; font-size:4em">🌊🌊🌊</div>
-
 
 ## Web programming
 
@@ -1098,21 +1101,15 @@ func main() {
 
 ## Further Reading
 
-The root of all things Go is the [official Go web site](http://golang.org/).
-There you can follow the tutorial, play interactively, and read lots.
-Aside from a tour, [the docs](https://golang.org/doc/) contain information on
-how to write clean and effective Go code, package and command docs, and release history.
+The root of all things Go is the [official Go web site](http://go.dev/). There you can follow the tutorial, play interactively, and read lots.
 
-The [Go language specification](https://golang.org/ref/spec) itself is highly recommended. It's easy to read
-and amazingly short (as language definitions go these days.)
+Aside from a tour, [the docs](https://go.dev/doc/) contain information on how to write clean and effective Go code, package and command docs, and release history.
 
-You can play around with the code on [Go playground](https://play.golang.org/p/tnWMjr16Mm). Try to change it and run it from your browser! Note that you can use [https://play.golang.org](https://play.golang.org) as a [REPL](https://en.wikipedia.org/wiki/Read-eval-print_loop) to test things and code in your browser, without even installing Go.
+The [Go language specification](https://go.dev/ref/spec) itself is highly recommended. It's easy to read and amazingly short (as language definitions go these days.)
 
-On the reading list for students of Go is the [source code to the standard
-library](http://golang.org/src/pkg/). Comprehensively documented, it
-demonstrates the best of readable and understandable Go, Go style, and Go
-idioms. Or you can click on a function name in [the
-documentation](http://golang.org/pkg/) and the source code comes up!
+You can try out or share Go code on the [Go playground](https://go.dev/play/p/njnvlXVIrRd). 
+
+On the reading list for students of Go is the [source code to the standard library](https://pkg.go.dev/std). Comprehensively documented, it demonstrates the best of readable and understandable Go, Go style, and Go idioms. If you click on a function name in a package documentation, you can drill down into the source code!
 
 Another great resource to learn Go is [Go by example](https://gobyexample.com/).
 
@@ -1122,6 +1119,4 @@ There are many excellent conference talks and video tutorials on Go available on
 - [Golang University 201](https://www.youtube.com/playlist?list=PLEcwzBXTPUE_5m_JaMXmGEFgduH8EsuTs) steps it up a notch, explaining important techniques like testing, web services, and APIs
 - [Golang University 301](https://www.youtube.com/playlist?list=PLEcwzBXTPUE8KvXRFmmfPEUmKoy9LfmAf) dives into more advanced topics like the Go scheduler, implementation of maps and channels, and optimization techniques
 
-Stay up to date on Go with the [Applied Go Weekly Newsletter](https://newsletter.appliedgo.net?utm_source=codapi). Articles, projects, tips, and more. 
-
-Go Mobile adds support for mobile platforms (Android and iOS). You can write all-Go native mobile apps or write a library that contains bindings from a Go package, which can be invoked via Java (Android) and Objective-C (iOS). Check out the [Go Mobile page](https://github.com/golang/go/wiki/Mobile) for more information.
+If you want to stay up to date on Go, read the [Applied Go Weekly Newsletter](https://newsletter.appliedgo.net?utm_source=codapi).
