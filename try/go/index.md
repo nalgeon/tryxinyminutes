@@ -26,7 +26,7 @@ Go draws concepts from imperative languages with static typing. It's fast to com
 Go comes with a rich standard library and a large, thriving community.
 
 <div class="tryx__panel">
-<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/curl/index.md">improve it</a>!</p>
+<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/go/index.md">improve it</a>!</p>
 <p>The guide is based on <a href="https://learnxinyminutes.com/docs/go/">Learn Go in Y Minutes</a>, with only a few changes required by the separation of the code into snippets that can execute independently. Big shoutout to the authors!</p>
 </div>
 
