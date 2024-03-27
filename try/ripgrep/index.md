@@ -247,14 +247,14 @@ rg --file=/tmp/patterns.txt README.md
 </codapi-snippet>
 
 ```
-* On MacOS, brew install:
-	    && brew install httpurr
-* Or elsewhere, go install:
-	go install github.com/rednafi/httpurr/cmd/httpurr
-* Go to the root directory and run:
-	make init
-	make lint
-	make test
+13:* On MacOS, brew install:
+17:	    && brew install httpurr
+20:* Or elsewhere, go install:
+23:	go install github.com/rednafi/httpurr/cmd/httpurr
+139:* Go to the root directory and run:
+141:	make init
+145:	make lint
+149:	make test
 ```
 
 ## Recursive search
@@ -612,7 +612,7 @@ rg --count -t go 'func ' .
 Note that `--count` counts the number of _lines_, not the number of matches. For example, there are 6 words `string` in `src/cli.go`, but two of them are on the same line, so `--count` reports 5:
 
 ```shell
-rg -w --count -t go 'string' src/cli.go
+rg -w --count 'string' src/cli.go
 ```
 
 <codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
@@ -625,7 +625,7 @@ rg -w --count -t go 'string' src/cli.go
 To count the number of _matches_ instead, use `--count-matches`:
 
 ```shell
-rg -w --count-matches -t go 'string' src/cli.go
+rg -w --count-matches 'string' src/cli.go
 ```
 
 <codapi-snippet sandbox="shell" command="aha" editor="basic" template="httpurr.sh" output-mode="html" output>
