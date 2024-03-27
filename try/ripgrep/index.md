@@ -215,7 +215,7 @@ Much better!
 
 ### Multiple patterns
 
-To search for multiple patterns, list them with the `-e` (`--regexp`) option. ripgrep will output-mode="html" output lines matching at least one of the specified patterns.
+To search for multiple patterns, list them with the `-e` (`--regexp`) option. ripgrep will output lines matching at least one of the specified patterns.
 
 For example, search for `make` or `run`:
 
@@ -498,7 +498,7 @@ We've excluded Go, Markdown and Ruby files, so all that's left is `go.mod` (pers
 
 ## Useful options
 
-ripgrep supports a number of additional search and output-mode="html" output options you may find handy.
+ripgrep supports a number of additional search and output options you may find handy.
 
 [Ignore case](#ignore-case) ·
 [Inverse matching](#inverse-matching) ·
@@ -882,7 +882,7 @@ Our replacement string (`status-$1`) consists of the literal `status-` followed 
 
 > Capturing groups actually start at index `0`, but the 0th capturing group always corresponds to the entire match. The capturing group at index `1` always corresponds to the first explicit capturing group found in the regex pattern.
 
-ripgrep **will never modify your files**. The `--replace` flag only controls ripgrep's output-mode="html" output. (And there is no flag to let you do a replacement in a file.)
+ripgrep **will never modify your files**. The `--replace` flag only controls ripgrep's output. (And there is no flag to let you do a replacement in a file.)
 
 ## Configuration
 
