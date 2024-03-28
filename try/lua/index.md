@@ -235,3 +235,185 @@ print 'hello'  -- Works fine.
 
 <codapi-snippet sandbox="lua" editor="basic">
 </codapi-snippet>
+
+# Tables
+
+Tables are Lua's only compound data structure. Under the hood, they are associative arrays. Similar to JS objects, they are hash-lookup dicts that can also be used as lists.
+
+Using tables as dictionaries/maps:
+
+```lua
+t = {key1 = 'value1', key2 = false}
+u = {['@!#'] = 'qbert', [{}] = 1729, [6.28] = 'tau'}
+```
+
+<codapi-snippet id="tabledecl" sandbox="lua" output-mode="hidden" editor="basic">
+</codapi-snippet>
+
+```lua
+-- string keys can use JS-like dot notation
+print(t.key1)
+
+t.newKey = {}  -- Adds a new key/value pair.
+t.key2 = nil   -- Removes key2 from the table.
+
+-- Literal notation for any (non-nil) value as key:
+
+print(u[6.28])  -- prints "tau"
+```
+
+<codapi-snippet sandbox="lua" depends-on="tabledecl" editor="basic">
+</codapi-snippet>
+
+Key matching is basically by value for numbers and strings, but by identity for tables.
+
+```lua
+a = u['@!#']  -- Now a = 'qbert'.
+b = u[{}]     -- We might expect 1729, but it's nil:
+-- b = nil since the lookup fails. It fails
+-- because the key we used is not the same object
+-- as the one used to store the original value. So
+-- strings & numbers are more portable keys.
+
+print(a)
+```
+
+<codapi-snippet sandbox="lua" depends-on="tabledecl" editor="basic" >
+</codapi-snippet>
+
+Similar to strings, a one-table function call needs no parens:
+
+```lua
+function h(x) print(x.key) end
+
+h{key = 'Sonmi~451'}  -- Prints 'Sonmi~451'.
+```
+
+<codapi-snippet sandbox="lua" editor="basic" >
+</codapi-snippet>
+
+Tables can be iterated over:
+
+```lua
+for key, val in pairs(u) do  -- Table iteration.
+  print(key, val)
+end
+
+-- Notice that printing out the `table` key's value prints the memory address for that table.
+```
+
+<codapi-snippet sandbox="lua" depends-on="tabledecl" editor="basic" >
+</codapi-snippet>
+
+`_G` is a special table of all globals.
+
+```lua
+print(_G['_G'] == _G) -- true
+```
+
+<codapi-snippet sandbox="lua" editor="basic" >
+</codapi-snippet>
+
+Using tables as lists / arrays. **Indices start at 1**.
+
+```lua
+-- List literals implicitly set up int keys:
+v = {'value1', 'value2', 1.21, 'gigawatts'}
+
+for i = 1, #v do  -- #v is the size of v for lists.
+  print(v[i])  -- Indices start at 1 !! SO CRAZY!
+end
+
+-- A 'list' is not a real type. v is just a table
+-- with consecutive integer keys, treated as a list.
+```
+
+<codapi-snippet sandbox="lua" editor="basic" >
+</codapi-snippet>
+
+# Metatables and metamethods
+
+A table can have a metatable that gives the table operator-overloadish behavior. Later we'll see how metatables support js-prototype behavior.
+
+```lua
+f1 = {a = 1, b = 2}  -- Represents the fraction a/b.
+f2 = {a = 2, b = 3}
+
+-- This would fail:
+-- s = f1 + f2
+```
+
+<codapi-snippet id="metatable1" sandbox="lua" editor="basic" >
+</codapi-snippet>
+
+```lua
+metafraction = {}
+function metafraction.__add(f1, f2)
+  sum = {}
+  sum.b = f1.b * f2.b
+  sum.a = f1.a * f2.b + f2.a * f1.b
+  return sum
+end
+
+setmetatable(f1, metafraction)
+setmetatable(f2, metafraction)
+
+s = f1 + f2  -- call __add(f1, f2) on f1's metatable
+
+print(s.a, s.b)
+
+-- This would fail since s has no metatable:
+-- z = s + s
+```
+
+<codapi-snippet sandbox="lua" editor="basic" depends-on="metatable1" >
+</codapi-snippet>
+
+f1, f2 have no key for their metatable, unlike prototypes in js, so you must retrieve it as in `getmetatable(f1)`.
+The metatable is a normal table with keys that Lua knows about, like `__add`.
+
+An `__index` on a metatable overloads dot lookups.
+
+From the Lua reference manual:
+> The indexing access operation table[key]. This event happens when table is not a table or when key is not present in table. The metavalue is looked up in the metatable of table.
+
+```lua
+defaultFavs = {animal = 'gru', food = 'donuts'}
+myFavs = {food = 'pizza'}
+setmetatable(myFavs, {__index = defaultFavs})
+eatenBy = myFavs.animal  -- works! thanks, metatable
+
+print(eatenBy)
+```
+
+<codapi-snippet sandbox="lua" editor="basic" >
+</codapi-snippet>
+
+Direct table lookups that fail will retry using
+the metatable's `__index` value, and this recurses.
+
+An `__index` value can also be a function(tbl, key)
+for more customized lookups.
+
+Values of index, add, .. are called metamethods.
+Here is a list: (not runnable)
+
+```lua
+-- __add(a, b)                     for a + b
+-- __sub(a, b)                     for a - b
+-- __mul(a, b)                     for a * b
+-- __div(a, b)                     for a / b
+-- __mod(a, b)                     for a % b
+-- __pow(a, b)                     for a ^ b
+-- __unm(a)                        for -a
+-- __concat(a, b)                  for a .. b
+-- __len(a)                        for #a
+-- __eq(a, b)                      for a == b
+-- __lt(a, b)                      for a < b
+-- __le(a, b)                      for a <= b
+-- __index(a, b)  <fn or a table>  for a.b
+-- __newindex(a, b, c)             for a.b = c
+-- __call(a, ...)                  for a(...)
+```
+
+# Class-like tables and inheritance
