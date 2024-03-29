@@ -11,7 +11,7 @@ contributors:
     - ["Daniel Stenberg", "https://daniel.haxx.se/"]
 ---
 
-Curl (<strong>c</strong>lient for <strong>URL</strong>s) is a tool for client-side internet transfers (uploads and downloads) using a specific protocol (such as HTTP, FTP or IMAP), where the endpoint is identified by a URL. Curl runs on 92 operating systems and has over 20 billion installations worldwide.
+[Curl](https://curl.se/) (<strong>c</strong>lient for <strong>URL</strong>s) is a tool for client-side internet transfers (uploads and downloads) using a specific protocol (such as HTTP, FTP or IMAP), where the endpoint is identified by a URL. Curl runs on 92 operating systems and has over 20 billion installations worldwide.
 
 Curl supports a crazy number of protocols, from HTTP, FTP and TELNET to IMAP, LDAP and GOPHER. It runs on 92 operating systems and has over 20 billion installations worldwide.
 
@@ -32,8 +32,8 @@ Curl supports a crazy number of protocols, from HTTP, FTP and TELNET to IMAP, LD
 
 Curl is mostly used to work with HTTP, so let's talk about it. I'll try to keep the theory short and simple.
 
-[Protocol](#http-protocol) •
-[Request](#http-request) •
+[Protocol](#http-protocol) ·
+[Request](#http-request) ·
 [Response](#http-response)
 
 ### HTTP protocol
@@ -149,11 +149,11 @@ There is much more to the HTTP protocol, but this basic knowledge should be enou
 
 Now let's see how to work with HTTP in curl.
 
-[Methods](#methods) •
-[Response code](#response-code) •
-[Response headers](#response-headers) •
-[Response body](#response-body) •
-[POST](#post) •
+[Methods](#methods) ·
+[Response code](#response-code) ·
+[Response headers](#response-headers) ·
+[Response body](#response-body) ·
+[POST](#post) ·
 [PUT](#put)
 
 ### Methods
@@ -531,12 +531,12 @@ curl --request PUT \
 
 The HTTP protocol has lots of features. We won't cover them all, but let's take a look at some of the more advanced ones.
 
-[Response variables](#response-variables) •
-[Redirects](#redirects) •
-[Ranges](#ranges) •
-[Conditional requests](#conditional-requests) •
-[Multipart formpost](#multipart-formpost) •
-[Cookies](#cookies) •
+[Response variables](#response-variables) ·
+[Redirects](#redirects) ·
+[Ranges](#ranges) ·
+[Conditional requests](#conditional-requests) ·
+[Multipart formpost](#multipart-formpost) ·
+[Cookies](#cookies) ·
 [Versions](#http-versions)
 
 ### Response variables
@@ -909,11 +909,11 @@ curl --write-out "%{http_version}" http://httpbingo.org/status/200
 
 Curl is a tool for internet transfers — uploads and downloads. Let's see how to control them.
 
-[Downloads](#downloads) •
-[Uploads](#uploads) •
-[Name resolving](#name-resolving) •
-[Transfer controls](#transfer-controls) •
-[Timeouts](#timeouts) •
+[Downloads](#downloads) ·
+[Uploads](#uploads) ·
+[Name resolving](#name-resolving) ·
+[Transfer controls](#transfer-controls) ·
+[Timeouts](#timeouts) ·
 [Retries](#retries)
 
 ### Downloads
@@ -1199,9 +1199,9 @@ scheme://user:password@host:port/path?query#fragment
 
 For curl, anything starting with `-` or `--` is an option, and everything else is a URL.
 
-[URL parameters](#url-parameters) •
-[Multiple URLs](#multiple-urls) •
-[URL globbing](#url-globbing) •
+[URL parameters](#url-parameters) ·
+[Multiple URLs](#multiple-urls) ·
+[URL globbing](#url-globbing) ·
 [State reset](#state-reset)
 
 ### URL parameters
@@ -1381,10 +1381,10 @@ curl \
 
 Let's talk about some additional curl features you might find useful.
 
-[Verbose](#verbose) •
-[Progress meters](#progress-meters) •
-[Credentials](#credentials) •
-[Config file](#config-file) •
+[Verbose](#verbose) ·
+[Progress meters](#progress-meters) ·
+[Credentials](#credentials) ·
+[Config file](#config-file) ·
 [Exit status](#exit-status)
 
 ### Verbose
