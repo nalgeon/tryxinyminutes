@@ -63,15 +63,6 @@ content-type: application/json
 }
 ```
 
-<div class="row">
-<div class="col-xs-12 col-sm-10">
-<figure>
-<img alt="HTTP request and response" src="http-messages.png">
-<figcaption class="align-center">It's easy to read HTTP requests and responses once you get used to it.</figcaption>
-</figure>
-</div>
-</div>
-
 HTTP/2, the successor to HTTP/1.1, is a binary protocol. However, curl displays HTTP/2 messages in plain text (just like HTTP/1.1), so we can safely ignore this fact for our purposes.
 
 ### HTTP request
