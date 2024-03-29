@@ -21,6 +21,7 @@ Get a quick taste of your next language (database, package, tool, etc.) by study
 <a class="lang" href="/try/ferretdb/">FerretDB</a>
 <a class="lang" href="/try/git/">Git</a>
 <a class="lang" href="/try/go/">Go</a>
+<a class="lang" href="/try/grep/">grep</a>
 <a class="lang" href="/try/mermaid/">Mermaid</a>
 <a class="lang" href="/try/odin/">Odin</a>
 <a class="lang" href="/try/postgres/">PostgreSQL</a>
