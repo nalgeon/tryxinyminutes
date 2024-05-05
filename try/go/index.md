@@ -149,7 +149,7 @@ func noparams() {
 
 ## Variables
 
-Variables must be declared before use. The type name _precedes_ the variable name; this is quite the opposite of what C does. See [here](https://appliedgo.com/blog/go-declaration-syntax) for an explanation.
+Variables must be declared before use. The variable name _precedes_ the type name; this is quite the opposite of what C does. See [here](https://appliedgo.com/blog/go-declaration-syntax) for an explanation.
 
 A variable assignment uses a single equal sign (`=`).
 
