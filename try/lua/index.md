@@ -2,7 +2,7 @@
 x: Lua
 title: Try Lua in Y minutes
 image: /try/cover.png
-lastmod: 2024-03-08
+lastmod: 2024-05-12
 original: https://learnxinyminutes.com/docs/lua/
 license: CC-BY-SA-3.0
 contributors:
@@ -10,17 +10,26 @@ contributors:
     - ["Sameer Srivastava", "https://github.com/s-m33r"]
 ---
 
-# Introduction
-
 [Lua](https://www.lua.org/) is designed to be a lightweight embeddable scripting language that is easy to learn and use and to embed into your application.
-
-Lua has no notion of a "main" program: it works embedded in a host client, called the embedding program or simply the host. (Frequently, this host is the stand-alone lua program.) The host program can invoke functions to execute a piece of Lua code, can write and read Lua variables, and can register C functions to be called by Lua code. Through the use of C functions, Lua can be augmented to cope with a wide range of different domains, thus creating customized programming languages sharing a syntactical framework.
 
 This guide has been adapted from the [learnxinyminutes page on Lua](https://learnxinyminutes.com/docs/lua/) and [the Lua reference manual](https://lua.org/manual/5.4/).
 
+[Introduction](#introduction) ·
+[Variables and flow control](#variables-and-flow-control) ·
+[Functions](#functions) ·
+[Tables](#tables) ·
+[Metatables and metamethods](#metatables-and-metamethods) ·
+[Class-like tables and inheritance](#class-like-tables-and-inheritance) ·
+[Modules](#modules) ·
+[Further Reading](#further-reading)
+
 <div class="tryx__panel">
-<p>🚧 This guide is a work in progress.</p>
+<p>✨ This is an open source guide. Feel free to <a href="https://github.com/nalgeon/tryxinyminutes/blob/main/try/lua/index.md">improve it</a>!</p>
 </div>
+
+## Introduction
+
+Lua has no notion of a "main" program: it works embedded in a host client, called the embedding program or simply the host. (Frequently, this host is the stand-alone lua program.) The host program can invoke functions to execute a piece of Lua code, can write and read Lua variables, and can register C functions to be called by Lua code. Through the use of C functions, Lua can be augmented to cope with a wide range of different domains, thus creating customized programming languages sharing a syntactical framework.
 
 Let's begin:
 
@@ -45,7 +54,7 @@ Multi-line comments.
 <codapi-snippet sandbox="lua" editor="basic" output-mode="hidden">
 </codapi-snippet>
 
-# Variables and flow control
+## Variables and flow control
 
 Lua is dynamically typed, with **global variables by default**.
 
@@ -150,7 +159,7 @@ end
 <codapi-snippet sandbox="lua" depends-on="vars" editor="basic">
 </codapi-snippet>
 
-# Functions
+## Functions
 
 Functions are defined using the keyword 'function' and follow the format `function name(argslist) [block] end`. No `do` required.
 
@@ -236,7 +245,7 @@ print 'hello'  -- Works fine.
 <codapi-snippet sandbox="lua" editor="basic">
 </codapi-snippet>
 
-# Tables
+## Tables
 
 Tables are Lua's only compound data structure. Under the hood, they are associative arrays. Similar to JS objects, they are hash-lookup dicts that can also be used as lists.
 
@@ -331,7 +340,7 @@ end
 <codapi-snippet sandbox="lua" editor="basic" >
 </codapi-snippet>
 
-# Metatables and metamethods
+## Metatables and metamethods
 
 A table can have a metatable that gives the table operator-overloadish behavior. Later we'll see how metatables support js-prototype behavior.
 
@@ -375,6 +384,7 @@ The metatable is a normal table with keys that Lua knows about, like `__add`.
 An `__index` on a metatable overloads dot lookups.
 
 From the Lua reference manual:
+
 > The indexing access operation table[key]. This event happens when table is not a table or when key is not present in table. The metavalue is looked up in the metatable of table.
 
 ```lua
@@ -416,7 +426,7 @@ Here is a list: (not runnable)
 -- __call(a, ...)                  for a(...)
 ```
 
-# Class-like tables and inheritance
+## Class-like tables and inheritance
 
 Classes aren't built in; there are different ways to make them using tables and metatables.
 
@@ -457,7 +467,7 @@ mrDog:makeSound()  -- 'I say woof'         -- 8.
 4. self = the class being instantiated. Often
    self = Dog, but inheritance can change it.
    newObj gets self's functions when we set both
-   newObj's metatable and self's __index to self.
+   newObj's metatable and self's \_\_index to self.
 5. Reminder: setmetatable returns its first arg.
 6. The : works as in 2, but this time we expect
    self to be an instance instead of a class.
@@ -491,9 +501,9 @@ seymour:makeSound()  -- 'woof woof woof'      -- 4.
 2. self has a 'sound' key from new(), see 3.
 3. Same as LoudDog.new(LoudDog), and converted to
    Dog.new(LoudDog) as LoudDog has no 'new' key,
-   but does have __index = Dog on its metatable.
+   but does have \_\_index = Dog on its metatable.
    Result: seymour's metatable is LoudDog, and
-   LoudDog.__index = LoudDog. So seymour.key will
+   LoudDog.\_\_index = LoudDog. So seymour.key will
    = seymour.key, LoudDog.key, Dog.key, whichever
    table is the first with the given key.
 4. The 'makeSound' key is found in LoudDog; this
@@ -512,7 +522,7 @@ end
 <codapi-snippet sandbox="lua" depends-on="LoudDog" editor="basic" >
 </codapi-snippet>
 
-# Modules
+## Modules
 
 Suppose the file mod.lua looks like this:
 
@@ -594,20 +604,25 @@ g()  -- Prints out 343; nothing printed before now.
 <codapi-snippet sandbox="lua" files="mod2.lua" editor="basic" >
 </codapi-snippet>
 
-# Further Reading
+## Further Reading
 
-- The official [Programming in Lua](https://www.lua.org/pil/contents.html) book
-- [BlackBulletIV’s Lua for programmers](https://ebens.me/posts/lua-for-programmers-part-1/)
-- [Lua Short Reference](http://lua-users.org/wiki/LuaShortReference)
+Books and references:
 
-- [Love2D](https://love2d.org/) is a very popular Lua game engine
-- Fantasy consoles like [TIC-80](https://tic80.com/) use Lua as the main programming language for games
+-   The official [Programming in Lua](https://www.lua.org/pil/contents.html) book
+-   [BlackBulletIV’s Lua for programmers](https://ebens.me/posts/lua-for-programmers-part-1/)
+-   [Lua Short Reference](http://lua-users.org/wiki/LuaShortReference)
 
-- The main topics not covered are standard libraries:
-    - [string library](http://lua-users.org/wiki/StringLibraryTutorial)
-    - [table library](http://lua-users.org/wiki/TableLibraryTutorial)
-    - [math library](http://lua-users.org/wiki/MathLibraryTutorial)
-    - [io library](http://lua-users.org/wiki/IoLibraryTutorial)
-    - [os library](http://lua-users.org/wiki/OsLibraryTutorial)
+In the wild:
+
+-   [Love2D](https://love2d.org/) is a very popular Lua game engine
+-   Fantasy consoles like [TIC-80](https://tic80.com/) use Lua as the main programming language for games
+
+Standard library:
+
+-   [string library](http://lua-users.org/wiki/StringLibraryTutorial)
+-   [table library](http://lua-users.org/wiki/TableLibraryTutorial)
+-   [math library](http://lua-users.org/wiki/MathLibraryTutorial)
+-   [io library](http://lua-users.org/wiki/IoLibraryTutorial)
+-   [os library](http://lua-users.org/wiki/OsLibraryTutorial)
 
 Have fun with Lua!
