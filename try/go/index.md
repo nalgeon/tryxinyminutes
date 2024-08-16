@@ -2,7 +2,7 @@
 x: Go
 title: Try Go in Y minutes
 image: /try/go/cover.png
-lastmod: 2024-03-27
+lastmod: 2024-08-16
 original: https://learnxinyminutes.com/docs/go/
 license: CC-BY-SA 3.0
 contributors:
@@ -64,13 +64,13 @@ Go has single- and multiline comments. Multiline comments cannot be nested.
 <codapi-snippet sandbox="go" editor="basic" template="tpl_plain_main.go">
 </codapi-snippet>
 
-A build tag is a line comment starting with `// +build` and can be executed by `go build -tags="foo bar"` command. Build tags are placed before the package clause near or at the top of the file followed by a blank line or other line comments.
+A build tag is a line comment starting with `//go:build` and can be executed by `go build -tags="foo bar"` command. Build tags are placed before the package clause near or at the top of the file followed by a blank line or other line comments.
 
 ```go
-// +build prod, dev, test
+//go:build prod || dev || test
 ```
 
-<codapi-snippet sandbox="go" editor="basic" template="tpl_plain_main.go">
+<codapi-snippet sandbox="go" editor="basic" template="tpl_main_build_tag.go">
 </codapi-snippet>
 
 ## Packages and imports
@@ -83,12 +83,13 @@ A `package` clause starts every source file. `main` is a special name declaring 
 package main
 
 import (
-	"fmt"       // A package in the Go standard library.
-	"io/ioutil" // Implements some I/O utility functions.
-	m "math"    // Math library with local alias m.
-	"net/http"  // Yes, a web server!
-	"os"        // OS functions like working with the file system
-	"strconv"   // String conversions.
+	"fmt"              // A package in the Go standard library.
+	"io"               // Implements some I/O utility functions.
+	m "math"           // Math library with local alias m.
+	"net/http"         // Yes, a web server!
+	_ "net/http/pprof" // Profiling library imported only for side effects
+	"os"               // OS functions like working with the file system
+	"strconv"          // String conversions.
 )
 
 // Running this code snippet is expected to fail,
