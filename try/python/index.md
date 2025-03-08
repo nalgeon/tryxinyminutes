@@ -5,7 +5,7 @@ image: /try/cover.png
 lastmod: 2024-02-16
 license: CC BY-SA 4.0
 contributors:
-    - ["molekh-xyz", "http://github.com/molekh-xyz"]
+    - ["efemeral-net", "http://github.com/efemeral-net"]
     - ["Louie Dinh", "http://pythonpracticeprojects.com"]
     - ["Zachary Ferguson", "http://github.com/zfergus2"]
     - ["evuez", "http://github.com/evuez"]
@@ -15,22 +15,7 @@ contributors:
     - ["Stanislav Modrak", "https://stanislav.gq"]
     - ["John Paul Wohlscheid", "https://gitpi.us"]
 ---
----
-name: Python
-adapted from the version on [[learnxinyminutes]] by:
-- ["Louie Dinh", "http://pythonpracticeprojects.com"]
-- ["Steven Basart", "http://github.com/xksteven"]
-- ["Andre Polykanine", "https://github.com/Oire"]
-- ["Zachary Ferguson", "http://github.com/zfergus2"]
-- ["evuez", "http://github.com/evuez"]
-- ["Rommel Martinez", "https://ebzzry.io"]
-- ["Roberto Fernandez Diaz", "https://github.com/robertofd1995"]
-- ["caminsha", "https://github.com/caminsha"]
-- ["Stanislav Modrak", "https://stanislav.gq"]
-- ["John Paul Wohlscheid", "https://gitpi.us"]
-edited and made interactive by [molekh-xyz](https://molekh.xyz)
 
----
 Python was created by Guido van Rossum in the early 90s. It is now one of the
 most popular languages in existence. I fell in love with Python for its
 syntactic clarity. It's basically executable pseudocode.
@@ -1199,3 +1184,20 @@ print(my_function.__code__.co_argcount)
 * [Dive Into Python 3](https://www.diveintopython3.net/)
 * [Python Tutorial for Intermediates](https://pythonbasics.org/)
 * [Build a Desktop App with Python](https://pythonpyqt.com/)
+
+# Credits
+
+Adapted from the version on [learnxinyminutes](https://learnxinyminutes.com/python/) by:
+- [Louie Dinh](http://pythonpracticeprojects.com)
+- [Steven Basart](http://github.com/xksteven)
+- [Andre Polykanine](https://github.com/Oire)
+- [Zachary Ferguson](http://github.com/zfergus2)
+- [evuez](http://github.com/evuez)
+- [Rommel Martinez](https://ebzzry.io)
+- [Roberto Fernandez Diaz](https://github.com/robertofd1995)
+- [caminsha](https://github.com/caminsha)
+- [Stanislav Modrak](https://stanislav.gq)
+- [John Paul Wohlscheid](https://gitpi.us)
+
+Edited and made interactive by:
+- [efemeral-net](https://github.com/efemeral-net)
