@@ -26,6 +26,7 @@ Get a quick taste of your next language (database, package, tool, etc.) by study
 <a class="lang" href="/try/mermaid/">Mermaid</a>
 <a class="lang" href="/try/odin/">Odin</a>
 <a class="lang" href="/try/postgres/">PostgreSQL</a>
+<a class="lang" href="/try/python/">Python</a>
 <a class="lang" href="/try/ripgrep/">ripgrep</a>
 <a class="lang" href="/try/rough-js/">Rough.js</a>
 <a class="lang" href="/try/scikit-learn/">scikit-learn</a>
