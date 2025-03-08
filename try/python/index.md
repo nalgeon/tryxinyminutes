@@ -1,24 +1,37 @@
 ---
-x: date
-title: Try `date` in Y minutes
+x: Python
+title: Try Python in Y minutes
 image: /try/cover.png
-lastmod: 2024-02-16
+lastmod: 2025-03-08
 license: CC BY-SA 4.0
 contributors:
-    - ["efemeral-net", "http://github.com/efemeral-net"]
-    - ["Louie Dinh", "http://pythonpracticeprojects.com"]
-    - ["Zachary Ferguson", "http://github.com/zfergus2"]
-    - ["evuez", "http://github.com/evuez"]
-    - ["Rommel Martinez", "https://ebzzry.io"]
-    - ["Roberto Fernandez Diaz", "https://github.com/robertofd1995"]
-    - ["caminsha", "https://github.com/caminsha"]
-    - ["Stanislav Modrak", "https://stanislav.gq"]
-    - ["John Paul Wohlscheid", "https://gitpi.us"]
+  - - efemeral-net
+    - http://github.com/efemeral-net
+  - - Louie Dinh
+    - http://pythonpracticeprojects.com
+  - - Zachary Ferguson
+    - http://github.com/zfergus2
+  - - evuez
+    - http://github.com/evuez
+  - - Rommel Martinez
+    - https://ebzzry.io
+  - - Roberto Fernandez Diaz
+    - https://github.com/robertofd1995
+  - - caminsha
+    - https://github.com/caminsha
+  - - Stanislav Modrak
+    - https://stanislav.gq
+  - - John Paul Wohlscheid
+    - https://gitpi.us
 ---
 
 Python was created by Guido van Rossum in the early 90s. It is now one of the
 most popular languages in existence. I fell in love with Python for its
 syntactic clarity. It's basically executable pseudocode.
+
+> ✨ This is an open source guide. Feel free to [improve it](https://github.com/nalgeon/tryxinyminutes/blob/main/try/python/index.md)!
+
+[Primitive Datatypes and Operators](#1-primitive-datatypes-and-operators) · [Variables and Collections](#2-variables-and-collections) · [Control Flow and Iterables](#3-control-flow-and-iterables) · [Functions](#4-functions) · [Modules](#5-modules) · [Classes](#6-classes) · [Advanced](http://127.0.0.1:3000/try/python/#7-advanced) · [Free Online Resources](http://127.0.0.1:3000/try/python/#free-online-resources) · [Credits](http://127.0.0.1:3000/try/python/#credits)
 
 ### There are two ways to make comments
 <pre><code>
