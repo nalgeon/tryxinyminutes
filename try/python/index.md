@@ -672,6 +672,7 @@ print(some_var)
 
 ### Here is an if statement. Indentation is significant in Python!
 <pre><code>
+some_var = 5
 if some_var > 10:
     print("some_var is totally bigger than 10.")
 elif some_var < 10:
@@ -743,25 +744,25 @@ finally:
 
 ### Instead of try/finally to cleanup resources you can use a with statement
 <pre><code>
-with open("myfile.txt") as f:
-    for line in f:
-        print(line)
+# with open("myfile.txt") as f:
+#    for line in f:
+#        print(line)
 </code></pre>
 <codapi-snippet sandbox="python" editor="basic"></codapi-snippet>
 
 ### Writing to a file
 <pre><code>
-contents = {"aa": 12, "bb": 21}
-with open("myfile1.txt", "w") as file:
-    file.write(str(contents))
+# contents = {"aa": 12, "bb": 21}
+# with open("myfile1.txt", "w") as file:
+#     file.write(str(contents))
 </code></pre>
 <codapi-snippet sandbox="python" editor="basic"></codapi-snippet>
 
 ### Reading from a file
 <pre><code>
-with open("myfile1.txt") as file:
-    contents = file.read()
-print(contents)
+# with open("myfile1.txt") as file:
+#     contents = file.read()
+# print(contents)
 </code></pre>
 <codapi-snippet sandbox="python" editor="basic"></codapi-snippet>
 
@@ -811,6 +812,8 @@ print(add(5, 6))
 
 ### Another way to call functions is with keyword arguments
 <pre><code>
+def add(x, y):
+    return x + y
 print(add(y=6, x=5))
 </code></pre>
 <codapi-snippet sandbox="python" editor="basic"></codapi-snippet>
@@ -842,6 +845,9 @@ all_the_args(1, 2, a=3, b=4)
 
 ### When calling functions, you can do the opposite of args/kwargs!
 <pre><code>
+def all_the_args(*args, **kwargs):
+    print(args)
+    print(kwargs)
 args = (1, 2, 3, 4)
 kwargs = {"a": 3, "b": 4}
 all_the_args(*args)
@@ -915,6 +921,8 @@ print((lambda x, y: x ** 2 + y ** 2)(2, 1))
 
 ### There are built-in higher order functions
 <pre><code>
+def add_10(x):
+    return x + 10
 print(list(map(add_10, [1, 2, 3])))
 print(list(map(max, [1, 2, 3], [4, 2, 1])))
 print(list(filter(lambda x: x > 5, [3, 4, 5, 6, 7])))
@@ -923,6 +931,8 @@ print(list(filter(lambda x: x > 5, [3, 4, 5, 6, 7])))
 
 ### We can use list comprehensions for nice maps and filters
 <pre><code>
+def add_10(x):
+    return x + 10
 print([add_10(i) for i in [1, 2, 3]])
 print([x for x in [3, 4, 5, 6, 7] if x > 5])
 </code></pre>
@@ -955,6 +965,7 @@ print(floor(3.7))
 ### You can import all functions from a module
 <pre><code>
 from math import *
+print(sqrt(16))
 </code></pre>
 <codapi-snippet sandbox="python" editor="basic"></codapi-snippet>
 
@@ -1018,64 +1029,50 @@ if __name__ == "__main__":
 </code></pre>
 <codapi-snippet sandbox="python" editor="basic"></codapi-snippet>
 
-# 6.1 Inheritance
+
+## Inheritance
 
 ### Inheritance allows new child classes to be defined that inherit methods and variables from their parent class
 <pre><code>
-from human import Human
-class Superhero(Human):
-    species = "Superhuman"
-    def __init__(self, name, movie=False, superpowers=["super strength", "bulletproofing"]):
-        self.fictional = True
-        self.movie = movie
-        self.superpowers = superpowers
-        super().__init__(name)
-    def sing(self):
-        return "Dun, dun, DUN!"
-    def boast(self):
-        for power in self.superpowers:
-            print(f"I wield the power of {power}!")
+class Animal:
+    def __init__(self, name):
+        self.name = name
+    def speak(self):
+        return f"{self.name} makes a sound."
+
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} barks!"
+
 if __name__ == "__main__":
-    sup = Superhero(name="Tick")
-    if isinstance(sup, Human):
-        print("I am human")
-    if type(sup) is Superhero:
-        print("I am a superhero")
-    print(Superhero.__mro__)
-    print(sup.get_species())
-    print(sup.sing())
-    sup.say("Spoon")
-    sup.boast()
-    sup.age = 31
-    print(sup.age)
-    print(f"Am I Oscar eligible? {sup.movie}")
+    dog = Dog("Buddy")
+    print(dog.speak())  # Output: Buddy barks!
 </code></pre>
 <codapi-snippet sandbox="python" editor="basic"></codapi-snippet>
 
-# 6.2 Multiple Inheritance
-
-### Another class definition
+## Multiple Inheritance
+### Another class definition that inherits from Superhero and Bat
 <pre><code>
+class Superhero:
+    species = "Superhuman"
+    def __init__(self, name, movie=False, superpowers=None):
+        self.name = name
+        self.movie = movie
+        self.superpowers = superpowers or ["super strength", "bulletproofing"]
+    def say(self, msg):
+        print(f"{self.name}: {msg}")
+    def get_species(self):
+        return self.species
+    def sing(self):
+        return "Dun, dun, DUN!"
+
 class Bat:
     species = "Baty"
     def __init__(self, can_fly=True):
         self.fly = can_fly
-    def say(self, msg):
-        msg = "... ... ..."
-        return msg
     def sonar(self):
         return "))) ... ((("
-if __name__ == "__main__":
-    b = Bat()
-    print(b.say("hello"))
-    print(b.fly)
-</code></pre>
-<codapi-snippet sandbox="python" editor="basic"></codapi-snippet>
 
-### And yet another class definition that inherits from Superhero and Bat
-<pre><code>
-from superhero import Superhero
-from bat import Bat
 class Batman(Superhero, Bat):
     def __init__(self, *args, **kwargs):
         Superhero.__init__(self, "anonymous", movie=True, superpowers=["Wealthy"], *args, **kwargs)
@@ -1083,23 +1080,24 @@ class Batman(Superhero, Bat):
         self.name = "Sad Affleck"
     def sing(self):
         return "nan nan nan nan nan batman!"
+
 if __name__ == "__main__":
     sup = Batman()
-    print(Batman.__mro__)
-    print(sup.get_species())
-    print(sup.sing())
-    sup.say("I agree")
-    print(sup.sonar())
-    sup.age = 100
-    print(sup.age)
-    print(f"Can I fly? {sup.fly}")
+    print(Batman.__mro__)  # Method Resolution Order
+    print(sup.get_species())  # Inherited from Superhero
+    print(sup.sing())  # Overridden in Batman
+    sup.say("I agree")  # Inherited from Superhero
+    print(sup.sonar())  # Inherited from Bat
+    sup.age = 100  # Dynamic attribute assignment
+    print(sup.age)  # Output: 100
+    print(f"Can I fly? {sup.fly}")  # Inherited from Bat
 </code></pre>
 <codapi-snippet sandbox="python" editor="basic"></codapi-snippet>
+
 
 # 7. Advanced
 
 ## Generators
-
 A **generator** in Python is a special type of iterator that allows you to iterate over a sequence of values without storing the entire sequence in memory. Generators are created using functions and the `yield` keyword.
 
 ### Generators help you make lazy code
@@ -1130,8 +1128,8 @@ print(gen_to_list)
 </code></pre>
 <codapi-snippet sandbox="python" editor="basic"></codapi-snippet>
 
-## Decorators
 
+## Decorators
 A **decorator** in Python is a design pattern that allows you to modify or extend the behavior of a function or method without changing its actual code.
 
 ### Decorators are a form of syntactic sugar
@@ -1152,6 +1150,17 @@ my_function(1,2)
 
 ### But there's a problem
 <pre><code>
+def log_function(func):
+    def wrapper(*args, **kwargs):
+        print(f"Entering function {func.__name__}")
+        result = func(*args, **kwargs)
+        print(f"Exiting function {func.__name__}")
+        return result
+    return wrapper
+@log_function
+def my_function(x,y):
+    return x+y
+
 print(my_function.__name__)
 print(my_function.__code__.co_argcount)
 </code></pre>
@@ -1171,7 +1180,7 @@ def log_function(func):
 @log_function
 def my_function(x,y):
     return x+y
-my_function(1,2)
+
 print(my_function.__name__)
 print(my_function.__code__.co_argcount)
 </code></pre>
