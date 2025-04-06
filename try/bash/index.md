@@ -897,7 +897,8 @@ Use `mkdir` to create new directories:
 ```bash
 mkdir /tmp/one
 
-# the `-p` flag causes new intermediate directories to be created as necessary.
+# the `-p` flag causes new intermediate directories
+# to be created as necessary.
 mkdir -p /tmp/two/three/four
 
 # show directory tree
@@ -1346,7 +1347,7 @@ foo bar
 If you literally want to search for the string,
 and not the regex, use `fgrep` (or `grep -F`):
 
-```
+```bash
 fgrep "baz" data.txt
 ```
 
