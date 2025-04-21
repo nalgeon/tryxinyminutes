@@ -29,4 +29,3 @@ Get a quick taste of your next language (database, package, tool, etc.) by study
 <a class="lang" href="/try/ripgrep/">ripgrep</a>
 <a class="lang" href="/try/rough-js/">Rough.js</a>
 <a class="lang" href="/try/scikit-learn/">scikit-learn</a>
-<a class="lang" href="/try/sqlglot/">SQLGlot</a>
