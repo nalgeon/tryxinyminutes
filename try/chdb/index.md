@@ -35,7 +35,7 @@ res = chdb.query("select 42")
 print(res, end="")
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic">
+<codapi-snippet sandbox="chdb" command="python" editor="basic">
 </codapi-snippet>
 
 Using a database engine to select the number `42` is probably not very exciting, but bear with me.
@@ -66,20 +66,21 @@ select
   avg(x) as "avg",
   round(quantile(0.95)(x), 2) as p95
 from data
-sample 0.1;
+sample 0.1
+settings output_format_pretty_row_numbers = 0;
 """
 
 res = db.query(query_sql, "PrettyCompactNoEscapes")
 print(res, end="")
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic">
+<codapi-snippet sandbox="chdb" command="python" editor="basic">
 </codapi-snippet>
 
 Note a couple of things here:
 
 -   `Session` provides a stateful database connection (the data is stored in the temporary folder and discarded when the connection is closed).
--   The second argument to the `query` method specifies the output format. There are many [supported formats](https://doc.chdb.io/#/formats) such as `CSV`, `SQLInsert`, `JSON` and `XML` (try changing the format in the above example and re-running the code). The default one is `CSV`.
+-   The second argument to the `query` method specifies the output format. There are many [supported formats](https://clickhouse.com/docs/chdb/reference/data-formats) such as `CSV`, `SQLInsert`, `JSON` and `XML` (try changing the format in the above example and re-running the code). The default one is `CSV`.
 
 ## Reading data
 
@@ -97,7 +98,7 @@ print(
 )
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic" template="main.py" files="employees.csv">
+<codapi-snippet sandbox="chdb" command="python" editor="basic" template="main.py" files="employees.csv">
 </codapi-snippet>
 
 Or work with an external dataset as if it were a database table:
@@ -112,7 +113,7 @@ res = chdb.query(query_sql, "CSV")
 print(res, end="")
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic" template="main.py" files="employees.csv">
+<codapi-snippet sandbox="chdb" command="python" editor="basic" template="main.py" files="employees.csv">
 </codapi-snippet>
 
 We can even query Pandas dataframes as if they were tables:
@@ -138,7 +139,7 @@ res = cdf.query(sql=query_sql, emp=employees, dep=departments)
 print(res, end="")
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic" files="employees.csv departments.csv">
+<codapi-snippet sandbox="chdb" command="python" editor="basic" files="employees.csv departments.csv">
 </codapi-snippet>
 
 ## Writing data
@@ -156,12 +157,15 @@ path = Path("/tmp/employees.parquet")
 path.write_bytes(res.bytes())
 
 # import from Parquet
-query_sql = "select * from '/tmp/employees.parquet' limit 5"
+query_sql = """
+select * from '/tmp/employees.parquet' limit 5
+settings output_format_pretty_row_numbers = 0
+"""
 res = chdb.query(query_sql, "PrettyCompactNoEscapes")
 print(res, end="")
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic" template="main.py" files="employees.csv">
+<codapi-snippet sandbox="chdb" command="python" editor="basic" template="main.py" files="employees.csv">
 </codapi-snippet>
 
 We can also easily convert the chDB result object into a PyArrow table:
@@ -174,7 +178,7 @@ table = chdb.to_arrowTable(res)
 print(table.schema)
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic" template="main.py" files="employees.csv">
+<codapi-snippet sandbox="chdb" command="python" editor="basic" template="main.py" files="employees.csv">
 </codapi-snippet>
 
 Or Pandas dataframe:
@@ -187,7 +191,7 @@ frame = chdb.to_df(res)
 frame.info()
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic" template="main.py" files="employees.csv">
+<codapi-snippet sandbox="chdb" command="python" editor="basic" template="main.py" files="employees.csv">
 </codapi-snippet>
 
 To persist a chDB session to a specific folder on disk, use the `path` constructor parameter. This way you can restore the session later:
@@ -225,7 +229,7 @@ res = db.query("select count(*) from db.employees")
 print(res, end="")
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic" files="employees.csv">
+<codapi-snippet sandbox="chdb" command="python" editor="basic" files="employees.csv">
 </codapi-snippet>
 
 ## User-defined functions
@@ -247,7 +251,7 @@ second = chdb.query("select split_part('a;b;c', ';', 2)")
 print(second, end="")
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic" template="main.py">
+<codapi-snippet sandbox="chdb" command="python" editor="basic" template="main.py">
 </codapi-snippet>
 
 And here is a `sumn` function that calculates a sum from 1 to N:
@@ -265,7 +269,7 @@ sum20 = chdb.query("select sumn(20)")
 print(sum20, end="")
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic" template="main.py">
+<codapi-snippet sandbox="chdb" command="python" editor="basic" template="main.py">
 </codapi-snippet>
 
 Currently chDB only supports scalar functions that take strings as parameters. If the function returns a type other than string, we should pass it as `return_type` to the `chdb_udf` decorator.
@@ -287,9 +291,9 @@ with closing(dbapi.connect()) as conn:
         print("data:", cur.fetchone())
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic">
+<codapi-snippet sandbox="chdb" command="python" editor="basic">
 </codapi-snippet>
 
 ## Further reading
 
-See the chDB [documentation](https://doc.chdb.io/) for details on using chDB with other programming languages, sample Jupyter notebooks, and SQL reference.
+See the chDB [documentation](https://clickhouse.com/docs/chdb) for details on using chDB with other programming languages, sample Jupyter notebooks, and SQL reference.
