@@ -18,7 +18,6 @@ Get a quick taste of your next language (database, package, tool, etc.) by study
 <a class="lang" href="/try/chdb/">chDB</a>
 <a class="lang" href="/try/curl/">curl</a>
 <a class="lang" href="/try/expr-lang/">Expr</a>
-<a class="lang" href="/try/ferretdb/">FerretDB</a>
 <a class="lang" href="/try/git/">Git</a>
 <a class="lang" href="/try/go/">Go</a>
 <a class="lang" href="/try/grep/">grep</a>
