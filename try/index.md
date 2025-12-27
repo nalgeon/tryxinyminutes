@@ -14,6 +14,7 @@ Get a quick taste of your next language (database, package, tool, etc.) by study
 
 <a class="lang" href="/try/bash/">Bash</a>
 <a class="lang" href="/try/c/">C</a>
+<a class="lang" href="/try/c3/">C3</a>
 <a class="lang" href="/try/caddy/">Caddy</a>
 <a class="lang" href="/try/chdb/">chDB</a>
 <a class="lang" href="/try/curl/">curl</a>
