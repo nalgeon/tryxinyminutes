@@ -10,7 +10,7 @@ contributors:
     - ["Anton Zhiyanov", "https://antonz.org"]
 ---
 
-[C3](https://odin-lang.org/) is a systems programming language that aims to be an evolution of C; enabling the same paradigms and syntax where possible, while adding more modern quality of life features.
+[C3](https://c3-lang.org/) is a systems programming language that aims to be an evolution of C; enabling the same paradigms and syntax where possible, while adding more modern quality of life features.
 
 ```c3
 import std::io;
