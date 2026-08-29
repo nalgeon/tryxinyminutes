@@ -129,7 +129,7 @@ You'll see Run and Edit buttons below each example. Try them out to see how they
 
 Learn more about the widget features in the `codapi-js` [documentation](https://github.com/nalgeon/codapi-js#advanced-features). In particular, read about templates and code cells — you'll probably use them a lot when writing more complex examples.
 
-See the list of available sandboxes on the [Codapi website](https://codapi.org/#sandboxes). If you need a specific sandbox that's currently missing — [let me know](https://github.com/orgs/codapi-org/discussions/1).
+See the list of available sandboxes on the [Codapi website](https://codapi.org/#sandboxes). If you need a specific sandbox that's currently missing — [let me know](https://github.com/orgs/codapi-org/discussions).
 
 ## Improve an existing guide
 
@@ -140,6 +140,8 @@ Some guides need improvement (they usually say so), so feel free to contribute t
 Use clear, simple language that's approachable for a wide range of technical readers. Use the active voice whenever possible. When contributing to existing guides, follow the original style and tone of the guide so that it looks and reads consistent.
 
 Do not write long, theory-heavy passages. Always explain by example. If you can't explain something with an example, it's probably best not to mention it at all.
+
+Don't let AI write for you. AI writing is easy to spot and unpleasant to read.
 
 Make sure all examples work. There should be no errors when the reader clicks _Run_ (unless the error is expected according to the example).
 

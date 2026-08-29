@@ -2,7 +2,22 @@
 
 An easy way to get a quick taste of your next language (database/package/tool) by studying interactive guides in the browser, without downloading or installing anything.
 
-<a href="https://codapi.org/try/"><img title="Try X in Y minutes" src="https://github.com/nalgeon/tryxinyminutes/raw/main/try.png" width="500"></a>
+```text
+## 4. Functions
+
+Use "def" to create a new function,
+then call it with parameters:
+┌───────────────────────────────┐
+│ def greet(name):              │
+│   print(f"Hello, {name}!")    │
+│                               │
+│ greet("World")                │
+└───────────────────────────────┘
+  Run ►  Edit  ✓ Done
+┌───────────────────────────────┐
+│ Hello, World!                 │
+└───────────────────────────────┘
+```
 
 [**Live version**](https://codapi.org/try/)
 
