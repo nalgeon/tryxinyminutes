@@ -44,7 +44,7 @@ main :: proc() {
 
 **Dynamic arrays** and sorting:
 
-```
+```odin
 package main
 
 import "core:fmt"
