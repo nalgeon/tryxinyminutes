@@ -14,10 +14,10 @@ contributors:
 
 Odin has a unique set of characteristics:
 
--   Simple language design without bells and whistles.
--   Manual memory management with custom allocators.
--   Well-thought standard library.
--   Concise and calm syntax.
+- Simple language design without bells and whistles.
+- Manual memory management with custom allocators.
+- Well-thought standard library.
+- Concise and calm syntax.
 
 <div class="tryx__panel">
 <p>✨ <strong>This guide needs some love</strong></p>
@@ -83,7 +83,7 @@ list := make([]int, 6, context.allocator)
 
 **Structs**, procedures and iteration (I'll skip the "package" stuff from now on):
 
-```
+```odin
 Person :: struct {
     name: string,
     age: int,
